@@ -1,156 +1,154 @@
 <template>
-	<view class="mask" @tap="cancel" @touchmove.stop>
-		<view class="content-card" @tap.stop>
-			<text class="new-iconfont icon-close"  @tap.stop="cancel"></text>
-			<view class="user-c">
-				<image class="headimg" :src="info.user.headimg" mode="widthFix"></image>
-				<view class="name">{{info.user.name}}</view> 
-				<view class="suffix">邀你助力</view>
-			</view>
-			<view class="sub-title">好友抽奖码{{info.user_ticket_total}}个 / 总抽奖码{{info.all_ticket_total}}个</view>
+    <view class="mask" @tap="cancel" @touchmove.stop>
+        <view class="content-card" @tap.stop>
+            <text class="new-iconfont icon-close" @tap.stop="cancel"></text>
+            <view class="user-c">
+                <image class="headimg" :src="info.user.headimg" mode="widthFix"></image>
+                <view class="name">{{ info.user.name }}</view>
+                <view class="suffix">邀你助力</view>
+            </view>
+            <view class="sub-title">好友抽奖码{{ info.user_ticket_total }}个 / 总抽奖码{{ info.all_ticket_total }}个</view>
 
-			<button class="share-btn bg-orange" @tap="handleOk" v-if="isAccepted || info.is_accepted">已助力，我也要抽奖</button>
-			<button class="share-btn bg-orange" @tap="acceptInvite" v-else>帮他/她助力一次</button>
-			<view class="desc">
-				<view>老用户助力增加{{info.old_user_reward_ticket}}个抽奖码， 新用户助力增加{{info.new_user_reward_ticket}}个抽奖码</view>
-			</view>
-		</view>
-	</view>
+            <button class="share-btn bg-orange" @tap="handleOk" v-if="isAccepted || info.is_accepted">已助力，我也要抽奖</button>
+            <button class="share-btn bg-orange" @tap="acceptInvite" v-else>帮他/她助力一次</button>
+            <view class="desc">
+                <view>老用户助力增加{{ info.old_user_reward_ticket }}个抽奖码， 新用户助力增加{{ info.new_user_reward_ticket }}个抽奖码</view>
+            </view>
+        </view>
+    </view>
 </template>
 
 <script>
-	export default {
-		components: {},
-		data() {
-			return {
-				isAccepted: 0
-			}
-		},
-		props: {
-			info: {
-				type: Object
-			}
-		},
-		computed: {
-			uuid () {
-				return this.info.activity.uuid
-			}
-		},
-		watch: {},
-		onLoad(e) {
-		},
-		created() {},
-		methods: {
-			cancel() {
-				this.$emit('cancel')
-			},
-			handleOk () {
-				this.$emit('cancel')
-			},
-			acceptInvite () {
-				uni.showLoading({
-					title: '助力中'
-				})
-				this.$http(`/lotteries/${this.uuid}/accept-invite`, 'POST', {
-					inviter: this.info.user.uuid
-				}).then(res => {
-					this.isAccepted = 1
-					uni.hideLoading()
-					uni.showToast({
-						title: '助力成功~',
-						icon: 'none'
-					})
-				})
-			}
-		},
-		onPageScroll(e) {},
-	}
+export default {
+    components: {},
+    data() {
+        return {
+            isAccepted: 0
+        };
+    },
+    props: {
+        info: {
+            type: Object
+        }
+    },
+    computed: {
+        uuid() {
+            return this.info.activity.uuid;
+        }
+    },
+    watch: {},
+    onLoad(e) {},
+    created() {},
+    methods: {
+        cancel() {
+            this.$emit('cancel');
+        },
+        handleOk() {
+            this.$emit('cancel');
+        },
+        acceptInvite() {
+            uni.showLoading({
+                title: '助力中'
+            });
+            this.$http(`/lotteries/${this.uuid}/accept-invite`, 'POST', {
+                inviter: this.info.user.uuid
+            }).then((res) => {
+                this.isAccepted = 1;
+                uni.hideLoading();
+                uni.showToast({
+                    title: '助力成功~',
+                    icon: 'none'
+                });
+            });
+        }
+    },
+    onPageScroll(e) {}
+};
 </script>
 
 <style lang="scss" scoped>
-	.content-card {
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		// height: 800rpx;
-		background-color: white;
-		border-radius: 10rpx 10rpx 0 0;
-		display: flex;
-		flex-direction: column;
-		// align-items: center;
+.content-card {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    // height: 800rpx;
+    background-color: white;
+    border-radius: 10rpx 10rpx 0 0;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
 
-		.icon-close {
-			position: absolute;
-			right: 20rpx;
-			top: 20rpx;
+    .icon-close {
+        position: absolute;
+        right: 20rpx;
+        top: 20rpx;
+    }
 
-		}
+    .user-c {
+        font-size: 36rpx;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 50rpx;
 
-		.user-c {
-			font-size: 36rpx;
-			font-weight: 500;
-			text-align: center;
-			margin-top: 50rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			
-			.headimg {
-				width: 60rpx;
-				height: 60rpx;
-				border-radius: 50%;
-			}
-			.suffix {
-				// font-size: 36rpx;
-			}
-		}
+        .headimg {
+            width: 60rpx;
+            height: 60rpx;
+            border-radius: 50%;
+        }
+        .suffix {
+            // font-size: 36rpx;
+        }
+    }
 
-		.sub-title {
-			text-align: center;
-			color: #888;
-			font-size: 26rpx;
-			margin-top: 20rpx;
-		}
+    .sub-title {
+        text-align: center;
+        color: #888;
+        font-size: 26rpx;
+        margin-top: 20rpx;
+    }
 
+    .share-btn {
+        &:after {
+            display: none;
+        }
 
-		.share-btn {
-			&:after {
-				display: none;
-			}
+        border-radius: 100rpx;
+        width: 600rpx;
+        margin-top: 50rpx;
+        // margin-bottom: 130rpx;
+    }
 
-			border-radius: 100rpx;
-			width: 600rpx;
-			margin-top: 50rpx;
-			// margin-bottom: 130rpx;
-		}
+    .status-c {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30rpx;
 
-		.status-c {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			margin-top: 30rpx;
+        .item {
+        }
 
-			.item {}
+        .line {
+            margin: 0rpx 20rpx;
+            border-left: 1rpx solid #999;
+            height: 30rpx;
+            width: 1rpx;
+        }
 
-			.line {
-				margin: 0rpx 20rpx;
-				border-left: 1rpx solid #999;
-				height: 30rpx;
-				width: 1rpx;
-			}
+        .number {
+            color: #6938b6;
+        }
+    }
 
-			.number {
-				color: #6938b6;
-			}
-		}
-
-		.desc {
-			color: #888;
-			text-align: center;
-			font-size: 26rpx;
-			margin-bottom: 130rpx;
-			margin-top: 30rpx;
-		}
-	}
+    .desc {
+        color: #888;
+        text-align: center;
+        font-size: 26rpx;
+        margin-bottom: 130rpx;
+        margin-top: 30rpx;
+    }
+}
 </style>

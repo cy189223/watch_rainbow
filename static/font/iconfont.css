@@ -1,39 +1,39 @@
 @font-face {
-  font-family: "new-icon"; /* Project id 4151866 */
-  src:  url('~@/static/font/iconfont.woff2?t=1655257813922') format('woff2'),
-       url('~@/static/font/iconfont.woff?t=1655257813922') format('woff'),
-       url('~@/static/font/iconfont.ttf?t=1655257813922') format('truetype');
+    font-family: 'new-icon'; /* Project id 4151866 */
+    src:
+        url('~@/static/font/iconfont.woff2?t=1655257813922') format('woff2'),
+        url('~@/static/font/iconfont.woff?t=1655257813922') format('woff'),
+        url('~@/static/font/iconfont.ttf?t=1655257813922') format('truetype');
 }
 
 .new-icon {
-  font-family: "new-icon" !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: 'new-icon' !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-fenxiang:before {
-  content: "\e621";
+    content: '\e621';
 }
 
 .icon-express-package:before {
-  content: "\e8b6";
+    content: '\e8b6';
 }
 
 .icon-jineqiandaiyueshangjin:before {
-  content: "\e61c";
+    content: '\e61c';
 }
 
 .icon-a-1:before {
-  content: "\e6ba";
+    content: '\e6ba';
 }
 
 .icon-gonggao:before {
-  content: "\e61e";
+    content: '\e61e';
 }
 
 .icon-dengjizhongxin:before {
-  content: "\e823";
+    content: '\e823';
 }
-

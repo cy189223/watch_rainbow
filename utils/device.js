@@ -1,3 +1,3 @@
-const device = uni.getSystemInfoSync()
+const device = uni.getSystemInfoSync();
 
-module.exports = device
+module.exports = device;

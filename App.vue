@@ -1,136 +1,133 @@
 <script>
-	import {
-		$setStorage
-	} from "@/utils/auth.js";
-	
-	import updateCli from "@/utils/updateCli.js"
+import { $setStorage } from '@/utils/auth.js';
 
-	export default {
-		onLaunch: function(e) {
-			this.$store.dispatch("setEnterScene", e.scene)
+import updateCli from '@/utils/updateCli.js';
 
-			// 淘宝小程序自动登陆
-			// #ifdef MP-ALIPAY
-			my.authorize({
-				scopes: 'scope.userInfo',
-				success: (res) => {
-					my.getAuthUserInfo({
-						success: (userInfo) => {
-							// console.log('userInfo ==========>', userInfo)
-							
-							return this.$store.dispatch("login", {
-								type: 'with-taobao',
-								params: {
-									name: userInfo.nickName,
-									headimg: userInfo.avatar,
-								}
-							})
-						}
-					})
-				},
-			});
-			// #endif
+export default {
+    onLaunch: function (e) {
+        this.$store.dispatch('setEnterScene', e.scene);
 
-			// 检查是否有邀请人参数
-			if (e.query && e.query.inviter) {
-				// console.log('inviter', e.query.inviter)
-				$setStorage('inviter', e.query.inviter)
-				$setStorage('invite_node', e.query.invite_node)
-				// console.log('onload params=> ', e.query.inviter)
-			}
-			
-			// uni.showModal({
-			// 	title: '测试',
-			// 	content: '{'abc': 'def'}
-			// })
-			
-			// #ifdef APP-PLUS
-			// App版检查是否安装有openinstall，并查找安装参数（邀请码等）
-			// if (process.env.NODE_ENV !== 'development') {
-			// 	const openinstall = uni.requireNativePlugin('openinstall-plugin');
-			// 	openinstall.init();
-			// 	openinstall.getInstall(
-			// 	    8,
-			// 	    function (result) {
-			// 			let bindData = JSON.parse(result.bindData || '{}')
-						
-			// 			// App安装参数带有inviter字段
-			// 			if (bindData.inviter) {
-			// 				$setStorage('inviter', bindData.inviter)
-			// 				$setStorage('invite_node', bindData.invite_node)
-			// 			}
-			// 	    }
-			// 	);
-			// }
-			// #endif
-			
+        // 淘宝小程序自动登陆
+        // #ifdef MP-ALIPAY
+        my.authorize({
+            scopes: 'scope.userInfo',
+            success: (res) => {
+                my.getAuthUserInfo({
+                    success: (userInfo) => {
+                        // console.log('userInfo ==========>', userInfo)
 
-			// 获取基本设置
-			this.$store.dispatch("getSetting")
-			
-			// 部分安卓机型需要隔500毫秒重发
-			setTimeout(() => {
-				this.$store.dispatch("getSetting")
-			}, 500)
-			
-			// 检查更新
-			setTimeout(() => {
-				updateCli.checkUpdate()
-			}, 3000)
-		},
-		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
-		}
-	}
+                        return this.$store.dispatch('login', {
+                            type: 'with-taobao',
+                            params: {
+                                name: userInfo.nickName,
+                                headimg: userInfo.avatar
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        // #endif
+
+        // 检查是否有邀请人参数
+        if (e.query && e.query.inviter) {
+            // console.log('inviter', e.query.inviter)
+            $setStorage('inviter', e.query.inviter);
+            $setStorage('invite_node', e.query.invite_node);
+            // console.log('onload params=> ', e.query.inviter)
+        }
+
+        // uni.showModal({
+        // 	title: '测试',
+        // 	content: '{'abc': 'def'}
+        // })
+
+        // #ifdef APP-PLUS
+        // App版检查是否安装有openinstall，并查找安装参数（邀请码等）
+        // if (process.env.NODE_ENV !== 'development') {
+        // 	const openinstall = uni.requireNativePlugin('openinstall-plugin');
+        // 	openinstall.init();
+        // 	openinstall.getInstall(
+        // 	    8,
+        // 	    function (result) {
+        // 			let bindData = JSON.parse(result.bindData || '{}')
+
+        // 			// App安装参数带有inviter字段
+        // 			if (bindData.inviter) {
+        // 				$setStorage('inviter', bindData.inviter)
+        // 				$setStorage('invite_node', bindData.invite_node)
+        // 			}
+        // 	    }
+        // 	);
+        // }
+        // #endif
+
+        // 获取基本设置
+        this.$store.dispatch('getSetting');
+
+        // 部分安卓机型需要隔500毫秒重发
+        setTimeout(() => {
+            this.$store.dispatch('getSetting');
+        }, 500);
+
+        // 检查更新
+        setTimeout(() => {
+            updateCli.checkUpdate();
+        }, 3000);
+    },
+    onShow: function () {
+        console.log('App Show');
+    },
+    onHide: function () {
+        console.log('App Hide');
+    }
+};
 </script>
 
 <style lang="scss">
-	@import url("./common/html.css");
-	@import "./common/iconfont.css";
-	@import "./common/new-iconfont.css";
-	@import "./common/common.css";
-	@import './common/animate.css';
-	@import './common/app.scss';
-	@import "./static/font/iconfont.css";
+@import url('./common/html.css');
+@import './common/iconfont.css';
+@import './common/new-iconfont.css';
+@import './common/common.css';
+@import './common/animate.css';
+@import './common/app.scss';
+@import './static/font/iconfont.css';
 
-	.float-icon-animate {
-		animation: float-icon-animate 1s;
-		animation-iteration-count: infinite;
-		transform-origin: center;
-	}
+.float-icon-animate {
+    animation: float-icon-animate 1s;
+    animation-iteration-count: infinite;
+    transform-origin: center;
+}
 
-	@keyframes float-icon-animate {
-		0% {
-			transform: scale(1) rotate(-4deg);
-		}
+@keyframes float-icon-animate {
+    0% {
+        transform: scale(1) rotate(-4deg);
+    }
 
-		25% {
-			transform: rotate(0deg);
-		}
+    25% {
+        transform: rotate(0deg);
+    }
 
-		50% {
-			transform: scale(1.1) rotate(4deg);
-		}
+    50% {
+        transform: scale(1.1) rotate(4deg);
+    }
 
-		75% {
-			transform: rotate(0deg);
-		}
+    75% {
+        transform: rotate(0deg);
+    }
 
-		100% {
-			transform: scale(1) rotate(-4deg);
-		}
-	}
+    100% {
+        transform: scale(1) rotate(-4deg);
+    }
+}
 
-	.hover {
-		opacity: 0.8;
-	}
+.hover {
+    opacity: 0.8;
+}
 
-	page {
-		background-color: #fff;
-		color: #333333;
-		font-size: 30rpx;
-	}
+page {
+    background-color: #fff;
+    color: #333333;
+    font-size: 30rpx;
+}
 </style>

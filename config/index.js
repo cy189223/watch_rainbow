@@ -1,13 +1,13 @@
-const device = uni.getSystemInfoSync()
+const device = uni.getSystemInfoSync();
 
 // #ifdef MP-TOUTIAO || MP-KUAISHOU
 let statusBar = device.statusBarHeight;
 let customBar = 0;
 if (device.platform == 'android') {
-	customBar = device.statusBarHeight + 48;
+    customBar = device.statusBarHeight + 48;
 } else {
-	customBar = device.statusBarHeight + 44;
-};
+    customBar = device.statusBarHeight + 44;
+}
 let menuHeight = 32;
 // #endif
 
@@ -15,27 +15,27 @@ let menuHeight = 32;
 let statusBar = device.statusBarHeight;
 let customBar = 0;
 if (device.platform == 'android') {
-	customBar = device.statusBarHeight + 48;
+    customBar = device.statusBarHeight + 48;
 } else {
-	customBar = device.statusBarHeight + 44;
-};
+    customBar = device.statusBarHeight + 44;
+}
 let menuHeight = 32;
-// #endif	
+// #endif
 
 // #ifdef APP-PLUS
 let statusBar = device.statusBarHeight;
 let customBar = 0;
 if (device.platform == 'android') {
-	customBar = device.statusBarHeight + 48;
+    customBar = device.statusBarHeight + 48;
 } else {
-	customBar = device.statusBarHeight + 44;
-};
+    customBar = device.statusBarHeight + 44;
+}
 let menuHeight = 32;
-// #endif	
+// #endif
 
 // #ifdef H5
-let statusBar = 0
-let customBar = 0
+let statusBar = 0;
+let customBar = 0;
 // #endif
 
 // #ifdef MP-ALIPAY
@@ -45,26 +45,23 @@ let customBar = device.statusBarHeight + device.titleBarHeight;
 
 // 设备信息
 const deviceInfo = {
-	height: device.screenHeight,
-	width: device.screenWidth,
-	system: device.system,
-	model: device.model,
-	platform: device.platform,
-	statusBar: statusBar,
-	customBar: customBar
-}
+    height: device.screenHeight,
+    width: device.screenWidth,
+    system: device.system,
+    model: device.model,
+    platform: device.platform,
+    statusBar: statusBar,
+    customBar: customBar
+};
 
 // console.log(deviceInfo)
 
-const dev =
-	'http://test.api.rainbow.bailingkeji.com' // 你的测试api地址   http://manghe.com https://api.caihongbox.com.cn
+const dev = 'http://test.api.rainbow.bailingkeji.com'; // 你的测试api地址   http://manghe.com https://api.caihongbox.com.cn
 
-const prod = "https://api.caihongbox.com.cn" // 你的正式api地址
-
-
+const prod = 'https://api.caihongbox.com.cn'; // 你的正式api地址
 
 module.exports = {
-	VERSIONS: "1.0.0",
-	BASE_URL: process.env.NODE_ENV === 'development' ? dev : prod,
-	DEVICE_INFO: deviceInfo
-}
+    VERSIONS: '1.0.0',
+    BASE_URL: process.env.NODE_ENV === 'development' ? dev : prod,
+    DEVICE_INFO: deviceInfo
+};

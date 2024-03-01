@@ -1,755 +1,747 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/shop/index",
-			"style": {
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": true,
-				"mp-alipay": {
-					"backgroundTextStyle": "black",
-					"transparentTitle": "always"
-				}
-			}
-		},{
-			"path": "pages/index/index",
-			"style": {
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": true,
-				"mp-alipay": {
-					"backgroundTextStyle": "black",
-					"transparentTitle": "always"
-				}
-			}
-		},
-		{
-			"path": "pages/activity/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "每日签到",
-				"navigationBarBackgroundColor": "#ffffff",
-				// "navigationStyle": "custom",
-				"enablePullDownRefresh": true,
-				"h5": {
-					"navigationStyle": "custom"
-				}
-			}
-		},
-		{
-			"path": "pages/activity/list",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "活动列表",
-				"navigationBarBackgroundColor": "#ffffff"
-				// "navigationStyle": "custom",
-				// "enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/exchange/productList",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "选择商品置换",
-				"navigationBarBackgroundColor": "#FFFFFF"
-				// "navigationStyle": "custom",
-				// "enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/exchange/orderPreview",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "确认置换商品",
-				"navigationBarBackgroundColor": "#FFFFFF"
-				// "navigationStyle": "custom",
-				// "enablePullDownRefresh": true
-			}
-		},
-		// {
-		// 	"path": "pages/lotteryActivity/luckyUserList",
-		// 	"style": {
-		// 		"backgroundTextStyle": "dark",
-		// 		"navigationBarTitleText": "幸运用户",
-		// 		"navigationBarBackgroundColor": "#FFFFFF"
-		// 		// "navigationStyle": "custom",
-		// 		// "enablePullDownRefresh": true
-		// 	}
-		// },
-		{
-			"path": "pages/yifanshang/detail",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#0d093c",
-				"navigationBarTextStyle": "white"
-				// "enablePullDownRefresh": true
-				// "navigationStyle": "custom"
-				// "enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/jika/detail",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "集卡",
-				"navigationBarBackgroundColor": "#FFFFFF",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-				// "enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/fudai/detail",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "无限赏",
-				"navigationBarBackgroundColor": "#0d093c",
-				"navigationBarTextStyle": "white"
-			}
-		},
-		{
-			"path": "pages/productDetail/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "商品详情",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/dayTask/index",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/myCard/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "我的道具卡券",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/presell/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "预售日历",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/orderPreview/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "订单结算",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/orderCode/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "订单核销码",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/orderCode/scan",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "扫码核销",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/payCenter/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "收银台",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/topic/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "论坛动态",
-				"navigationBarBackgroundColor": "#ffffff",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/agentPayRecord/detail",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "订单代付",
-				"navigationBarBackgroundColor": "#ffffff",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/topic/create",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "发布动态",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/topic/tagList",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "全部话题",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/topic/groupList",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "全部圈子",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/topic/topicList",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "全部动态",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/topic/topicDetail",
-			"style": {
-				"navigationStyle": "custom",
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "动态详情",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/contact/index",
-			"style": {
-				// "navigationStyle": "custom",
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "联系我们",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/couponDetail/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "领取优惠券",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/code/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "使用兑换码",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/code/record",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "兑换记录",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/myBox/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "盒柜仓库",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/myBox/detail",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "物品详情",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/orderList/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "订单列表",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/orderDetail/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "订单详情",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/myActivity/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "我参与的活动",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/cart/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "购物车",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/category/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "所有分类",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/ip/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "IP列表",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/seckill/detail",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "秒杀活动详情",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/page/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "页面详情",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/center/index",
-			"style": {
-				"navigationStyle": "custom",
-				"mp-alipay": {
-					"backgroundTextStyle": "black",
-					"transparentTitle": "always"
-				}
-			}
-		},
-		{
-			"path": "pages/center/detail",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "个人中心",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/buyVip/index",
-			"style": {
-				"navigationBarTitleText": "开通会员",
-				"navigationStyle": "custom",
-				"mp-alipay": {
-					"backgroundTextStyle": "black",
-					"navigationBarForceEnable": false
-				}
-			}
-		},
-		{
-			"path": "pages/boxDetail/index",
-			"style": {
-				"disableScroll": true,
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#ffffff",
-				"navigationStyle": "custom",
-				"mp-alipay": {
-					"backgroundTextStyle": "dark",
-					"navigationBarForceEnable": false,
-					"transparentTitle": "always"
-				}
-			}
-		},
-		{
-			"path": "pages/resale/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "转售区",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/resale/detail",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "转售详情",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/search/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "内容搜索",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/openBox/index",
-			"style": {
-				"disableScroll": true,
-				"navigationStyle": "custom",
-				"mp-alipay": {
-					"backgroundTextStyle": "dark",
-					"navigationBarForceEnable": false,
-					"transparentTitle": "always"
-				}
-			}
-		},
-		{
-			"path": "pages/myAddress/index",
-			"style": {
-				"navigationBarTitleText": "我的收货地址"
-			}
-		},
-		{
-			"path": "pages/setAddress/index",
-			"style": {
-				"navigationBarTitleText": "添加收货地址"
-			}
-		},
-		{
-			"path": "pages/myCoupons/index",
-			"style": {
-				"navigationBarTitleText": "我的优惠券"
-			}
-		},
-		{
-			"path": "pages/myInvitees/index",
-			"style": {
-				"navigationBarTitleText": "邀请与分销记录"
-			}
-		},
-		{
-			"path": "pages/myScore/index",
-			"style": {
-				"navigationBarTitleText": ""
-			}
-		},
-		{
-			"path": "pages/activityTicket/record",
-			"style": {
-				"navigationBarTitleText": "活动次数记录",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/myScore/buy",
-			"style": {
-				"navigationBarTitleText": "积分充值"
-			}
-		},
-		{
-			"path": "pages/myChip/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "碎片资产",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/myProfile/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "编辑个人资料",
-				"navigationBarBackgroundColor": "#ffffff"
-			}
-		},
-		{
-			"path": "pages/myRedpack/index",
-			"style": {
-				"navigationBarTitleText": "我的彩虹币",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/myRedpack/buy",
-			"style": {
-				"navigationBarTitleText": "余额充值"
-			}
-		},
-		{
-			"path": "pages/myRedpack/withdraw",
-			"style": {
-				"navigationBarBackgroundColor": "#ffffff",
-				"navigationBarTitleText": "彩虹币提现"
-			}
-		},
-		{
-			"path": "pages/myRedpack/withdrawList",
-			"style": {
-				"navigationBarBackgroundColor": "#ffffff",
-				"navigationBarTitleText": "提现记录"
-			}
-		},
-		{
-			"path": "pages/coverChip/index",
-			"style": {
-				"navigationBarBackgroundColor": "#ffffff",
-				"navigationBarTitleText": "碎片兑换"
-			}
-		},
-		{
-			"path": "pages/webview/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/rule/index",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "规则说明",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
-			"path": "pages/rule/userStatement",
-			"style": {
-				"backgroundTextStyle": "dark",
-				"navigationBarTitleText": "使用协议",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		}
-		// #ifndef APP-PLUS
-		,{
-			"path": "pages/login/index",
-			"style": {
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#f4f4f4",
-				"navigationStyle": "custom",
-				"mp-alipay": {
-					"backgroundTextStyle": "dark",
-					"navigationBarForceEnable": false,
-					"transparentTitle": "always"
-				}
-			}
-		}
-		//  #endif
-		// #ifdef APP-PLUS
-		,{
-			"path": "pages/login/app",
-			"style": {
-				"navigationBarTitleText": "授权登陆",
-				"navigationBarBackgroundColor": "#f4f4f4",
-				"navigationStyle": "custom"
-			}
-		}
-		//  #endif
-		,{
-			"path": "pages/appUpgrade/index",
-			"style": {
-				"disableScroll": true,
-				"app-plus": {
-					"backgroundColorTop": "transparent",
-					"background": "transparent",
-					"titleNView": false,
-					"scrollIndicator": false,
-					"popGesture": "none",
-					"animationType": "fade-in",
-					"animationDuration": 200
-				}
-			}
-		},{
-			"path": "pages/ranking/index",
-			"style": {
-				"navigationBarTitleText": "排行榜",
-				"disableScroll": true,
-				"app-plus": {
-					"backgroundColorTop": "transparent",
-					"background": "transparent",
-					"titleNView": false,
-					"scrollIndicator": false,
-					"popGesture": "none",
-					"animationType": "fade-in",
-					"animationDuration": 200
-				}
-			}
-		}
-	    ,{
-            "path" : "pages/level/level",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "我的等级",
-				"backgroundTextStyle": "dark",
-				"navigationBarBackgroundColor": "#ffffff",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/pkindex/pkindex",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "拳击",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/jiaoliuqun/jiaoliuqun",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "交流群",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/couponlist/couponlist",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "领券中心",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        
-        ,{
-            "path" : "pages/pkindex/index",
-            "style" :                                                                                    
-            {
+    "pages": [
+        //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+        {
+            "path": "pages/shop/index",
+            "style": {
                 "navigationStyle": "custom",
                 "enablePullDownRefresh": true,
                 "mp-alipay": {
-                	"backgroundTextStyle": "black",
-                	"transparentTitle": "always"
+                    "backgroundTextStyle": "black",
+                    "transparentTitle": "always"
                 }
             }
-            
+        },
+        {
+            "path": "pages/index/index",
+            "style": {
+                "navigationStyle": "custom",
+                "enablePullDownRefresh": true,
+                "mp-alipay": {
+                    "backgroundTextStyle": "black",
+                    "transparentTitle": "always"
+                }
+            }
+        },
+        {
+            "path": "pages/activity/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "每日签到",
+                "navigationBarBackgroundColor": "#ffffff",
+                // "navigationStyle": "custom",
+                "enablePullDownRefresh": true,
+                "h5": {
+                    "navigationStyle": "custom"
+                }
+            }
+        },
+        {
+            "path": "pages/activity/list",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "活动列表",
+                "navigationBarBackgroundColor": "#ffffff"
+                // "navigationStyle": "custom",
+                // "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/exchange/productList",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "选择商品置换",
+                "navigationBarBackgroundColor": "#FFFFFF"
+                // "navigationStyle": "custom",
+                // "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/exchange/orderPreview",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "确认置换商品",
+                "navigationBarBackgroundColor": "#FFFFFF"
+                // "navigationStyle": "custom",
+                // "enablePullDownRefresh": true
+            }
+        },
+        // {
+        // 	"path": "pages/lotteryActivity/luckyUserList",
+        // 	"style": {
+        // 		"backgroundTextStyle": "dark",
+        // 		"navigationBarTitleText": "幸运用户",
+        // 		"navigationBarBackgroundColor": "#FFFFFF"
+        // 		// "navigationStyle": "custom",
+        // 		// "enablePullDownRefresh": true
+        // 	}
+        // },
+        {
+            "path": "pages/yifanshang/detail",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "",
+                "navigationBarBackgroundColor": "#0d093c",
+                "navigationBarTextStyle": "white"
+                // "enablePullDownRefresh": true
+                // "navigationStyle": "custom"
+                // "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/jika/detail",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "集卡",
+                "navigationBarBackgroundColor": "#FFFFFF",
+                "enablePullDownRefresh": false,
+                "navigationStyle": "custom"
+                // "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/fudai/detail",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "无限赏",
+                "navigationBarBackgroundColor": "#0d093c",
+                "navigationBarTextStyle": "white"
+            }
+        },
+        {
+            "path": "pages/productDetail/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "商品详情",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/dayTask/index",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/myCard/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "我的道具卡券",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/presell/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "预售日历",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/orderPreview/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "订单结算",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/orderCode/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "订单核销码",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/orderCode/scan",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "扫码核销",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/payCenter/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "收银台",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/topic/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "论坛动态",
+                "navigationBarBackgroundColor": "#ffffff",
+                "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/agentPayRecord/detail",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "订单代付",
+                "navigationBarBackgroundColor": "#ffffff",
+                "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/topic/create",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "发布动态",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/topic/tagList",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "全部话题",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/topic/groupList",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "全部圈子",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/topic/topicList",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "全部动态",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/topic/topicDetail",
+            "style": {
+                "navigationStyle": "custom",
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "动态详情",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/contact/index",
+            "style": {
+                // "navigationStyle": "custom",
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "联系我们",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/couponDetail/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "领取优惠券",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/code/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "使用兑换码",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/code/record",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "兑换记录",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/myBox/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "盒柜仓库",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/myBox/detail",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "物品详情",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/orderList/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "订单列表",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/orderDetail/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "订单详情",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/myActivity/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "我参与的活动",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/cart/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "购物车",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/category/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "所有分类",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/ip/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "IP列表",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/seckill/detail",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "秒杀活动详情",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/page/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "页面详情",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/center/index",
+            "style": {
+                "navigationStyle": "custom",
+                "mp-alipay": {
+                    "backgroundTextStyle": "black",
+                    "transparentTitle": "always"
+                }
+            }
+        },
+        {
+            "path": "pages/center/detail",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "个人中心",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/buyVip/index",
+            "style": {
+                "navigationBarTitleText": "开通会员",
+                "navigationStyle": "custom",
+                "mp-alipay": {
+                    "backgroundTextStyle": "black",
+                    "navigationBarForceEnable": false
+                }
+            }
+        },
+        {
+            "path": "pages/boxDetail/index",
+            "style": {
+                "disableScroll": true,
+                "navigationBarTitleText": "",
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationStyle": "custom",
+                "mp-alipay": {
+                    "backgroundTextStyle": "dark",
+                    "navigationBarForceEnable": false,
+                    "transparentTitle": "always"
+                }
+            }
+        },
+        {
+            "path": "pages/resale/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "转售区",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/resale/detail",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "转售详情",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/search/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "内容搜索",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/openBox/index",
+            "style": {
+                "disableScroll": true,
+                "navigationStyle": "custom",
+                "mp-alipay": {
+                    "backgroundTextStyle": "dark",
+                    "navigationBarForceEnable": false,
+                    "transparentTitle": "always"
+                }
+            }
+        },
+        {
+            "path": "pages/myAddress/index",
+            "style": {
+                "navigationBarTitleText": "我的收货地址"
+            }
+        },
+        {
+            "path": "pages/setAddress/index",
+            "style": {
+                "navigationBarTitleText": "添加收货地址"
+            }
+        },
+        {
+            "path": "pages/myCoupons/index",
+            "style": {
+                "navigationBarTitleText": "我的优惠券"
+            }
+        },
+        {
+            "path": "pages/myInvitees/index",
+            "style": {
+                "navigationBarTitleText": "邀请与分销记录"
+            }
+        },
+        {
+            "path": "pages/myScore/index",
+            "style": {
+                "navigationBarTitleText": ""
+            }
+        },
+        {
+            "path": "pages/activityTicket/record",
+            "style": {
+                "navigationBarTitleText": "活动次数记录",
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/myScore/buy",
+            "style": {
+                "navigationBarTitleText": "积分充值"
+            }
+        },
+        {
+            "path": "pages/myChip/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "碎片资产",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/myProfile/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "编辑个人资料",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/myRedpack/index",
+            "style": {
+                "navigationBarTitleText": "我的彩虹币",
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/myRedpack/buy",
+            "style": {
+                "navigationBarTitleText": "余额充值"
+            }
+        },
+        {
+            "path": "pages/myRedpack/withdraw",
+            "style": {
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTitleText": "彩虹币提现"
+            }
+        },
+        {
+            "path": "pages/myRedpack/withdrawList",
+            "style": {
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTitleText": "提现记录"
+            }
+        },
+        {
+            "path": "pages/coverChip/index",
+            "style": {
+                "navigationBarBackgroundColor": "#ffffff",
+                "navigationBarTitleText": "碎片兑换"
+            }
+        },
+        {
+            "path": "pages/webview/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/rule/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "规则说明",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        {
+            "path": "pages/rule/userStatement",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "使用协议",
+                "navigationBarBackgroundColor": "#FFFFFF"
+            }
+        },
+        // #ifndef APP-PLUS
+        {
+            "path": "pages/login/index",
+            "style": {
+                "navigationBarTitleText": "",
+                "navigationBarBackgroundColor": "#f4f4f4",
+                "navigationStyle": "custom",
+                "mp-alipay": {
+                    "backgroundTextStyle": "dark",
+                    "navigationBarForceEnable": false,
+                    "transparentTitle": "always"
+                }
+            }
+        },
+        //  #endif
+        // #ifdef APP-PLUS
+        {
+            "path": "pages/login/app",
+            "style": {
+                "navigationBarTitleText": "授权登陆",
+                "navigationBarBackgroundColor": "#f4f4f4",
+                "navigationStyle": "custom"
+            }
+        },
+        //  #endif
+        {
+            "path": "pages/appUpgrade/index",
+            "style": {
+                "disableScroll": true,
+                "app-plus": {
+                    "backgroundColorTop": "transparent",
+                    "background": "transparent",
+                    "titleNView": false,
+                    "scrollIndicator": false,
+                    "popGesture": "none",
+                    "animationType": "fade-in",
+                    "animationDuration": 200
+                }
+            }
+        },
+        {
+            "path": "pages/ranking/index",
+            "style": {
+                "navigationBarTitleText": "排行榜",
+                "disableScroll": true,
+                "app-plus": {
+                    "backgroundColorTop": "transparent",
+                    "background": "transparent",
+                    "titleNView": false,
+                    "scrollIndicator": false,
+                    "popGesture": "none",
+                    "animationType": "fade-in",
+                    "animationDuration": 200
+                }
+            }
+        },
+        {
+            "path": "pages/level/level",
+            "style": {
+                "navigationBarTitleText": "我的等级",
+                "backgroundTextStyle": "dark",
+                "navigationBarBackgroundColor": "#ffffff",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/pkindex/pkindex",
+            "style": {
+                "navigationBarTitleText": "拳击",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/jiaoliuqun/jiaoliuqun",
+            "style": {
+                "navigationBarTitleText": "交流群",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/couponlist/couponlist",
+            "style": {
+                "navigationBarTitleText": "领券中心",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/pkindex/index",
+            "style": {
+                "navigationStyle": "custom",
+                "enablePullDownRefresh": true,
+                "mp-alipay": {
+                    "backgroundTextStyle": "black",
+                    "transparentTitle": "always"
+                }
+            }
         }
     ],
-	"subpackages": [
-	    {
-	      "root": "packageA",
-	      "pages": [
-			  {
-			  	"path": "rotateLottery/detail",
-			  	"style": {
-			  		"backgroundTextStyle": "dark",
-			  		"navigationBarTitleText": "大转盘抽奖",
-			  		"navigationBarBackgroundColor": "#FFFFFF"
-			  		// "navigationStyle": "custom",
-			  		// "enablePullDownRefresh": true
-			  	}
-			  },
-			  {
-			  	"path": "lottery/userList",
-			  	"style": {
-			  		"backgroundTextStyle": "dark",
-			  		"navigationBarTitleText": "参与记录",
-			  		"navigationBarBackgroundColor": "#FFFFFF"
-			  		// "navigationStyle": "custom",
-			  		// "enablePullDownRefresh": true
-			  	}
-			  },
-			  {
-			  	"path": "lottery/detail",
-			  	"style": {
-			  		"backgroundTextStyle": "dark",
-			  		"navigationBarTitleText": "抽奖活动详情",
-			  		"navigationBarBackgroundColor": "#FFFFFF"
-			  	}
-			  },
-			  {
-			  	"path": "lotteryTicket/index",
-			  	"style": {
-			  		"backgroundTextStyle": "dark",
-			  		"navigationBarTitleText": "我的抽奖码",
-			  		"navigationBarBackgroundColor": "#FFFFFF"
-			  	}
-			  },
-			  {
-			  	"path": "eggLottery/detail",
-			  	"style": {
-			  		"disableScroll": true,
-			  		"navigationBarTitleText": "扭蛋机",
-			  		"navigationStyle": "custom",
-			  		"mp-alipay": {
-			  			"backgroundTextStyle": "black",
-			  			"navigationBarForceEnable": false
-			  		}
-			  	}
-			  }
-	      ]
-	    }
-	],
-	"globalStyle": {
-		// "autoscan":true,
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": " ",
-		"navigationBarBackgroundColor": "#FFFFFF",
-		"backgroundColor": "#F8F8F8",
-		"h5": {
-			"navigationStyle": "custom"
-		}
-	},
-	"tabBar": {
-		"color": "#999999",
-		"selectedColor": "#000",
-		"borderStyle": "white",
-		"backgroundColor": "#FFFFFF",
-		"list": [
-			{
-				"pagePath": "pages/shop/index",
-				"iconPath": "static/tabbar/tabbar1.png",
-				"selectedIconPath": "static/tabbar/tabbar1-1.png",
-				"text": "商城"
-			},
-			{
-				"pagePath": "pages/pkindex/index",
-				"iconPath": "static/tabbar/tabbar2.png",
-				"selectedIconPath": "static/tabbar/tabbar2-1.png",
-				"text": "拳击"
-			},
-			{
-				"pagePath": "pages/index/index",
-				"iconPath": "static/tabbar/tabbar3.png",
-				"selectedIconPath": "static/tabbar/tabbar3-1.png",
-				"text": "抽赏"
-			},
-			{
-				"pagePath": "pages/myBox/index",
-				"iconPath": "static/tabbar/tabbar4.png",
-				"selectedIconPath": "static/tabbar/tabbar4-1.png",
-				"text": "赏袋"
-			},
-			{
-				"pagePath": "pages/center/index",
-				"iconPath": "static/tabbar/tabbar5.png",
-				"selectedIconPath": "static/tabbar/tabbar5-1.png",
-				"text": "我的"
-			}
-		]
-	},
-	"condition": { //模式配置，仅开发期间生效
-		"current": 0, //当前激活的模式（list 的索引项）
-		"list": [
-		]
-	}
+    "subpackages": [
+        {
+            "root": "packageA",
+            "pages": [
+                {
+                    "path": "rotateLottery/detail",
+                    "style": {
+                        "backgroundTextStyle": "dark",
+                        "navigationBarTitleText": "大转盘抽奖",
+                        "navigationBarBackgroundColor": "#FFFFFF"
+                        // "navigationStyle": "custom",
+                        // "enablePullDownRefresh": true
+                    }
+                },
+                {
+                    "path": "lottery/userList",
+                    "style": {
+                        "backgroundTextStyle": "dark",
+                        "navigationBarTitleText": "参与记录",
+                        "navigationBarBackgroundColor": "#FFFFFF"
+                        // "navigationStyle": "custom",
+                        // "enablePullDownRefresh": true
+                    }
+                },
+                {
+                    "path": "lottery/detail",
+                    "style": {
+                        "backgroundTextStyle": "dark",
+                        "navigationBarTitleText": "抽奖活动详情",
+                        "navigationBarBackgroundColor": "#FFFFFF"
+                    }
+                },
+                {
+                    "path": "lotteryTicket/index",
+                    "style": {
+                        "backgroundTextStyle": "dark",
+                        "navigationBarTitleText": "我的抽奖码",
+                        "navigationBarBackgroundColor": "#FFFFFF"
+                    }
+                },
+                {
+                    "path": "eggLottery/detail",
+                    "style": {
+                        "disableScroll": true,
+                        "navigationBarTitleText": "扭蛋机",
+                        "navigationStyle": "custom",
+                        "mp-alipay": {
+                            "backgroundTextStyle": "black",
+                            "navigationBarForceEnable": false
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "globalStyle": {
+        // "autoscan":true,
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": " ",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "backgroundColor": "#F8F8F8",
+        "h5": {
+            "navigationStyle": "custom"
+        }
+    },
+    "tabBar": {
+        "color": "#999999",
+        "selectedColor": "#000",
+        "borderStyle": "white",
+        "backgroundColor": "#FFFFFF",
+        "list": [
+            {
+                "pagePath": "pages/shop/index",
+                "iconPath": "static/tabbar/tabbar1.png",
+                "selectedIconPath": "static/tabbar/tabbar1-1.png",
+                "text": "商城"
+            },
+            {
+                "pagePath": "pages/pkindex/index",
+                "iconPath": "static/tabbar/tabbar2.png",
+                "selectedIconPath": "static/tabbar/tabbar2-1.png",
+                "text": "拳击"
+            },
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "static/tabbar/tabbar3.png",
+                "selectedIconPath": "static/tabbar/tabbar3-1.png",
+                "text": "抽赏"
+            },
+            {
+                "pagePath": "pages/myBox/index",
+                "iconPath": "static/tabbar/tabbar4.png",
+                "selectedIconPath": "static/tabbar/tabbar4-1.png",
+                "text": "赏袋"
+            },
+            {
+                "pagePath": "pages/center/index",
+                "iconPath": "static/tabbar/tabbar5.png",
+                "selectedIconPath": "static/tabbar/tabbar5-1.png",
+                "text": "我的"
+            }
+        ]
+    },
+    "condition": {
+        //模式配置，仅开发期间生效
+        "current": 0, //当前激活的模式（list 的索引项）
+        "list": []
+    }
 }

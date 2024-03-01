@@ -1,8 +1,8 @@
-import request from "../utils/request.js";
+import request from '../utils/request.js';
 
 export async function getIPS() {
-	return await request({
-		url: `/IPs`,
-		method: 'get'
-	})
+    return await request({
+        url: `/IPs`,
+        method: 'get'
+    });
 }
