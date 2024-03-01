@@ -700,7 +700,7 @@
 	    }
 	],
 	"globalStyle": {
-		"autoscan":true,
+		// "autoscan":true,
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": " ",
 		"navigationBarBackgroundColor": "#FFFFFF",
