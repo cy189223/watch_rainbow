@@ -35,7 +35,7 @@ let menuHeight = 32;
 
 // #ifdef H5
 let statusBar = 0
-let customBar  = 0
+let customBar = 0
 // #endif
 
 // #ifdef MP-ALIPAY
@@ -56,9 +56,10 @@ const deviceInfo = {
 
 // console.log(deviceInfo)
 
-const dev = 'http://manghe.com'    // 你的测试api地址   http://manghe.com https://api.caihongbox.com.cn
+const dev =
+	'http://test.api.rainbow.bailingkeji.com' // 你的测试api地址   http://manghe.com https://api.caihongbox.com.cn
 
-const prod = "https://api.caihongbox.com.cn"  // 你的正式api地址
+const prod = "https://api.caihongbox.com.cn" // 你的正式api地址
 
 
 

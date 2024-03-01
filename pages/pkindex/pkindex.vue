@@ -44,7 +44,7 @@
 				<view v-if="item.prize_type == 'C'" class="tagbox btag">串串奖励</view>
 			</view>
 		</view>
-		
+
 		<view class="sku-list" v-if="wintype != ''" style="margin-bottom: 0;">
 			<view class="title-c">
 				<view class="stock-c" v-if="pkdata.room_index">第{{pkdata.room_index}}箱获奖列表</view>
@@ -55,7 +55,8 @@
 						<image :src="item.user.headimg" mode="aspectFill" class="headimg"></image>
 						<view class="sku-title">{{item.user.name}}</view>
 						<view class="weizhi" v-if="ispk">
-							{{item.type == 'A' ? 'A' : '通杀位'}}{{item.type == 'A' ? item.seat_code + '号位' : ''}}</view>
+							{{item.type == 'A' ? 'A' : '通杀位'}}{{item.type == 'A' ? item.seat_code + '号位' : ''}}
+						</view>
 						<view class="weizhi" v-else>{{item.seat_code}}号位</view>
 					</view>
 					<view class="user-c" v-for="(ite, ind) in item.packages" :key="ind">
@@ -65,13 +66,13 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="bottombtnbox">
 			<view class="joinbox" @tap="openprev">上一箱</view>
 			<view class="boxnum" v-if="pkdata.room_index" @tap="isRoomPopup = true">第 {{pkdata.room_index}} 箱</view>
 			<view class="joinbox" @tap="opennext">下一箱</view>
 		</view>
-		
+
 		<view class="mainbox">
 			<view class="userlistbox parta" :class="ispk ? '' : 'quanjushang'">
 				<view class="userbox" v-for="(item,index) in pkadata" :key="index" @tap="topay(item)">
@@ -138,7 +139,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<RoomPopup v-if="isRoomPopup" @select="changeRoom" @close="hideRoom()" :uuid="pkid"></RoomPopup>
 
 		<PayCard v-if="isShowPayCard" :pkskus="pkdata.activity" :paytype="paytype" :payuuid="payuuid" :pktype="pktype"
@@ -153,11 +154,10 @@
 	export default {
 		components: {
 			PayCard,
-			RoomPopup
 		},
 		data() {
 			return {
-				isRoomPopup:false,
+				isRoomPopup: false,
 				pkid: '',
 				payCardInfo: {},
 				uuid: '',
@@ -179,7 +179,7 @@
 				payjoin_type: '',
 				payseat_uuid: '',
 				ispk: false,
-				pktype:'',
+				pktype: '',
 			}
 		},
 		onShow() {},
@@ -194,7 +194,7 @@
 				this.getpkssku()
 			}
 		},
-		computed:{
+		computed: {
 			share() {
 				if (this.pkdata && this.pkdata.activity) {
 					return {
