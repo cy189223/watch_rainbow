@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'AlimamaShuHeiTi';
+    src: url('https://watch-box.oss-cn-beijing.aliyuncs.com/AlimamaShuHeiTi-Bold.otf');
+}
+
+body {
+    font-family: 'AlimamaShuHeiTi';
+}
+
+
 .mask {
     z-index: 100;
     position: fixed;
@@ -57,14 +67,17 @@
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 110;
 }
+
 .ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
+
 .hover {
     opacity: 0.9;
 }
+
 .safe-area-bottom {
     padding-bottom: 0;
     padding-bottom: constant(safe-area-inset-bottom) !important;
@@ -74,9 +87,11 @@
 .margin {
     margin: 24rpx;
 }
+
 .margin-h {
     margin: 0 24rpx;
 }
+
 .margin-v {
     margin: 24rpx 0;
 }
@@ -84,9 +99,11 @@
 .padding {
     padding: 24rpx;
 }
+
 .padding-h {
     padding: 0 24rpx;
 }
+
 .padding-v {
     padding: 24rpx 0;
 }
@@ -99,49 +116,61 @@ icon {
 .flex {
     display: flex;
 }
+
 .rows {
     display: flex;
     flex-direction: row;
 }
+
 .columns {
     display: flex;
     flex-direction: column;
 }
+
 .wrap {
     display: flex;
     flex-wrap: wrap;
 }
+
 .nowrap {
     display: flex;
     flex-wrap: nowrap;
 }
+
 .space-between {
     display: flex;
     justify-content: space-between;
 }
+
 .flex-vtop {
     align-items: flex-start;
 }
+
 .flex-vcenter {
     align-items: center;
 }
+
 .flex-vbottom {
     align-items: flex-end;
 }
+
 .content-center {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .box-center {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .center-h {
     display: flex;
     align-items: center;
 }
+
 .column {
     display: flex;
     flex-direction: column;
@@ -153,36 +182,47 @@ icon {
 .black {
     color: #0e151d;
 }
+
 .white {
     color: #ffffff;
 }
+
 .blue {
     color: #3688ff;
 }
+
 .light-blue {
     color: #afcfff;
 }
+
 .blue-sky {
     color: #61cbef;
 }
+
 .gray {
     color: #a5a7b2;
 }
+
 .light-gray {
     color: #bbbbbb;
 }
+
 .red {
     color: #e52302;
 }
+
 .yellow {
     color: #ffcc00;
 }
+
 .light-yellow {
     color: #ecd1a8;
 }
+
 .green {
     color: #9dd26d;
 }
+
 .orange {
     color: #f27233;
 }
@@ -192,50 +232,62 @@ icon {
     background: #0e151d !important;
     color: #ffffff !important;
 }
+
 .bg-white {
     background: #ffffff !important;
     color: #0e151d !important;
 }
+
 .bg-blue {
     background: #3688ff !important;
     color: #ffffff !important;
 }
+
 .bg-purple {
     background: #555195 !important;
     color: #ffffff !important;
 }
+
 .bg-blue-sky {
     background: #61cbef !important;
     color: #ffffff !important;
 }
+
 .bg-gray {
     background: #ddd !important;
     color: #ffffff !important;
 }
+
 .bg-cancel {
     background: #e8e8e8 !important;
     color: #666 !important;
 }
+
 .bg-red {
     background: #f52302 !important;
     color: #ffffff !important;
 }
+
 .bg-green {
     background: #9dd26d !important;
     color: #ffffff !important;
 }
+
 .bg-yellow {
     background: #f7af09 !important;
     color: #ffffff !important;
 }
+
 .bg-brown {
     background: #e0a360 !important;
     color: #ffffff !important;
 }
+
 .bg-light-blue {
     background: #afcfff !important;
     color: #ffffff !important;
 }
+
 .bg-light-yellow {
     background: #ecd1a8 !important;
     color: #ffffff !important;
@@ -245,10 +297,12 @@ icon {
     background: #6432c9 !important;
     color: #ffffff !important;
 }
+
 .btn {
     font-weight: 500;
     box-sizing: border-box;
 }
+
 .btn-orange-border {
     border: 4rpx solid #6938b6 !important;
     background: white;
@@ -260,22 +314,27 @@ icon {
     background-image: linear-gradient(45deg, #b100ff 0%, #00b3ff 80%);
     color: #ffffff;
 }
+
 .gtbg-pink {
     background-image: linear-gradient(45deg, #ff0066 0%, #ca00ff 80%);
     color: #ffffff;
 }
+
 .gtbg-green {
     background-image: linear-gradient(45deg, #39b55a 0%, #8dc63e 80%);
     color: #ffffff;
 }
+
 .gtbg-purple {
     background-image: linear-gradient(45deg, #f000ee 0%, #6e00ff 80%);
     color: #ffffff;
 }
+
 .gtbg-orange {
     background-image: linear-gradient(160deg, #ffcd00 0%, #ff9b00 80%);
     color: #ffffff;
 }
+
 .gtbg-blue-sky {
     background-image: linear-gradient(160deg, #00ffd5 0%, #008cff 80%);
     color: #ffffff;
@@ -294,11 +353,13 @@ icon {
     align-items: center;
     position: relative;
 }
+
 .list-item .body {
     flex: 1;
     display: flex;
     align-items: center;
 }
+
 .list-item-title {
     flex: 1;
 }
