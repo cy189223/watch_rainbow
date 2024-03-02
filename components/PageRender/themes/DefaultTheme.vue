@@ -24,7 +24,7 @@
                     <view class="orderbox">
                         <view class="new-icon icon-gonggao" style="color: #d8d3e1; font-size: 15px"></view>
                         <view style="color: #fff; margin-left: 5px; font-size: 13px">公告</view>
-                        <uni-notice-bar scrollable single :text="ordernotice" style="flex: 1" color="#fff" background-color="none" speed="50"></uni-notice-bar>
+                        <NoticeBar scrollable single :text="ordernotice" style="flex: 1" color="#fff" background-color="none" speed="50"></NoticeBar>
                     </view>
                     <view class="btnlist">
                         <image class="btnbox" src="https://api.caihongbox.com.cn/image/jlq.png" mode="scaleToFill" @tap="toDetail('/pages/jiaoliuqun/jiaoliuqun')"></image>
@@ -61,13 +61,15 @@ import ImageList from '../modules/ImageList.vue';
 import PureImageList from '../modules/PureImageList.vue';
 import VideoItem from '../modules/Video.vue';
 import SearchBar from '../modules/SearchBar.vue';
+import NoticeBar from '../../../components/NoticeBar/index.vue';
 
 export default {
     components: {
         ImageList,
         PureImageList,
         VideoItem,
-        SearchBar
+        SearchBar,
+        NoticeBar
     },
     props: {
         isshowye: {
