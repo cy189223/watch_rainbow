@@ -50,7 +50,7 @@ export default {
 .container {
     padding-top: 1rpx;
     background-color: #1d0051;
-    background-image: url('https://hlw01.oss-cn-beijing.aliyuncs.com/bg_page_particle.gif');
+    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_page_particle.gif');
     background-position: top;
     background-repeat: no-repeat;
     background-size: 100%;

@@ -5,10 +5,7 @@
                 <view class="title">
                     {{ title }}
                 </view>
-                <view class="search-btn" @tap="toSearch" hover-class="hover">
-                    <image src="@/static/search.png" class="search-icon"></image>
-                    搜索
-                </view>
+                <view class="search-area" @tap="toSearch">请输入</view>
             </view>
         </view>
     </view>
@@ -127,6 +124,18 @@ export default {
                 height: 26rpx;
                 margin-right: 2rpx;
             }
+        }
+
+        .search-area {
+            width: 200rpx;
+            height: 52rpx;
+            line-height: 52rpx;
+            margin-left: 40rpx;
+            border-radius: 20rpx;
+            background: #171717;
+            padding-left: 40rpx;
+            font-size: 26rpx;
+            color: rgba($color: #fff, $alpha: 0.6);
         }
     }
 

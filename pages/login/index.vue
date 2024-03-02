@@ -239,7 +239,7 @@ export default {
         stopLogin() {
             $setStorage('stop_login_time', new Date().getTime());
             uni.switchTab({
-                url: '/pages/shop/index'
+                url: '/pages/home/index'
             });
         },
         submitLogin(params) {

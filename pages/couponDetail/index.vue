@@ -58,7 +58,7 @@ export default {
         },
         toShop() {
             uni.switchTab({
-                url: '/pages/shop/index'
+                url: '/pages/home/index'
             });
         },
         initData() {
