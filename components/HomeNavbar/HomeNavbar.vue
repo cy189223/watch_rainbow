@@ -88,7 +88,7 @@ export default {
     -webkit-transition: background 0.2s;
 
     .nav-content {
-        padding: 0 18rpx;
+        padding: 0 30rpx;
         height: 100%;
         display: flex;
         align-items: center;

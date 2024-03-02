@@ -692,7 +692,6 @@
         }
     ],
     "globalStyle": {
-        // "autoscan":true,
         "navigationBarTextStyle": "black",
         "navigationBarTitleText": " ",
         "navigationBarBackgroundColor": "#FFFFFF",
@@ -702,16 +701,16 @@
         }
     },
     "tabBar": {
-        "color": "#999999",
-        "selectedColor": "#000",
+        "color": "#ffffff",
+        "selectedColor": "#8352C4",
         "borderStyle": "white",
-        "backgroundColor": "#FFFFFF",
+        "backgroundColor": "#161616",
         "list": [
             {
                 "pagePath": "pages/shop/index",
                 "iconPath": "static/tabbar/tabbar1.png",
                 "selectedIconPath": "static/tabbar/tabbar1-1.png",
-                "text": "商城"
+                "text": "首页"
             },
             {
                 "pagePath": "pages/pkindex/index",
