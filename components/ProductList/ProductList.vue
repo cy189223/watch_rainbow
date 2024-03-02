@@ -1,11 +1,11 @@
 <template>
     <view>
-        <view class="title-container">
+        <!-- <view class="title-container">
             <view class="text" v-if="classlist && classlist != ''" @tap="navtype = 0" :class="navtype === 0 ? 'cur' : ''">全部</view>
             <view class="text" @tap="navtype = item.id" :class="navtype == item.id ? 'cur' : ''" v-for="(item, index) in classlist" :key="index">
                 {{ item.title }}
             </view>
-        </view>
+        </view> -->
         <view class="list-scope" :class="{ scroll: isScroll }" v-if="wrapMode === 'wrap'">
             <template v-if="grid == 'grid2'">
                 <ProductItem @tap="clickItem" :class="grid" :grid="grid" v-for="(item, index) in list" :info="item" :key="index"></ProductItem>

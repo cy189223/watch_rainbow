@@ -127,7 +127,7 @@ export default {
         }
 
         .search-area {
-            width: 200rpx;
+            width: 160rpx;
             height: 52rpx;
             line-height: 52rpx;
             margin-left: 40rpx;
