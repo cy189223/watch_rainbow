@@ -34,21 +34,37 @@
                 </view>
             </template>
         </PageRender>
+
+        <HomepageTheme
+            @getliushuilist="getList"
+            :page="box_home_page"
+            :refreshCounter="refreshCounter"
+            :getNextPageCounter="getNextPageCounter"
+            :yfslist="yfslist"
+            :ssjlist="ssjlist"
+            :liushuilist="list"
+        ></HomepageTheme>
     </view>
 </template>
 
 <script>
 import NoticeBar from '../../components/NoticeBar/index.vue';
+import HomepageTheme from './components/HomepageTheme.vue';
 export default {
     components: {
-        NoticeBar
+        NoticeBar,
+        HomepageTheme
     },
     data() {
         return {
             scrollTop: 0,
             refreshCounter: 0,
             getNextPageCounter: 0,
-            ordernotice: ''
+            ordernotice: '',
+            list: {},
+            // amountnum:'',
+            yfslist: {},
+            ssjlist: {}
         };
     },
     computed: {
@@ -57,23 +73,65 @@ export default {
         },
         customBar() {
             return this.$store.getters.deviceInfo.customBar;
+        },
+        box_home_page() {
+            return this.$store.getters.setting.box_home;
         }
     },
     watch: {},
     onLoad() {
         this.$visitor.record('box_index');
+        this.$http(`/setting/notice`).then((res) => {
+            debugger;
+            this.ordernotice = res.data.setting.notice;
+        });
     },
     onPullDownRefresh() {
         this.$showPullRefresh().then((res) => {
             this.refreshCounter++;
         });
-    },
-    onShow() {
+        // this.getDanmu();  //TODO
+        this.getList();
+        this.getyfsList();
+        this.getssjList();
         this.$http(`/setting/notice`).then((res) => {
+            debugger;
             this.ordernotice = res.data.setting.notice;
         });
     },
-    methods: {},
+    onShow() {
+        this.getList();
+        this.getyfsList();
+        this.getssjList();
+    },
+    methods: {
+        toDetail(url) {
+            uni.navigateTo({
+                url: url
+            });
+        },
+        getyfsList() {
+            this.$http(`/yifanshangs`, 'get', {
+                type: 'yfs'
+            }).then((res) => {
+                this.yfslist = res.data;
+            });
+        },
+        getssjList() {
+            this.$http(`/yifanshangs`, 'get', {
+                type: 'ssj'
+            }).then((res) => {
+                this.ssjlist = res.data;
+            });
+        },
+        getList() {
+            this.$http(`/accounts`, 'get', {
+                type: 'fudai'
+            }).then((res) => {
+                this.list = res.data;
+            });
+        }
+    },
     onReachBottom() {
         this.getNextPageCounter++;
     },
@@ -109,7 +167,7 @@ export default {
 
         .btnbox {
             width: 160rpx;
-            height: 160rpx;
+            height: 180rpx;
         }
     }
 }

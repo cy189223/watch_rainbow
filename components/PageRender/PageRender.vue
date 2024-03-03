@@ -1,12 +1,12 @@
 <template>
     <view class="page-scope">
         <DefaultTheme :refreshCounter="refreshCounter" :getNextPageCounter="getNextPageCounter" v-if="renderTheme === 'default'" :page="page" :isHome="isHome">
-            <template v-for="(_, key) in $slots" v-slot:[key] :key="key">
+            <template v-for="(_, key) in $slots" v-slot:[key]>
                 <slot :name="key"></slot>
             </template>
         </DefaultTheme>
 
-        <HomepageTheme
+        <!-- <HomepageTheme
             @getliushui="getliushui"
             :liushuilist="liushuilist"
             :yfslist="yfslist"
@@ -15,7 +15,7 @@
             :getNextPageCounter="getNextPageCounter"
             v-else-if="renderTheme === 'homepage'"
             :page="page"
-        ></HomepageTheme>
+        ></HomepageTheme> -->
 
         <FloatBtn v-if="isShowFloatBtn" :link="floatBtn.link" :isAnimated="floatBtn.is_animate" :src="floatBtn.image"></FloatBtn>
     </view>
@@ -23,11 +23,10 @@
 
 <script>
 import DefaultTheme from './themes/DefaultTheme.vue';
-import HomepageTheme from './themes/HomepageTheme.vue';
+
 export default {
     components: {
-        DefaultTheme,
-        HomepageTheme
+        DefaultTheme
     },
     props: {
         isHome: {

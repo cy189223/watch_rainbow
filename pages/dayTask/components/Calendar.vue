@@ -11,13 +11,11 @@
         <swiper class="swiper" :current="current" @change="current = $event.detail.current">
             <swiper-item class="swiper-item" v-for="(list, index) in calendar" :key="index">
                 <view class="day-list">
-                    <template v-for="(item, key) in list">
-                        <view class="day-c" :class="{ completed: item.completed }" :key="key">
-                            <view class="day">{{ item.date }}</view>
-                            <view class="score" v-if="item.score">+{{ item.score }}</view>
-                            <view class="score" v-else></view>
-                        </view>
-                    </template>
+                    <view v-for="(item, _index) in list" :key="_index" class="day-c" :class="{ completed: item.completed }">
+                        <view class="day">{{ item.date }}</view>
+                        <view class="score" v-if="item.score">+{{ item.score }}</view>
+                        <view class="score" v-else></view>
+                    </view>
                 </view>
             </swiper-item>
         </swiper>

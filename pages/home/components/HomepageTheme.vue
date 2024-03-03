@@ -1,7 +1,7 @@
 <template>
-    <view>
+    <view class="_homePageThemeWrap">
         <view class="navlistbox">
-            <view class="navbox" @tap="navtype = item.type" :class="navtype == item.type ? 'cur' : ''" v-for="(item, index) in navlist" :key="index">
+            <view class="navbox" @tap="changeTab(item)" :class="navtype == item.type ? 'cur' : ''" v-for="(item, index) in navlist" :key="index">
                 {{ item.name }}
             </view>
         </view>
@@ -98,16 +98,7 @@
 </template>
 
 <script>
-import ImageList from '../modules/ImageList.vue';
-import PureImageList from '../modules/PureImageList.vue';
-import VideoItem from '../modules/Video.vue';
-
 export default {
-    components: {
-        ImageList,
-        PureImageList,
-        VideoItem
-    },
     props: {
         refreshCount: {
             type: Number
@@ -138,8 +129,9 @@ export default {
                 { name: '无限赏', type: 'fudai' },
                 { name: '一番赏', type: 'yifanshang' },
                 { name: '双随机', type: 'shuangsuiji' },
-                { name: '盲盒', type: 'box' },
-                { name: '流水奖励', type: 'liushuijiangli' }
+                { name: '刮刮乐', type: 'box' },
+                { name: '流水奖励', type: 'liushuijiangli' },
+                { name: '打拳', type: 'pk' }
             ]
         };
     },
@@ -172,6 +164,16 @@ export default {
     },
     created() {},
     methods: {
+        changeTab(item) {
+            if (item.type == 'pk') {
+                this.navtype = 'fudai';
+                uni.navigateTo({
+                    url: '/pages/pkindex/index'
+                });
+            } else {
+                this.navtype = item.type;
+            }
+        },
         receive(uuid, item) {
             if (item.can_get == 2) {
                 uni.showToast({
@@ -251,6 +253,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+._homePageThemeWrap {
+    margin-top: 30rpx;
+}
+
 .content-c {
     position: relative;
     overflow: hidden;
