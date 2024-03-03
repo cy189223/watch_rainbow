@@ -1,6 +1,11 @@
 <template>
     <view class="page-scope">
-        <DefaultTheme :refreshCounter="refreshCounter" :getNextPageCounter="getNextPageCounter" v-if="renderTheme === 'default'" :page="page" :isshowye="isshowye"></DefaultTheme>
+        <DefaultTheme :refreshCounter="refreshCounter" :getNextPageCounter="getNextPageCounter" v-if="renderTheme === 'default'" :page="page" :isHome="isHome">
+            <template v-for="(_, key) in $slots" v-slot:[key] :key="key">
+                <slot :name="key"></slot>
+            </template>
+        </DefaultTheme>
+
         <HomepageTheme
             @getliushui="getliushui"
             :liushuilist="liushuilist"
@@ -25,7 +30,7 @@ export default {
         HomepageTheme
     },
     props: {
-        isshowye: {
+        isHome: {
             type: Boolean,
             default() {
                 return false;

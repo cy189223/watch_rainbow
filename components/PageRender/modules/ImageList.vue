@@ -1,7 +1,13 @@
 <template>
     <view class="list" :class="module.grid">
-        <view class="image-c" :class="'per-row-' + perRow" v-for="(item, index) in list" :style="'width: ' + imageWidth + 'rpx; margin-left:' + module.spacing + 'rpx;'">
-            <image mode="widthFix" :src="item.image" hover-class="hover" @tap="$tool.toLink(item.link)"></image>
+        <view
+            class="image-c"
+            :class="'per-row-' + perRow"
+            v-for="(item, index) in list"
+            :key="index"
+            :style="'width: ' + imageWidth + 'rpx; margin-left:' + module.spacing + 'rpx;'"
+        >
+            <image mode="widthFix" :src="item.image" hover-class="hover" @tap="$tool.toLink(item.link)" :style="'border-radius:' + module.radius + 'rpx;'"></image>
             <view class="text" v-if="item.text">{{ item.text }}</view>
         </view>
     </view>
@@ -86,6 +92,8 @@ export default {
             width: 100%;
             display: block;
             margin: 0rpx;
+            box-shadow: 0rpx 0rpx 11rpx 0rpx rgba(176, 128, 255, 0.8);
+            border: 2px solid #a809f8;
         }
 
         .text {
