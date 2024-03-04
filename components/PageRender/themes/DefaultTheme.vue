@@ -82,7 +82,7 @@ export default {
     },
     computed: {
         modules() {
-            return this.page.modules || [];
+            return this.page.modules.filter((item) => item.isAutoShow !== '0') || [];
         },
         pageStyle() {
             return (this.page && this.page.style) || {};

@@ -51,7 +51,7 @@
                 </view>
             </view>
         </view>
-        <view class="module-c" style="margin-top: 0px; padding: 0 14px" v-if="navtype == 'shuangsuiji'">
+        <!-- <view class="module-c" style="margin-top: 0px; padding: 0 14px" v-if="navtype == 'shuangsuiji'">
             <view class="list-scope list-grid2">
                 <view class="item-container grid2" hover-class="hover" @click="clickyfsItem(item)" v-for="(item, index) in ssjlist.list" :key="index">
                     <view class="tag">{{ (item && item.tags && item.tags[0]) || '创意热销' }}</view>
@@ -70,11 +70,15 @@
                     </view>
                 </view>
             </view>
-        </view>
+        </view> -->
 
-        <Banner v-if="swiperList.length > 0" dotListStyle="bottom: 90rpx;" :list="swiperList" :iStyle="'height: ' + (swiperModule.style.height || 650) + 'rpx;'"></Banner>
         <view class="content-c">
-            <view class="module-c" :style="'margin-top:' + item.style.margin_top + 'rpx; padding: 0 ' + item.style.margin + 'rpx;'" v-for="(item, index) in modules" :key="index">
+            <view
+                class="module-c"
+                :style="'margin-top:' + item.style.margin_top + 'rpx; padding: 0 ' + item.style.margin + 'rpx;'"
+                v-for="(item, index) in page.modules"
+                :key="index"
+            >
                 <ActivityList
                     :refreshCounter="refreshCounter"
                     :getNextPageCounter="getNextPageCounter"
@@ -84,7 +88,7 @@
                 />
             </view>
         </view>
-        <view class="mask" @tap="isShowPay = false" v-if="isShowPay">
+        <!-- <view class="mask" @tap="isShowPay = false" v-if="isShowPay">
             <view class="mask-content" @tap.stop>
                 <text class="new-iconfont icon-close close-btn" @tap="isShowPay = false"></text>
                 <view class="title">领取奖品</view>
@@ -95,7 +99,7 @@
                     <text>确认领取奖品</text>
                 </view>
             </view>
-        </view>
+        </view> -->
     </view>
 </template>
 
@@ -104,14 +108,6 @@ export default {
     props: {
         refreshCount: {
             type: Number
-        },
-        page: {
-            type: Object,
-            default() {
-                return {
-                    modules: []
-                };
-            }
         },
         liushuilist: Object,
         yfslist: Object,
@@ -138,27 +134,11 @@ export default {
         };
     },
     computed: {
+        page() {
+            return this.$store.getters.setting.box_home;
+        },
         customBar() {
             return this.$store.getters.deviceInfo.customBar;
-        },
-        pageModules() {
-            return this.page.modules || [];
-        },
-        swiperList() {
-            return (this.pageModules[0] && this.pageModules[0].list) || [];
-        },
-        swiperModule() {
-            return (
-                this.pageModules[0] || {
-                    style: {}
-                }
-            );
-        },
-        modules() {
-            return this.pageModules.slice(1);
-        },
-        title() {
-            return this.page.title || '未设置';
         },
         orderConfig() {
             return this.$store.getters.setting.order || {};
@@ -179,75 +159,75 @@ export default {
                 this.navtype = type;
             }
         },
-        receive(uuid, item) {
-            if (item.can_get == 2) {
-                uni.showToast({
-                    title: '已经领取过了哦',
-                    icon: 'none'
-                });
-                return;
-            }
-            if (item.can_get != 1) {
-                uni.showToast({
-                    title: '流水不足',
-                    icon: 'none'
-                });
-                return;
-            }
-            if (item.thumb && item.thumb != '') {
-                this.uuid = uuid;
-                this.id = item.id;
-                this.isShowPay = true;
-            } else {
-                uni.showLoading({
-                    title: '领取中',
-                    icon: 'none'
-                });
-                this.$http(`/account/order/confirm`, 'post', {
-                    uuid: uuid,
-                    sku_id: item.id
-                    // address_id: this.address.id,
-                }).then((res) => {
-                    this.$emit('getliushui');
-                    this.uuid = '';
-                    this.id = '';
-                    uni.hideLoading();
-                    uni.showModal({
-                        title: '领取成功',
-                        content: this.scoreAlias + '领取成功，请注意查收~'
-                    });
-                });
-            }
-        },
-        submit() {
-            if (!this.address.id) {
-                uni.showModal({
-                    title: '请选择收货地址'
-                });
-                return false;
-            }
+        // receive(uuid, item) {
+        //     if (item.can_get == 2) {
+        //         uni.showToast({
+        //             title: '已经领取过了哦',
+        //             icon: 'none'
+        //         });
+        //         return;
+        //     }
+        //     if (item.can_get != 1) {
+        //         uni.showToast({
+        //             title: '流水不足',
+        //             icon: 'none'
+        //         });
+        //         return;
+        //     }
+        //     if (item.thumb && item.thumb != '') {
+        //         this.uuid = uuid;
+        //         this.id = item.id;
+        //         this.isShowPay = true;
+        //     } else {
+        //         uni.showLoading({
+        //             title: '领取中',
+        //             icon: 'none'
+        //         });
+        //         this.$http(`/account/order/confirm`, 'post', {
+        //             uuid: uuid,
+        //             sku_id: item.id
+        //             // address_id: this.address.id,
+        //         }).then((res) => {
+        //             this.$emit('getliushui');
+        //             this.uuid = '';
+        //             this.id = '';
+        //             uni.hideLoading();
+        //             uni.showModal({
+        //                 title: '领取成功',
+        //                 content: this.scoreAlias + '领取成功，请注意查收~'
+        //             });
+        //         });
+        //     }
+        // },
+        // submit() {
+        //     if (!this.address.id) {
+        //         uni.showModal({
+        //             title: '请选择收货地址'
+        //         });
+        //         return false;
+        //     }
 
-            uni.showLoading({
-                title: '提交中',
-                icon: 'none'
-            });
+        //     uni.showLoading({
+        //         title: '提交中',
+        //         icon: 'none'
+        //     });
 
-            this.$http(`/account/order/confirm`, 'post', {
-                uuid: this.uuid,
-                sku_id: this.id,
-                address_id: this.address.id
-            }).then((res) => {
-                this.$emit('getliushui');
-                this.uuid = '';
-                this.id = '';
-                uni.hideLoading();
-                this.isShowPay = false;
-                uni.showModal({
-                    title: '领取成功',
-                    content: '已成功提交发货请求，请注意查收快递哦~'
-                });
-            });
-        },
+        //     this.$http(`/account/order/confirm`, 'post', {
+        //         uuid: this.uuid,
+        //         sku_id: this.id,
+        //         address_id: this.address.id
+        //     }).then((res) => {
+        //         this.$emit('getliushui');
+        //         this.uuid = '';
+        //         this.id = '';
+        //         uni.hideLoading();
+        //         this.isShowPay = false;
+        //         uni.showModal({
+        //             title: '领取成功',
+        //             content: '已成功提交发货请求，请注意查收快递哦~'
+        //         });
+        //     });
+        // },
         clickyfsItem(item) {
             uni.navigateTo({
                 url: `/pages/yifanshang/detail?uuid=${item.uuid}`
