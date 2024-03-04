@@ -1,5 +1,5 @@
 <template>
-    <view class="item-container" :class="theme + ' ' + grid" @tap="toDetail" hover-class="hover">
+    <view class="item-container" :class="theme + ' ' + grid" @tap="toDetail">
         <template v-if="isShowTags">
             <template v-if="info.tags && info.tags.length">
                 <view class="tag" v-for="(tag, index) in info.tags" :key="index">{{ tag }}</view>

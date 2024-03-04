@@ -1,5 +1,5 @@
 <template>
-    <view class="item-container grid2" :class="theme" hover-class="hover" @tap="$emit('click')">
+    <view class="item-container grid2" :class="theme" @tap="$emit('click')">
         <view class="tag">{{ tagString }}</view>
         <view class="thumb-c">
             <image class="p-tag" :class="'location-' + info.image_tag.location" :src="info.image_tag.image" v-if="info.image_tag"></image>

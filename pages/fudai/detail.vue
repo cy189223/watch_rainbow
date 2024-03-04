@@ -301,10 +301,12 @@ export default {
 
 <style lang="scss" scoped>
 .scope-container {
-    // padding-top: 150rpx;
-    min-height: 100vh;
     box-sizing: border-box;
-    background-image: linear-gradient(to bottom, #0d093c, #1a0641);
+    background-color: #000000;
+    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_page_particle.gif');
+    background-position: top;
+    background-size: 100%;
+    min-height: calc(100vh - 1rpx);
 }
 
 .topbox {

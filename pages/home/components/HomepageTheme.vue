@@ -33,7 +33,7 @@
         </view> -->
         <view class="module-c" style="margin-top: 0px; padding: 0 14px" v-if="navtype == 'yifanshang'">
             <view class="list-scope list-grid2">
-                <view class="item-container grid2" hover-class="hover" @click="clickyfsItem(item)" v-for="(item, index) in yfslist.list" :key="index">
+                <view class="item-container grid2" @click="clickyfsItem(item)" v-for="(item, index) in yfslist.list" :key="index">
                     <view class="tag">{{ (item && item.tags && item.tags[0]) || '创意热销' }}</view>
                     <view class="thumb-c">
                         <image class="p-tag" :class="'location-' + item.image_tag.location" :src="item.image_tag.image" v-if="item.image_tag"></image>
@@ -53,7 +53,7 @@
         </view>
         <!-- <view class="module-c" style="margin-top: 0px; padding: 0 14px" v-if="navtype == 'shuangsuiji'">
             <view class="list-scope list-grid2">
-                <view class="item-container grid2" hover-class="hover" @click="clickyfsItem(item)" v-for="(item, index) in ssjlist.list" :key="index">
+                <view class="item-container grid2"  @click="clickyfsItem(item)" v-for="(item, index) in ssjlist.list" :key="index">
                     <view class="tag">{{ (item && item.tags && item.tags[0]) || '创意热销' }}</view>
                     <view class="thumb-c">
                         <image class="p-tag" :class="'location-' + item.image_tag.location" :src="item.image_tag.image" v-if="item.image_tag"></image>
