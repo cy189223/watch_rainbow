@@ -420,7 +420,7 @@ export default {
     position: relative;
     margin-bottom: 20px;
     border-radius: 10px;
-    background: #f7f0ff;
+    // background: #f7f0ff;
 
     .grid2 {
         width: 48%;

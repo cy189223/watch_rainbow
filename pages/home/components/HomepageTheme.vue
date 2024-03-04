@@ -73,12 +73,7 @@
         </view> -->
 
         <view class="content-c">
-            <view
-                class="module-c"
-                :style="'margin-top:' + item.style.margin_top + 'rpx; padding: 0 ' + item.style.margin + 'rpx;'"
-                v-for="(item, index) in page.modules"
-                :key="index"
-            >
+            <view class="module-c" :style="'margin-top:' + item.style.margin_top + 'rpx; padding: 0 ' + item.style.margin + 'rpx;'" v-for="(item, index) in modules" :key="index">
                 <ActivityList
                     :refreshCounter="refreshCounter"
                     :getNextPageCounter="getNextPageCounter"
@@ -134,8 +129,8 @@ export default {
         };
     },
     computed: {
-        page() {
-            return this.$store.getters.setting.box_home;
+        modules() {
+            return this.$store.getters.setting.box_home.modules.filter((item) => item.isAutoShow === '0');
         },
         customBar() {
             return this.$store.getters.deviceInfo.customBar;

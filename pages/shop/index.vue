@@ -5,6 +5,7 @@
         <!-- #ifndef MP-ALIPAY -->
         <HomeNavbar :title="page.title" searchType="all" :theme="scrollTop > 20 ? '#000000' : 'transparent'"></HomeNavbar>
         <!-- #endif -->
+        <PageRender :page="page" :refreshCounter="refreshCounter" theme="default"></PageRender>
     </view>
 </template>
 
@@ -13,7 +14,8 @@ export default {
     components: {},
     data() {
         return {
-            scrollTop: 0
+            scrollTop: 0,
+            refreshCounter: 1
         };
     },
     computed: {
@@ -32,7 +34,9 @@ export default {
     onReachBottom() {
         this.getNextPageCounter++;
     },
-    onShow() {},
+    onShow() {
+        this.refreshCounter++;
+    },
     methods: {},
     onPageScroll(e) {
         this.scrollTop = e.scrollTop;
@@ -42,11 +46,11 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-    min-height: 100vh;
+    padding-top: 1rpx;
     background-color: #000000;
-    background-image: url('https://api.caihongbox.com.cn/image/centertopbg.png');
+    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_page_particle.gif');
     background-position: top;
-    background-repeat: no-repeat;
     background-size: 100%;
+    min-height: calc(100vh - 1rpx);
 }
 </style>

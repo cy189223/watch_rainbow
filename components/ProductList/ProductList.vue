@@ -163,7 +163,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    background: #f7f0ff;
+    // background: #f7f0ff;
     padding: 12px;
 
     &.scroll {
@@ -171,7 +171,7 @@ export default {
     }
 
     .grid2 {
-        width: 48%;
+        width: 49%;
         display: inline-block;
     }
 
@@ -183,7 +183,7 @@ export default {
 
 .scroll-list {
     white-space: nowrap;
-    background: #f7f0ff;
+    // background: #f7f0ff;
     padding-top: 10px;
 
     &.scroll {
