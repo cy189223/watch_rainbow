@@ -53,7 +53,7 @@ export default {
     data() {
         return {
             paiming: [],
-            typeTextList: ['本日', '本周', '全部'],
+            typeTextList: ['人民币', '流水'],
             current: 0,
             rankListSetting: ''
         };

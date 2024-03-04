@@ -708,26 +708,26 @@
         "list": [
             {
                 "pagePath": "pages/home/index",
-                "iconPath": "static/tabbar/tabbar1.png",
-                "selectedIconPath": "static/tabbar/tabbar1-1.png",
+                "iconPath": "static/tabbar/home.png",
+                "selectedIconPath": "static/tabbar/homeActive.png",
                 "text": "首页"
             },
             {
                 "pagePath": "pages/shop/index",
-                "iconPath": "static/tabbar/tabbar3.png",
-                "selectedIconPath": "static/tabbar/tabbar3-1.png",
+                "iconPath": "static/tabbar/shop.png",
+                "selectedIconPath": "static/tabbar/shopActive.png",
                 "text": "商城"
             },
             {
                 "pagePath": "pages/myBox/index",
-                "iconPath": "static/tabbar/tabbar4.png",
-                "selectedIconPath": "static/tabbar/tabbar4-1.png",
+                "iconPath": "static/tabbar/pag.png",
+                "selectedIconPath": "static/tabbar/pagActive.png",
                 "text": "赏袋"
             },
             {
                 "pagePath": "pages/center/index",
-                "iconPath": "static/tabbar/tabbar5.png",
-                "selectedIconPath": "static/tabbar/tabbar5-1.png",
+                "iconPath": "static/tabbar/user.png",
+                "selectedIconPath": "static/tabbar/userActive.png",
                 "text": "我的"
             }
         ]
