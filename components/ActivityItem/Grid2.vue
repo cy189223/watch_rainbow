@@ -67,7 +67,7 @@ export default {
         -webkit-box-orient: vertical;
 
         position: absolute;
-        z-index: 999;
+        z-index: 9;
         font-size: 22rpx;
         padding: 2rpx 10rpx;
         border-radius: 6rpx;
