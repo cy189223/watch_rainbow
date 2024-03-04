@@ -2,7 +2,8 @@
     <view class="_homePageThemeWrap">
         <view class="navlistbox" :style="'top: ' + customBar + 'px'">
             <view class="navbox" @tap="changeTab(item)" :class="navtype == item.type ? 'cur' : ''" v-for="(item, index) in navlist" :key="index">
-                {{ item.name }}
+                <image :src="item.icon" :class="item.iconClass"></image>
+                <text class="title">{{ item.name }}</text>
             </view>
         </view>
         <!-- TODO -->
@@ -127,12 +128,12 @@ export default {
             address: {},
             navtype: 'fudai',
             navlist: [
-                { name: '无限赏', type: 'fudai' },
-                { name: '一番赏', type: 'yifanshang' },
+                { name: '无限赏', type: 'fudai', icon: 'https://watch-box.oss-cn-beijing.aliyuncs.com/wuxian1.png', iconClass: 'icon' },
+                { name: '一番赏', type: 'yifanshang', icon: 'https://watch-box.oss-cn-beijing.aliyuncs.com/money1.png', iconClass: 'icon2' },
                 // { name: '双随机', type: 'shuangsuiji' },
-                { name: '刮刮乐', type: 'box' },
+                { name: '刮刮乐', type: 'box', icon: 'https://watch-box.oss-cn-beijing.aliyuncs.com/%E5%88%AE%E5%88%AE%E4%B9%90.png', iconClass: 'icon' },
                 // { name: '流水奖励', type: 'liushuijiangli' },
-                { name: '打拳', type: 'pk' }
+                { name: '打拳', type: 'pk', icon: 'https://watch-box.oss-cn-beijing.aliyuncs.com/%E6%8B%B3%E5%A4%B4%E4%BC%98%E5%8A%BF.png', iconClass: 'icon2' }
             ]
         };
     },
@@ -588,31 +589,66 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 5px 20px 20px;
+    margin: 10rpx 40rpx 0;
     position: sticky;
     z-index: 970;
-    background-color: transparent;
+    background-color: #000000;
+    padding-bottom: 40rpx;
 
     .navbox {
         position: relative;
         color: #fff;
         font-size: 16px;
-        text-shadow:
-            1px 1px 0px #00d0ff,
-            -2px 0px 0px #c33edc;
+        padding: 0 20rpx;
+        width: 100rpx;
+        height: 90rpx;
+        // text-shadow:
+        //     1px 1px 0px #00d0ff,
+        //     -2px 0px 0px #c33edc;
+        background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/tagItemBg.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        box-sizing: border-box;
+        .title {
+            position: absolute;
+            bottom: -32rpx;
+            font-size: 25rpx;
+            width: 100%;
+            left: 0;
+            text-align: center;
+        }
+        .icon {
+            width: 50rpx;
+            height: 50rpx;
+            position: absolute;
+            top: 19rpx;
+            left: 25rpx;
+        }
+        .icon2 {
+            width: 32rpx;
+            height: 32rpx;
+            position: absolute;
+            top: 29rpx;
+            left: 35rpx;
+        }
+    }
+    .cur {
+        .title {
+            color: #8352c4;
+        }
     }
 
-    .navbox.cur::after {
-        content: '';
-        position: absolute;
-        bottom: -9px;
-        right: 50%;
-        transform: translateX(50%);
-        width: 25px;
-        border-radius: 10px;
-        height: 4px;
-        background-color: #fff;
-        box-shadow: 0 0 5px 3px #c33edc;
-    }
+    // .navbox.cur::after {
+    //     content: '';
+    //     position: absolute;
+    //     bottom: -9px;
+    //     right: 50%;
+    //     transform: translateX(50%);
+    //     width: 25px;
+    //     border-radius: 10px;
+    //     height: 4px;
+    //     background-color: #fff;
+    //     box-shadow: 0 0 5px 3px #c33edc;
+    // }
 }
 </style>

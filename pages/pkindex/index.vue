@@ -1,7 +1,7 @@
 <template>
     <view class="container">
         <view :style="'height:' + customBar + 'px;'"></view>
-        <HomeNavbar :title="page.title" searchType="all" :theme="scrollTop > 20 ? '#1d0051' : 'transparent'"></HomeNavbar>
+        <HomeNavbar :title="page.title" searchType="all" :theme="scrollTop > 20 ? '#000000' : 'transparent'"></HomeNavbar>
 
         <view class="navlistbox">
             <view class="navbox" @tap="navtype = item.type" :class="navtype == item.type ? 'cur' : ''" v-for="(item, index) in navlist" :key="index">
@@ -249,7 +249,7 @@ export default {
 <style lang="scss" scoped>
 .container {
     min-height: 100vh;
-    background-color: #1d0051;
+    background-color: #000000;
     background-image: url('https://api.caihongbox.com.cn/image/centertopbg.png');
     background-position: top;
     background-repeat: no-repeat;

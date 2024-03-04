@@ -2,7 +2,7 @@
     <view class="container">
         <view :style="'height:' + customBar + 'px;'"></view>
         <!-- #ifndef MP-ALIPAY -->
-        <HomeNavbar :title="page.title" searchType="all" :theme="scrollTop > 150 ? '#1d0051' : 'transparent'"></HomeNavbar>
+        <HomeNavbar :title="page.title" searchType="all" :theme="scrollTop > 150 ? '#000000' : 'transparent'"></HomeNavbar>
         <!-- #endif -->
         <PageRender :refreshCounter="refreshCounter" :getNextPageCounter="getNextPageCounter" :page="page" theme="default" :isHome="true">
             <template v-slot:gonggao>
@@ -15,7 +15,7 @@
                 <view class="btnlist">
                     <image
                         class="btnbox"
-                        src="https://watch-box.oss-cn-beijing.aliyuncs.com/%E5%AE%A2%E6%9C%8D%20(1).png"
+                        src="https://watch-box.oss-cn-beijing.aliyuncs.com/%E5%AE%A2%E6%9C%8D.png"
                         mode="scaleToFill"
                         @tap="toDetail('/pages/jiaoliuqun/jiaoliuqun')"
                     ></image>
@@ -142,7 +142,7 @@ export default {
 <style lang="scss" scoped>
 .container {
     padding-top: 1rpx;
-    background-color: #1d0051;
+    background-color: #000000;
     background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_page_particle.gif');
     background-position: top;
     background-size: 100%;

@@ -3,7 +3,7 @@
         <view :style="'height:' + customBar + 'px;'"></view>
         <!-- 淘宝小程序不需要 -->
         <!-- #ifndef MP-ALIPAY -->
-        <HomeNavbar :title="page.title" searchType="all" :theme="scrollTop > 20 ? '#1d0051' : 'transparent'"></HomeNavbar>
+        <HomeNavbar :title="page.title" searchType="all" :theme="scrollTop > 20 ? '#000000' : 'transparent'"></HomeNavbar>
         <!-- #endif -->
 
         <PageRender
@@ -116,7 +116,7 @@ export default {
 <style lang="scss" scoped>
 .container {
     min-height: 100vh;
-    background-color: #1d0051;
+    background-color: #000000;
     background-image: url('https://api.caihongbox.com.cn/image/centertopbg.png');
     background-position: top;
     background-repeat: no-repeat;
