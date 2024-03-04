@@ -1,6 +1,6 @@
 <template>
     <view class="_homePageThemeWrap">
-        <view class="navlistbox">
+        <view class="navlistbox" :style="'top: ' + customBar + 'px'">
             <view class="navbox" @tap="changeTab(item)" :class="navtype == item.type ? 'cur' : ''" v-for="(item, index) in navlist" :key="index">
                 {{ item.name }}
             </view>
@@ -129,7 +129,7 @@ export default {
             navlist: [
                 { name: '无限赏', type: 'fudai' },
                 { name: '一番赏', type: 'yifanshang' },
-                { name: '双随机', type: 'shuangsuiji' },
+                // { name: '双随机', type: 'shuangsuiji' },
                 { name: '刮刮乐', type: 'box' },
                 // { name: '流水奖励', type: 'liushuijiangli' },
                 { name: '打拳', type: 'pk' }
@@ -137,6 +137,9 @@ export default {
         };
     },
     computed: {
+        customBar() {
+            return this.$store.getters.deviceInfo.customBar;
+        },
         pageModules() {
             return this.page.modules || [];
         },
@@ -165,14 +168,14 @@ export default {
     },
     created() {},
     methods: {
-        changeTab(item) {
-            if (item.type == 'pk') {
+        changeTab({ type }) {
+            if (type == 'pk') {
                 this.navtype = 'fudai';
                 uni.navigateTo({
                     url: '/pages/pkindex/index'
                 });
             } else {
-                this.navtype = item.type;
+                this.navtype = type;
             }
         },
         receive(uuid, item) {
@@ -372,7 +375,7 @@ export default {
             -webkit-box-orient: vertical;
 
             position: absolute;
-            z-index: 999;
+            z-index: 9;
             font-size: 22rpx;
             padding: 2rpx 10rpx;
             border-radius: 6rpx;
@@ -586,6 +589,9 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin: 5px 20px 20px;
+    position: sticky;
+    z-index: 970;
+    background-color: transparent;
 
     .navbox {
         position: relative;
