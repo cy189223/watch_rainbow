@@ -18,7 +18,7 @@ export default {
     },
     computed: {
         page() {
-            return this.$store.getters.setting.box_home;
+            return this.$store.getters.setting.shop_home;
         },
         customBar() {
             return this.$store.getters.deviceInfo.customBar;

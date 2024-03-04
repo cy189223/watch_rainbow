@@ -1,21 +1,10 @@
 <template>
     <view class="page-scope">
-        <DefaultTheme :refreshCounter="refreshCounter" :getNextPageCounter="getNextPageCounter" v-if="renderTheme === 'default'" :page="page" :isHome="isHome">
+        <DefaultTheme :refreshCounter="refreshCounter" :getNextPageCounter="getNextPageCounter" v-if="renderTheme === 'default'" :page="page">
             <template v-for="(_, key) in $slots" v-slot:[key]>
                 <slot :name="key"></slot>
             </template>
         </DefaultTheme>
-
-        <!-- <HomepageTheme
-            @getliushui="getliushui"
-            :liushuilist="liushuilist"
-            :yfslist="yfslist"
-            :ssjlist="ssjlist"
-            :refreshCounter="refreshCounter"
-            :getNextPageCounter="getNextPageCounter"
-            v-else-if="renderTheme === 'homepage'"
-            :page="page"
-        ></HomepageTheme> -->
 
         <FloatBtn v-if="isShowFloatBtn" :link="floatBtn.link" :isAnimated="floatBtn.is_animate" :src="floatBtn.image"></FloatBtn>
     </view>
@@ -29,12 +18,6 @@ export default {
         DefaultTheme
     },
     props: {
-        isHome: {
-            type: Boolean,
-            default() {
-                return false;
-            }
-        },
         page: {
             type: Object,
             default() {

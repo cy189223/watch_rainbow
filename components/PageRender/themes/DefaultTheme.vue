@@ -1,6 +1,7 @@
 <template>
     <view>
-        <view class="content-c" :style="'margin-top:' + pageStyle.margin_top + 'rpx; padding: 0 ' + pageStyle.margin + 'rpx;'">
+        <!-- <view class="content-c" :style="'margin-top:' + pageStyle.margin_top + 'rpx; padding: 0 ' + pageStyle.margin + 'rpx;'"> -->
+        <view class="content-c">
             <view
                 :style="
                     'margin-top:' +
@@ -60,12 +61,6 @@ export default {
         SearchBar
     },
     props: {
-        isHome: {
-            type: Boolean,
-            default() {
-                return false;
-            }
-        },
         refreshCount: {
             type: Number
         },

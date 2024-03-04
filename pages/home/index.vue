@@ -4,7 +4,7 @@
         <!-- #ifndef MP-ALIPAY -->
         <HomeNavbar :title="page.title" searchType="all" :theme="scrollTop > 150 ? '#000000' : 'transparent'"></HomeNavbar>
         <!-- #endif -->
-        <PageRender :refreshCounter="refreshCounter" :getNextPageCounter="getNextPageCounter" :page="page" theme="default" :isHome="true">
+        <PageRender :refreshCounter="refreshCounter" :getNextPageCounter="getNextPageCounter" :page="page" theme="default">
             <template v-slot:gonggao>
                 <view class="orderbox">
                     <image class="gonggao-icon" src="https://watch-box.oss-cn-beijing.aliyuncs.com/%E5%85%AC%E5%91%8A.png" mode="scaleToFill"></image>
@@ -69,7 +69,7 @@ export default {
     },
     computed: {
         page() {
-            return this.$store.getters.setting.shop_home;
+            return this.$store.getters.setting.box_home;
         },
         customBar() {
             return this.$store.getters.deviceInfo.customBar;
