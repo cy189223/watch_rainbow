@@ -9,6 +9,11 @@
                         <text style="margin-top: 5rpx">热度:{{ info.sales }}</text>
                     </view>
                 </view>
+                <view class="myMoneyInfo">
+                    彩虹币：{{ userInfo.score }}
+                    <br />
+                    彩虹积分：{{ userInfo.redpack }}
+                </view>
                 <view class="sharebtn" @tap="isSharePopup = true">
                     <text class="new-icon icon-fenxiang"></text>
                     <view>分享</view>
@@ -32,12 +37,50 @@
 
             <view class="body animated" :class="{ bounceOutRight: startMoving, bounceInLeft: !startMoving }">
                 <view class="sku-list">
-                    <view class="skutitlebox">
+                    <!-- <view class="skutitlebox">
                         <image src="../../static/skutitle.png" mode="" class="skubg"></image>
                         <image src="../../static/spyl.png" mode="" class="skuspyl skuimg" @tap="changetype(1)"></image>
                         <image src="../../static/csjl.png" mode="" class="skucsjl skuimg" @tap="changetype(2)"></image>
                         <image src="../../static/spyla.png" mode="" class="skuspyla skuimga" v-if="skutype == 1"></image>
                         <image src="../../static/csjla.png" mode="" class="skucsjla skuimga" v-else-if="skutype == 2"></image>
+                    </view> -->
+                    <view class="headerTool">
+                        <view
+                            class="headerToolItem"
+                            @click="changetype(0)"
+                            :class="{
+                                headerToolCur: skutype == 0
+                            }"
+                        >
+                            欧皇榜
+                        </view>
+                        <view
+                            @click="changetype(1)"
+                            class="headerToolItem"
+                            :class="{
+                                headerToolCur: skutype == 1
+                            }"
+                        >
+                            赏品一览
+                        </view>
+                        <view
+                            @click="changetype(2)"
+                            class="headerToolItem"
+                            :class="{
+                                headerToolCur: skutype == 2
+                            }"
+                        >
+                            抽赏记录
+                        </view>
+                        <view
+                            @click="changetype(3)"
+                            class="headerToolItem"
+                            :class="{
+                                headerToolCur: skutype == 3
+                            }"
+                        >
+                            非酋榜
+                        </view>
                     </view>
                     <view class="item" v-for="(item, index) in info.skus" :key="item.id" @tap="showDetailImagePopup(item)" v-if="skutype == 1">
                         <view class="thumb">
@@ -347,11 +390,24 @@ export default {
         }
     }
 
+    .myMoneyInfo {
+        color: #fff;
+        line-height: 33rpx;
+        font-size: 26rpx;
+        position: absolute;
+        top: 33rpx;
+        left: 300rpx;
+        text-shadow:
+            1px 1px 3px #b2b2f8,
+            -1px 1px 3px #b2b2f8,
+            -1px -1px 3px #b2b2f8,
+            1px -1px 3px #b2b2f8;
+    }
     .sharebtn {
         display: flex;
         align-items: center;
         position: absolute;
-        top: 30rpx;
+        top: 40rpx;
         right: 20rpx;
         color: #fff;
         font-size: 14px;
@@ -405,7 +461,7 @@ export default {
                 .new-icon {
                     margin-right: 10rpx;
                     font-weight: bold;
-                    font-size: 35rpx;
+                    font-size: 30rpx;
                 }
             }
         }
@@ -522,25 +578,47 @@ export default {
         }
     }
 
+    .headerTool {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        position: sticky;
+        top: -1rpx;
+        z-index: 999;
+        background-color: #000000;
+        .headerToolItem {
+            background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/wTagItemBg.png');
+            width: 170rpx;
+            height: 70rpx;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            line-height: 70rpx;
+            text-align: center;
+            color: #fff;
+            font-size: 26rpx;
+        }
+        .headerToolCur {
+            background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/wTagItemBgActive.png');
+        }
+    }
     .sku-list {
         position: relative;
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
-        margin: 70rpx 15rpx 30rpx;
-        padding: 65rpx 35rpx;
-        background-image: url('https://api.caihongbox.com.cn/image/listbg.png');
+        margin: 30rpx 15rpx 30rpx;
+        padding: 30rpx 5rpx;
+        // background-image: url('https://api.caihongbox.com.cn/image/listbg.png');
         background-size: 100% 100%;
         .item {
-            margin: 5rpx 4rpx;
-            padding: 5rpx;
-            width: calc(100% / 3 - 4rpx - 4rpx);
+            padding: 40rpx 40rpx 40rpx 44rpx;
+            width: 49%;
             box-sizing: border-box;
             border-radius: 25rpx;
-            border: 5rpx solid transparent;
             background-clip: padding-box, border-box;
             background-origin: padding-box, border-box;
             background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/boxItemBg.png');
+            border: 5px solid transparent;
 
             .thumb {
                 position: relative;
@@ -647,12 +725,11 @@ export default {
                     height: 60rpx;
                     font-size: 22rpx;
                     text-align: center;
+                    color: #fff;
 
                     .value {
                         font-weight: normal;
-                    }
-                    .key {
-                        color: #999;
+                        color: red;
                     }
                 }
             }

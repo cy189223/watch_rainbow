@@ -130,7 +130,7 @@ export default {
     },
     computed: {
         modules() {
-            return this.$store.getters.setting.box_home.modules.filter((item) => item.isAutoShow === '0');
+            return (this.$store.getters.setting.box_home.modules || []).filter((item) => item.isAutoShow === '0');
         },
         customBar() {
             return this.$store.getters.deviceInfo.customBar;
