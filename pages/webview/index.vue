@@ -14,7 +14,7 @@ export default {
     },
     onShareAppMessage: function () {
         return {
-            path: '/pages/index/index'
+            path: '/pages/home/index'
         };
     },
     methods: {}

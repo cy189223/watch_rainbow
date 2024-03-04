@@ -91,7 +91,7 @@ export default {
         },
         stopLogin() {
             uni.switchTab({
-                url: '/pages/index/index'
+                url: '/pages/home/index'
             });
         },
         getPhoneNumberSuccess(data) {

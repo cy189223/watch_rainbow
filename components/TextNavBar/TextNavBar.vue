@@ -43,7 +43,7 @@ export default {
             // console.log('goback', getCurrentPages().length)
             if (getCurrentPages().length == 1) {
                 uni.switchTab({
-                    url: '/pages/index/index'
+                    url: '/pages/home/index'
                 });
             } else {
                 uni.navigateBack();

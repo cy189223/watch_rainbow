@@ -13,7 +13,7 @@
             }
         },
         {
-            "path": "pages/index/index",
+            "path": "pages/shop/index",
             "style": {
                 "navigationStyle": "custom",
                 "enablePullDownRefresh": true,
@@ -713,10 +713,10 @@
                 "text": "首页"
             },
             {
-                "pagePath": "pages/index/index",
+                "pagePath": "pages/shop/index",
                 "iconPath": "static/tabbar/tabbar3.png",
                 "selectedIconPath": "static/tabbar/tabbar3-1.png",
-                "text": "抽赏"
+                "text": "商城"
             },
             {
                 "pagePath": "pages/myBox/index",
