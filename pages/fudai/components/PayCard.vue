@@ -6,6 +6,11 @@
                 {{ info.title }}
             </view>
 
+            <view class="numberChange">
+                <view class="button" @click="changeNumber(-1)">-</view>
+                <view>{{ payTotal }}</view>
+                <view class="button" @click="changeNumber(1)">+</view>
+            </view>
             <view class="block">
                 <view class="total-list-new">
                     <view class="item" v-for="(item, index) in info.total_list" :class="{ actived: payTotal === item.total }" @tap="changepay(item.total)">
@@ -111,6 +116,18 @@ export default {
         this.initOrder();
     },
     methods: {
+        changeNumber(num) {
+            this.payTotal = this.payTotal + num;
+            if (this.payTotal < 1) {
+                this.payTotal = 1;
+                return;
+            }
+            if (this.payTotal > 50) {
+                this.payTotal = 50;
+                return;
+            }
+            this.initOrder();
+        },
         changepay(type) {
             if (this.payTotal == type) return;
             this.currentCoupon = {};
@@ -252,6 +269,20 @@ export default {
     border-radius: 10rpx 10rpx 0 0;
     padding: 50rpx 40rpx;
     box-sizing: border-box;
+
+    .numberChange {
+        line-height: 80rpx;
+        height: 80rpx;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        .button {
+            width: 50rpx;
+            height: 50rpx;
+            margin: 0;
+            line-height: 50rpx;
+        }
+    }
 
     .close-btn {
         position: absolute;
