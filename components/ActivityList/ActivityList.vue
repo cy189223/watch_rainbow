@@ -177,8 +177,6 @@ export default {
     position: relative;
     margin-bottom: 20px;
     border-radius: 10px;
-    background: #f7f0ff;
-    padding: 10px 10px 0;
 
     .row1 {
         width: 100%;
@@ -189,11 +187,11 @@ export default {
     }
 
     .grid2 {
-        width: 48%;
+        width: 50%;
     }
 
     .grid3 {
-        width: 31%;
+        width: 32%;
     }
 }
 

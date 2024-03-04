@@ -1,5 +1,6 @@
 <template>
     <view class="item-container grid2" :class="theme" hover-class="hover" @tap="$emit('click')">
+        <view class="tag">{{ tagString }}</view>
         <view class="thumb-c">
             <image class="p-tag" :class="'location-' + info.image_tag.location" :src="info.image_tag.image" v-if="info.image_tag"></image>
             <image mode="aspectFill" :src="info.thumb" class="thumb"></image>
@@ -8,7 +9,6 @@
         <view class="body">
             <view class="title">{{ info.title }}</view>
             <view class="bottom">
-                <view class="tag">{{ tagString }}</view>
                 <view class="price">
                     <PriceDisplay :info="info"></PriceDisplay>
                 </view>
@@ -53,12 +53,28 @@ export default {
     border-radius: 30rpx 30rpx 20rpx 20rpx;
     overflow: hidden;
     margin-bottom: 28rpx;
-    box-shadow: 0px 14px 30px 0px rgba(226, 222, 204, 0.4);
+    // box-shadow: 0px 14px 30px 0px rgba(226, 222, 204, 0.4);
     position: relative;
-    border: 5rpx solid transparent;
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-    background-image: linear-gradient(to right, #fff, #fff), linear-gradient(30deg, #a252cb, #3c53df, #a252cb);
+    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/boxItemBg.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 40rpx 30rpx 40rpx 44rpx;
+
+    .tag {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+
+        position: absolute;
+        z-index: 999;
+        font-size: 22rpx;
+        padding: 2rpx 10rpx;
+        border-radius: 6rpx;
+        top: 36rpx;
+        background-image: linear-gradient(120deg, #efde73 0%, #bea04f 100%);
+        color: #463b3b;
+    }
 
     .thumb-c {
         position: relative;
@@ -72,7 +88,7 @@ export default {
             position: absolute;
             width: 100%;
             text-align: center;
-            background: rgba(230, 49, 17, 0.5);
+            background: #8352c4d1;
             color: white;
             left: 0rpx;
             bottom: 0rpx;
@@ -99,35 +115,16 @@ export default {
     }
 
     .body {
-        background: white;
         padding: 12rpx 21rpx 10rpx 21rpx;
         box-sizing: border-box;
         .title {
-            font-size: 30rpx;
+            font-size: 26rpx;
             font-weight: 500;
-            color: #000000;
+            color: #fff;
 
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-        }
-
-        .tag {
-            height: 36rpx;
-            background: #f7f7f7;
-            border-radius: 50rpx;
-            font-size: 22rpx;
-            font-weight: 500;
-            color: #999999;
-            line-height: 36rpx;
-            padding: 0rpx 12rpx;
-            max-width: 180rpx;
-            display: inline;
-
-            overflow: hidden;
-            text-overflow: ellipsis;
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
         }

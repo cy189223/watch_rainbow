@@ -538,7 +538,7 @@ export default {
             border: 5rpx solid transparent;
             background-clip: padding-box, border-box;
             background-origin: padding-box, border-box;
-            background-image: linear-gradient(to right, #fff, #fff), linear-gradient(30deg, #a252cb, #3c53df, #a252cb);
+            background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/boxItemBg.png');
 
             .thumb {
                 position: relative;

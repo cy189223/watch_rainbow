@@ -5,7 +5,8 @@
                 {{ item.name }}
             </view>
         </view>
-        <view v-if="navtype == 'liushuijiangli'" class="liushuilistbox">
+        <!-- TODO -->
+        <!-- <view v-if="navtype == 'liushuijiangli'" class="liushuilistbox">
             <view class="liushuibox" v-if="liushuilist.list">
                 <view v-for="(item, index) in liushuilist.list" :key="index" style="padding-bottom: 5px">
                     <view>{{ item.start_time }} 至 {{ item.end_time }}</view>
@@ -28,10 +29,11 @@
                 </view>
             </view>
             <NoData v-if="liushuilist && !liushuilist.list.length"></NoData>
-        </view>
+        </view> -->
         <view class="module-c" style="margin-top: 0px; padding: 0 14px" v-if="navtype == 'yifanshang'">
             <view class="list-scope list-grid2">
                 <view class="item-container grid2" hover-class="hover" @click="clickyfsItem(item)" v-for="(item, index) in yfslist.list" :key="index">
+                    <view class="tag">{{ (item && item.tags && item.tags[0]) || '创意热销' }}</view>
                     <view class="thumb-c">
                         <image class="p-tag" :class="'location-' + item.image_tag.location" :src="item.image_tag.image" v-if="item.image_tag"></image>
                         <image mode="aspectFill" :src="item.thumb" class="thumb"></image>
@@ -40,7 +42,6 @@
                     <view class="body">
                         <view class="title">{{ item.title }}</view>
                         <view class="bottom">
-                            <view class="tag">{{ (item && item.tags && item.tags[0]) || '创意热销' }}</view>
                             <view class="price">
                                 <PriceDisplay :info="item"></PriceDisplay>
                             </view>
@@ -52,6 +53,7 @@
         <view class="module-c" style="margin-top: 0px; padding: 0 14px" v-if="navtype == 'shuangsuiji'">
             <view class="list-scope list-grid2">
                 <view class="item-container grid2" hover-class="hover" @click="clickyfsItem(item)" v-for="(item, index) in ssjlist.list" :key="index">
+                    <view class="tag">{{ (item && item.tags && item.tags[0]) || '创意热销' }}</view>
                     <view class="thumb-c">
                         <image class="p-tag" :class="'location-' + item.image_tag.location" :src="item.image_tag.image" v-if="item.image_tag"></image>
                         <image mode="aspectFill" :src="item.thumb" class="thumb"></image>
@@ -60,7 +62,6 @@
                     <view class="body">
                         <view class="title">{{ item.title }}</view>
                         <view class="bottom">
-                            <view class="tag">{{ (item && item.tags && item.tags[0]) || '创意热销' }}</view>
                             <view class="price">
                                 <PriceDisplay :info="item"></PriceDisplay>
                             </view>
@@ -130,7 +131,7 @@ export default {
                 { name: '一番赏', type: 'yifanshang' },
                 { name: '双随机', type: 'shuangsuiji' },
                 { name: '刮刮乐', type: 'box' },
-                { name: '流水奖励', type: 'liushuijiangli' },
+                // { name: '流水奖励', type: 'liushuijiangli' },
                 { name: '打拳', type: 'pk' }
             ]
         };
@@ -254,7 +255,7 @@ export default {
 
 <style lang="scss" scoped>
 ._homePageThemeWrap {
-    margin-top: 30rpx;
+    margin-top: 40rpx;
 }
 
 .content-c {
@@ -348,24 +349,37 @@ export default {
     position: relative;
     margin-bottom: 20px;
     border-radius: 10px;
-    background: #f7f0ff;
-    padding: 10px 10px 0;
 
     .grid2 {
-        width: 48%;
+        width: 50%;
     }
 
     .item-container {
-        width: calc(48% - 10rpx);
         border-radius: 30rpx 30rpx 20rpx 20rpx;
         overflow: hidden;
         margin-bottom: 28rpx;
-        box-shadow: 0px 14px 30px 0px rgba(226, 222, 204, 0.4);
         position: relative;
-        border: 5rpx solid transparent;
-        background-clip: padding-box, border-box;
-        background-origin: padding-box, border-box;
-        background-image: linear-gradient(to right, #fff, #fff), linear-gradient(30deg, #a252cb, #3c53df, #a252cb);
+        background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/boxItemBg.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        padding: 40rpx 30rpx 40rpx 44rpx;
+        box-sizing: border-box;
+
+        .tag {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+
+            position: absolute;
+            z-index: 999;
+            font-size: 22rpx;
+            padding: 2rpx 10rpx;
+            border-radius: 6rpx;
+            top: 36rpx;
+            background-image: linear-gradient(120deg, #efde73 0%, #bea04f 100%);
+            color: #463b3b;
+        }
 
         .thumb-c {
             position: relative;
@@ -379,7 +393,7 @@ export default {
                 position: absolute;
                 width: 100%;
                 text-align: center;
-                background: rgba(230, 49, 17, 0.5);
+                background: #8352c4d1;
                 color: white;
                 left: 0rpx;
                 bottom: 0rpx;
@@ -406,13 +420,12 @@ export default {
         }
 
         .body {
-            background: white;
             padding: 12rpx 21rpx 10rpx 21rpx;
             box-sizing: border-box;
             .title {
-                font-size: 30rpx;
+                font-size: 26rpx;
                 font-weight: 500;
-                color: #000000;
+                color: #fff;
 
                 overflow: hidden;
                 text-overflow: ellipsis;

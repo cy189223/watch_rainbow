@@ -421,7 +421,6 @@ export default {
     margin-bottom: 20px;
     border-radius: 10px;
     background: #f7f0ff;
-    padding: 10px 10px 0;
 
     .grid2 {
         width: 48%;
@@ -434,10 +433,7 @@ export default {
         margin-bottom: 28rpx;
         box-shadow: 0px 14px 30px 0px rgba(226, 222, 204, 0.4);
         position: relative;
-        border: 5rpx solid transparent;
-        background-clip: padding-box, border-box;
-        background-origin: padding-box, border-box;
-        background-image: linear-gradient(to right, #fff, #fff), linear-gradient(30deg, #a252cb, #3c53df, #a252cb);
+        background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/boxItemBg.png');
 
         .thumb-c {
             position: relative;
