@@ -12,37 +12,26 @@
                     <image class="huoimg" src="../../static/redu.png" mode="aspectFit"></image>
                     <text style="margin-top: 5rpx">{{ info.sales }}</text>
                 </view>
-            </view>
-            <!-- <view class="topbox">
-                <view class="topimgbox">
-                    <image :src="info.thumb" mode="aspectFill" class="topimg"></image>
-                    <view class="topimgtext" v-if="info.sales || info.sales === 0">
-                        <image class="huoimg" src="../../static/redu.png" mode="aspectFit"></image>
-                        <text style="margin-top: 5rpx">热度:{{ info.sales }}</text>
-                    </view>
+                <view class="sharebtn" @tap="isSharePopup = true">
+                    <text class="new-icon icon-fenxiang"></text>
+                    <view>分享</view>
                 </view>
+            </view>
+            <view class="middleBox">
                 <view class="myMoneyInfo">
                     彩虹币：{{ userInfo.score }}
                     <br />
                     彩虹积分：{{ userInfo.redpack }}
                 </view>
-                <view class="sharebtn" @tap="isSharePopup = true">
-                    <text class="new-icon icon-fenxiang"></text>
-                    <view>分享</view>
+                <view class="textbox" @tap="showTips">
+                    <text class="new-icon icon-a-1"></text>
+                    规则说明
                 </view>
-                <view class="topmainbox">
-                    <view class="topmainboxb">
-                        <view class="textbox" @tap="showTips">
-                            <text class="new-icon icon-a-1"></text>
-                            规则说明
-                        </view>
-                        <view class="textbox" @tap="totabbar('/pages/myBox/index')">
-                            <text class="new-icon icon-jineqiandaiyueshangjin"></text>
-                            我的赏袋
-                        </view>
-                    </view>
+                <view class="textbox" @tap="totabbar('/pages/myBox/index')">
+                    <text class="new-icon icon-jineqiandaiyueshangjin"></text>
+                    我的赏袋
                 </view>
-            </view> -->
+            </view>
 
             <view class="body animated" :class="{ bounceOutRight: startMoving, bounceInLeft: !startMoving }">
                 <view class="sku-list">
@@ -414,10 +403,10 @@ export default {
         align-items: center;
         font-size: 28rpx;
         position: absolute;
-        right: 40rpx;
-        top: 0;
-        background-image: linear-gradient(120deg, #efde73 0%, #bea04f 100%);
-        color: #463b3b;
+        left: 50rpx;
+        top: 3rpx;
+        background-image: linear-gradient(120deg, #7e30ee 0%, #ea25e7 100%);
+        color: #fff;
         padding: 0 20rpx 3rpx 10rpx;
         border-radius: 10rpx;
         .huoimg {
@@ -426,108 +415,55 @@ export default {
             margin-right: 6rpx;
         }
     }
-}
 
-.topbox {
-    position: relative;
-    margin: 0 22rpx;
-    padding-top: 100rpx;
-
-    .topimgbox {
+    .sharebtn {
         display: flex;
-        flex-direction: column;
         align-items: center;
         position: absolute;
-        top: 15rpx;
-        left: 30rpx;
-
-        .topimg {
-            width: 235rpx;
-            height: 235rpx;
-            margin-bottom: 15rpx;
-            border-radius: 25rpx;
-            box-shadow: 0 0 7px 3px #8048a5;
-            border: 10rpx solid transparent;
-            background-clip: padding-box, border-box;
-            background-origin: padding-box, border-box;
-            background-image: linear-gradient(to right, #fff, #fff), linear-gradient(30deg, #00ddff, #dc3dff, #00ddff, #dc3dff);
+        top: 0rpx;
+        right: 20rpx;
+        color: #fff;
+        font-size: 24rpx;
+        line-height: 38rpx;
+        background-image: linear-gradient(120deg, #7e30ee 0%, #ea25e7 100%);
+        padding: 0 20rpx 3rpx 20rpx;
+        border-radius: 10rpx;
+        .new-icon {
+            font-size: 24rpx;
+            color: #ceffff;
+            margin-right: 3px;
         }
     }
+}
 
+.middleBox {
+    padding: 26rpx 40rpx;
+    margin: 20rpx;
+    margin-top: 30rpx;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    align-items: center;
+    background: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_home_recommend.png');
+    background-size: 96% 100%;
+    background-repeat: no-repeat;
     .myMoneyInfo {
-        color: #fff;
         line-height: 33rpx;
         font-size: 26rpx;
-        position: absolute;
-        top: 33rpx;
-        left: 300rpx;
         text-shadow:
             1px 1px 3px #b2b2f8,
             -1px 1px 3px #b2b2f8,
             -1px -1px 3px #b2b2f8,
             1px -1px 3px #b2b2f8;
     }
-    .sharebtn {
-        display: flex;
-        align-items: center;
-        position: absolute;
-        top: 40rpx;
-        right: 20rpx;
-        color: #fff;
-        font-size: 14px;
-        line-height: 24px;
+    .textbox {
+        margin-right: 30rpx;
+        font-size: 30rpx;
 
         .new-icon {
-            font-size: 20px;
-            color: #ceffff;
-            margin-right: 3px;
-        }
-    }
-
-    .topmainbox {
-        padding: 8rpx;
-        background-color: #fff;
-        border-radius: 20rpx;
-        border-top: 10rpx solid #75f1f9;
-        border-bottom: 10rpx solid #ef86fc;
-
-        .topmainboxa {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            width: 100%;
-            height: 105rpx;
-            border-radius: 10rpx 10rpx 0 0;
-            background-image: linear-gradient(to right, #4515b7, #9a45e1 40%, #3b2a90);
-
-            .titletext {
-                width: calc(100% - 325rpx);
-                margin-right: 30rpx;
-                color: #fff;
-                text-shadow:
-                    1px 1px 3px #b2b2f8,
-                    -1px 1px 3px #b2b2f8,
-                    -1px -1px 3px #b2b2f8,
-                    1px -1px 3px #b2b2f8;
-            }
-        }
-        .topmainboxb {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            width: 100%;
-            height: 105rpx;
-
-            .textbox {
-                margin-right: 30rpx;
-                font-size: 30rpx;
-
-                .new-icon {
-                    margin-right: 10rpx;
-                    font-weight: bold;
-                    font-size: 30rpx;
-                }
-            }
+            margin-right: 10rpx;
+            font-weight: bold;
+            font-size: 30rpx;
         }
     }
 }
@@ -670,8 +606,8 @@ export default {
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
-        margin: 30rpx 15rpx 30rpx;
-        padding: 30rpx 5rpx;
+        margin: 0 15rpx 30rpx;
+        padding: 10rpx 5rpx;
         // background-image: url('https://api.caihongbox.com.cn/image/listbg.png');
         background-size: 100% 100%;
         .item {
