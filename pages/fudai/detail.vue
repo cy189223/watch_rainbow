@@ -3,7 +3,17 @@
         <view :style="'height:' + customBar + 'px;'"></view>
         <Navbar :title="info.title"></Navbar>
         <view class="content">
-            <view class="topbox">
+            <view class="headerBox">
+                <video object-fit="cover" autoplay loop :controls="false" :show-fullscreen-btn="false" src="https://watch-box.oss-cn-beijing.aliyuncs.com/bgV.mp4"></video>
+                <view class="banner">
+                    <FBanner :list="bannerList"></FBanner>
+                </view>
+                <view class="topimgtext" v-if="info.sales || info.sales === 0">
+                    <image class="huoimg" src="../../static/redu.png" mode="aspectFit"></image>
+                    <text style="margin-top: 5rpx">{{ info.sales }}</text>
+                </view>
+            </view>
+            <!-- <view class="topbox">
                 <view class="topimgbox">
                     <image :src="info.thumb" mode="aspectFill" class="topimg"></image>
                     <view class="topimgtext" v-if="info.sales || info.sales === 0">
@@ -21,9 +31,6 @@
                     <view>分享</view>
                 </view>
                 <view class="topmainbox">
-                    <view class="topmainboxa">
-                        <view class="titletext">{{ info.title }}</view>
-                    </view>
                     <view class="topmainboxb">
                         <view class="textbox" @tap="showTips">
                             <text class="new-icon icon-a-1"></text>
@@ -35,7 +42,7 @@
                         </view>
                     </view>
                 </view>
-            </view>
+            </view> -->
 
             <view class="body animated" :class="{ bounceOutRight: startMoving, bounceInLeft: !startMoving }">
                 <view class="sku-list">
@@ -151,16 +158,30 @@
 import PayCard from './components/PayCard.vue';
 import RecordList from './components/RecordList.vue';
 import Navbar from '@/components/Navbar/index.vue';
+import FBanner from './components/fBanner';
 
 import { mapGetters } from 'vuex';
 export default {
     components: {
         PayCard,
         RecordList,
-        Navbar
+        Navbar,
+        FBanner
     },
     data() {
         return {
+            bannerList: [
+                {
+                    image: 'https://watchrainbow.oss-cn-beijing.aliyuncs.com/box/img/other/OdzjbTIVwwwmxouf1AKgOriDBECmPWZwUo2OmwfG.jpg',
+                    link: 'www.baidu.com',
+                    title: '我是标题'
+                },
+                {
+                    image: 'https://watchrainbow.oss-cn-beijing.aliyuncs.com/box/img/other/oBopLzJcsjvPlktedSysexQxBbzHyqCtpHRwaeoB.jpg',
+                    link: 'www.baidu.com',
+                    title: '我是标题2'
+                }
+            ],
             uuid: '',
             isInit: false,
             isPayPopup: false,
@@ -369,6 +390,44 @@ export default {
     }
 }
 
+.headerBox {
+    height: 400rpx;
+    width: 100%;
+    background: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_unlimited_swiper_new.png') center;
+    background-size: 96% 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    position: relative;
+
+    .banner {
+        width: 100%;
+        height: 340rpx;
+        margin: 0 auto;
+        padding-top: 16rpx;
+        position: absolute;
+        top: 30rpx;
+    }
+
+    .topimgtext {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28rpx;
+        position: absolute;
+        right: 40rpx;
+        top: 0;
+        background-image: linear-gradient(120deg, #efde73 0%, #bea04f 100%);
+        color: #463b3b;
+        padding: 0 20rpx 3rpx 10rpx;
+        border-radius: 10rpx;
+        .huoimg {
+            width: 34rpx;
+            height: 34rpx;
+            margin-right: 6rpx;
+        }
+    }
+}
+
 .topbox {
     position: relative;
     margin: 0 22rpx;
@@ -392,18 +451,6 @@ export default {
             background-clip: padding-box, border-box;
             background-origin: padding-box, border-box;
             background-image: linear-gradient(to right, #fff, #fff), linear-gradient(30deg, #00ddff, #dc3dff, #00ddff, #dc3dff);
-        }
-
-        .topimgtext {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 28rpx;
-
-            .huoimg {
-                width: 40rpx;
-                height: 40rpx;
-            }
         }
     }
 
@@ -716,8 +763,7 @@ export default {
 
             .title {
                 font-size: 24rpx;
-                font-family: PingFang;
-                color: #000000;
+                color: #fff;
                 margin: 5rpx;
                 overflow: hidden;
                 text-overflow: ellipsis;
