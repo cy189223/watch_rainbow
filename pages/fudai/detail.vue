@@ -1,5 +1,7 @@
 <template>
     <view class="scope-container">
+        <view :style="'height:' + customBar + 'px;'"></view>
+        <Navbar :title="info.title"></Navbar>
         <view class="content">
             <view class="topbox">
                 <view class="topimgbox">
@@ -148,12 +150,14 @@
 <script>
 import PayCard from './components/PayCard.vue';
 import RecordList from './components/RecordList.vue';
+import Navbar from '@/components/Navbar/index.vue';
 
 import { mapGetters } from 'vuex';
 export default {
     components: {
         PayCard,
-        RecordList
+        RecordList,
+        Navbar
     },
     data() {
         return {
@@ -178,6 +182,9 @@ export default {
     },
     computed: {
         ...mapGetters(['userInfo']),
+        customBar() {
+            return this.$store.getters.deviceInfo.customBar;
+        },
         skuLevel() {
             return this.info.sku_level || [];
         },
@@ -350,6 +357,16 @@ export default {
     background-position: top;
     background-size: 100%;
     min-height: calc(100vh - 1rpx);
+
+    .navBar {
+        position: absolute;
+        bottom: 0;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 28rpx;
+        color: #fff;
+    }
 }
 
 .topbox {

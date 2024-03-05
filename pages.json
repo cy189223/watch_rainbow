@@ -102,6 +102,7 @@
         {
             "path": "pages/fudai/detail",
             "style": {
+                "navigationStyle": "custom",
                 "backgroundTextStyle": "dark",
                 "navigationBarTitleText": "无限赏",
                 "navigationBarBackgroundColor": "#0d093c",
