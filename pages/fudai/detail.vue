@@ -662,6 +662,7 @@ export default {
             background-size: 100% 100%;
             margin: 20rpx 0;
             padding: 20rpx;
+            box-sizing: border-box;
             ._t1 {
                 display: flex;
                 padding: 20rpx;
