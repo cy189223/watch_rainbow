@@ -4,7 +4,7 @@
         <Navbar :title="info.title"></Navbar>
         <view class="content">
             <view class="headerBox">
-                <video
+                <!-- <video
                     style="height: 100%"
                     object-fit="cover"
                     autoplay
@@ -12,7 +12,8 @@
                     :controls="false"
                     :show-fullscreen-btn="false"
                     src="https://watch-box.oss-cn-beijing.aliyuncs.com/bgV.mp4"
-                ></video>
+                ></video> -->
+                <view class="bg1"></view>
                 <view class="banner">
                     <FBanner :list="bannerList"></FBanner>
                 </view>
@@ -43,7 +44,7 @@
 
             <view class="body animated" :class="{ bounceOutRight: startMoving, bounceInLeft: !startMoving }">
                 <view class="sku-list">
-                    <view class="headerTool">
+                    <view class="headerTool" :style="'top:' + customBar + 'px'">
                         <view
                             @click="changetype(1)"
                             class="headerToolItem"
@@ -370,8 +371,7 @@ export default {
 .scope-container {
     box-sizing: border-box;
     background-color: #000000;
-    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_page_particle.gif');
-    // background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/a36feecb27cf1838.gif');
+    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/65dea2a339eab7782bf47e83.gif');
     background-position: top;
     background-size: 100%;
     min-height: calc(100vh - 1rpx);
@@ -395,6 +395,18 @@ export default {
     background-repeat: no-repeat;
     text-align: center;
     position: relative;
+
+    .bg1 {
+        width: 200rpx;
+        height: 200rpx;
+        background: url('https://watch-box.oss-cn-beijing.aliyuncs.com/%E7%BB%84%20221.png') center;
+        background-size: 96% 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        bottom: -17px;
+        left: 50%;
+        margin-left: -100rpx;
+    }
 
     .banner {
         width: 100%;

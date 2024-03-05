@@ -567,7 +567,6 @@ export default {
     margin: 10rpx 40rpx 0;
     position: sticky;
     z-index: 970;
-    background-color: #000000;
     padding-bottom: 40rpx;
 
     .navbox {

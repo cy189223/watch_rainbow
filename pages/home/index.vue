@@ -143,7 +143,7 @@ export default {
 .container {
     padding-top: 1rpx;
     background-color: #000000;
-    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_page_particle.gif');
+    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/65dea2a339eab7782bf47e83.gif');
     background-position: top;
     background-size: 100%;
     min-height: calc(100vh - 1rpx);
