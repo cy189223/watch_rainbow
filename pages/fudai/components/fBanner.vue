@@ -5,7 +5,7 @@
                 <view style="position: relative">
                     <image
                         mode="aspectFill"
-                        :src="item.image + '?x-oss-process=image/resize,w_1200'"
+                        :src="item.thumb + '?x-oss-process=image/resize,w_1200'"
                         :style="imageStyle"
                         class="slide-image"
                         :data-item="item"
@@ -13,7 +13,7 @@
                     />
                     <view class="title">
                         {{ item.title }}
-                        <text style="color: red; margin-left: 20rpx">概率：{{ item.prencent }}%</text>
+                        <text style="color: red; margin-left: 20rpx">概率：{{ item.front_odds }}%</text>
                     </view>
                 </view>
             </swiper-item>

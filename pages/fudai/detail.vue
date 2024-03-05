@@ -15,7 +15,7 @@
                 ></video> -->
                 <view class="bg1"></view>
                 <view class="banner">
-                    <FBanner :list="bannerList"></FBanner>
+                    <FBanner :list="skus"></FBanner>
                 </view>
                 <view class="topimgtext" v-if="info.sales || info.sales === 0">
                     <image class="huoimg" src="../../static/redu.png" mode="aspectFit"></image>
@@ -83,36 +83,36 @@
                         </view>
                     </view>
 
-                    <view class="_block" v-if="skutype == 1" v-for="(item, index) in info.sku_level.reverse()">
-                        {{ item.title }}
-                    </view>
-                    <!-- <view class="item" v-for="(item, index) in info.skus" :key="item.id" @tap="showDetailImagePopup(item)" v-if="skutype == 1">
-                        <view class="thumb">
-                            <image mode="aspectFill" :src="item.thumb + '?x-oss-process=image/resize,w_300'"></image>
-                            <view class="shang-title" :class="'shang-title-' + item.level">{{ getLevelTitle(item.level) }}</view>
+                    <view class="_block" v-if="skutype == 1" v-for="item in skuLevelReverse" :key="item.title" v-show="getSkusByLevel(item.odds).length > 0">
+                        <view class="_t1">
+                            <image :src="item.icon" class="_icon"></image>
+                            {{ item.title }}
+
+                            <view style="margin-left: 20rpx" v-if="config.show_odds_mode === 'enable'">
+                                概率{{ item.odds }}%
+                                <text style="font-size: 20rpx">（此概率为当前赏级出赏概率）</text>
+                            </view>
+                            <view style="margin-left: 20rpx" v-else-if="config.show_odds_mode === 'auto'">
+                                <view v-if="item.front_odds >= 0.1">概率{{ item.odds }}%</view>
+                                <view v-else>概率{{ '<' }}0.1%</view>
+                                <text style="font-size: 20rpx">（此概率为当前赏级出赏概率）</text>
+                            </view>
                         </view>
-                        <view class="title">{{ item.title }}</view>
-                        <view class="bottomflex">
-                            <view class="display-price" style="border-right: 1px solid #ccc">
-                                <view class="value">
-                                    <PriceDisplay :info="item"></PriceDisplay>
+                        <view class="itemWrap">
+                            <view class="item" v-for="(item, index) in getSkusByLevel(item.odds)" :key="item.id" @tap="showDetailImagePopup(item)" v-if="skutype == 1">
+                                <view class="thumb">
+                                    <image mode="aspectFill" :src="item.thumb + '?x-oss-process=image/resize,w_300'"></image>
+                                    <view class="shang-title" :class="'shang-title-' + item.level">{{ getLevelTitle(item.front_odds) }}</view>
                                 </view>
-                                <view class="key">零售价</view>
-                            </view>
-                            <view class="display-price">
-                                <template>
-                                    <template v-if="config.show_odds_mode === 'enable'">
-                                        <text class="value">{{ item.front_odds }}%</text>
-                                    </template>
-                                    <template v-else-if="config.show_odds_mode === 'auto'">
-                                        <text class="value" v-if="item.front_odds >= 0.1">{{ item.front_odds }}%</text>
-                                        <text class="value" v-else>{{ '<' }}0.1%</text>
-                                    </template>
-                                    <text clas="key">概率</text>
-                                </template>
+                                <view class="title">{{ item.title }}</view>
+                                <view class="bottomflex">
+                                    <view>零售价：</view>
+                                    <PriceDisplay style="color: red" :info="item"></PriceDisplay>
+                                </view>
                             </view>
                         </view>
-                    </view> -->
+                    </view>
+
                     <RecordList ref="record" v-if="skutype == 2" :info="info" style="width: 100%"></RecordList>
                 </view>
             </view>
@@ -205,6 +205,9 @@ export default {
         },
         skuLevel() {
             return this.info.sku_level || [];
+        },
+        skuLevelReverse() {
+            return (this.info.sku_level || []).reverse() || [];
         },
         skus() {
             return this.info.skus || [];
@@ -356,11 +359,12 @@ export default {
             this.isPayPopup = true;
             this.paytotal = type;
         },
-        getLevelIcon(level) {
-            return this.skuLevel[level - 1].icon;
+        getLevelTitle(odds) {
+            return this.skuLevel.find((item) => item.odds == odds).title;
         },
-        getLevelTitle(level) {
-            return this.skuLevel[level - 1].title;
+        getSkusByLevel(odds) {
+            const res = this.skus.filter((item) => item.front_odds == odds);
+            return res;
         }
     },
     onPageScroll(e) {}
@@ -657,9 +661,30 @@ export default {
             background-image: url('../../static/_blockBg.png');
             background-size: 100% 100%;
             margin: 20rpx 0;
+            padding: 20rpx;
+            ._t1 {
+                display: flex;
+                padding: 20rpx;
+                color: #fff;
+                background-image: linear-gradient(120deg, #7e30ee 0%, #ea25e7 100%);
+                border-radius: 10rpx;
+                ._icon {
+                    margin-right: 20rpx;
+                    height: 40rpx;
+                    width: 40rpx;
+                }
+            }
+            .itemWrap {
+                display: flex;
+                overflow-x: auto;
+                .item {
+                    width: 230rpx;
+                    flex-shrink: 0;
+                }
+            }
         }
         .item {
-            padding: 40rpx 40rpx 40rpx 44rpx;
+            padding: 24rpx;
             width: 49%;
             box-sizing: border-box;
             border-radius: 25rpx;
@@ -667,6 +692,7 @@ export default {
             background-origin: padding-box, border-box;
             background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/boxItemBg.png');
             border: 5px solid transparent;
+            background-size: 100% 100%;
 
             .thumb {
                 position: relative;
@@ -710,6 +736,7 @@ export default {
                 }
 
                 .shang-title {
+                    display: none;
                     background-image: linear-gradient(to bottom, #4fb4fc, #68f1fb);
                     border-radius: 0 0 10rpx 0;
                     color: white;
@@ -754,21 +781,23 @@ export default {
                 display: -webkit-box;
                 -webkit-line-clamp: 1;
                 -webkit-box-orient: vertical;
+                padding: 10rpx 0;
             }
 
             .bottomflex {
                 display: flex;
                 justify-content: space-between;
                 align-items: flex-start;
-                border-top: 1px dashed #ccc;
-                padding-top: 5rpx;
+                font-size: 20rpx;
+                color: #fff;
+                border-top: 1px solid #eee;
+                padding: 10rpx;
 
                 .display-price {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
-                    width: 50%;
                     height: 60rpx;
                     font-size: 22rpx;
                     text-align: center;
