@@ -17,7 +17,7 @@
                     <view class="item" @tap="checkSku(item)" :class="'item-' + skus.length" v-for="(item, index) in skus">
                         <view class="thumb-c">
                             <image class="thumb" :src="item.thumb" mode="aspectFit"></image>
-                            <view :class="item.options.shang_title ? 'shang-title' : 'title'">{{ item.title }}</view>
+                            <view class="_mTitle" :class="item.options.shang_title ? 'shang-title' : 'title'">{{ item.title }}</view>
                             <view class="total">×{{ item.total }}</view>
                             <view class="title" :class="{ gift: item.options.shang_type === 1 }" v-if="item.options.shang_title">{{ item.options.shang_title }}</view>
                         </view>
@@ -47,7 +47,7 @@
                     <view class="btn confirm bg-purple" @tap="goBack">试玩不发货哦~</view>
                 </view>
                 <view class="button-c" v-else>
-                    <view class="btn confirm bg-purple" @tap="close">开心收下</view>
+                    <view class="btn confirm bg-purple" @tap="close">全部云发货</view>
                     <view class="btn return-sale" @tap="returnSale" v-if="!orderConfig.is_ban_return_sale">我的赏袋</view>
                 </view>
             </view>
@@ -297,7 +297,7 @@ export default {
             transform: translateX(-50%);
             width: 155rpx;
             height: 155rpx;
-            top: 50rpx;
+            top: 36rpx;
             display: block;
         }
 
@@ -306,25 +306,36 @@ export default {
             width: 210rpx;
             height: 230rpx;
             position: relative;
-            background-image: url('https://api.caihongbox.com.cn/image/getbg.png');
+            background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/getbg.png');
             z-index: 11;
             animation: showbox 1s;
             transform-origin: center;
             animation-fill-mode: forwards;
             background-size: 100% 100%;
+            .shang-title {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: -30rpx;
+                color: white;
+                text-align: center;
+                font-size: 24rpx;
+            }
+            .title {
+                position: absolute;
+                color: #6965c4;
+                font-weight: 500;
+                text-align: center;
+                width: 100%;
+                line-height: 19rpx;
+                font-size: 19rpx;
+                // top: 25rpx;
+                // left: 35rpx;
+                text-align: center;
+                bottom: 20rpx;
+            }
         }
 
-        .title {
-            position: absolute;
-            color: #6965c4;
-            font-weight: 500;
-            text-align: center;
-            width: 55rpx;
-            line-height: 19rpx;
-            font-size: 19rpx;
-            top: 25rpx;
-            left: 35rpx;
-        }
         .total {
             position: absolute;
             right: -1rpx;
@@ -338,15 +349,6 @@ export default {
             color: white;
             font-size: 22rpx;
         }
-        .shang-title {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -30rpx;
-            color: white;
-            text-align: center;
-            font-size: 24rpx;
-        }
 
         // 单个
         &.item-1 {
@@ -357,17 +359,17 @@ export default {
                 height: 420rpx;
 
                 image {
-                    top: 90rpx;
+                    top: 70rpx;
                     width: 285rpx;
                     height: 285rpx;
                     display: block;
                 }
                 .title {
-                    left: 64rpx;
-                    width: 100rpx;
+                    // left: 64rpx;
+                    width: 100%;
                     line-height: 30rpx;
-                    font-size: 30rpx;
-                    top: 48rpx;
+                    font-size: 28rpx;
+                    bottom: 32rpx;
                 }
                 .total {
                     width: 75rpx;
