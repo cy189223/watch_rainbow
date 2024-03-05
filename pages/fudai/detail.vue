@@ -371,7 +371,7 @@ export default {
     box-sizing: border-box;
     background-color: #000000;
     background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_page_particle.gif');
-    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/a36feecb27cf1838.gif');
+    // background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/a36feecb27cf1838.gif');
     background-position: top;
     background-size: 100%;
     min-height: calc(100vh - 1rpx);
