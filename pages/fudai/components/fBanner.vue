@@ -11,7 +11,10 @@
                         :data-item="item"
                         @tap="handleClick"
                     />
-                    <view class="title">{{ item.title }}</view>
+                    <view class="title">
+                        {{ item.title }}
+                        <text style="color: red; margin-left: 20rpx">概率：{{ item.prencent }}%</text>
+                    </view>
                 </view>
             </swiper-item>
         </swiper>

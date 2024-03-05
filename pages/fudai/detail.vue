@@ -4,7 +4,15 @@
         <Navbar :title="info.title"></Navbar>
         <view class="content">
             <view class="headerBox">
-                <video object-fit="cover" autoplay loop :controls="false" :show-fullscreen-btn="false" src="https://watch-box.oss-cn-beijing.aliyuncs.com/bgV.mp4"></video>
+                <video
+                    style="height: 100%"
+                    object-fit="cover"
+                    autoplay
+                    loop
+                    :controls="false"
+                    :show-fullscreen-btn="false"
+                    src="https://watch-box.oss-cn-beijing.aliyuncs.com/bgV.mp4"
+                ></video>
                 <view class="banner">
                     <FBanner :list="bannerList"></FBanner>
                 </view>
@@ -35,23 +43,7 @@
 
             <view class="body animated" :class="{ bounceOutRight: startMoving, bounceInLeft: !startMoving }">
                 <view class="sku-list">
-                    <!-- <view class="skutitlebox">
-                        <image src="../../static/skutitle.png" mode="" class="skubg"></image>
-                        <image src="../../static/spyl.png" mode="" class="skuspyl skuimg" @tap="changetype(1)"></image>
-                        <image src="../../static/csjl.png" mode="" class="skucsjl skuimg" @tap="changetype(2)"></image>
-                        <image src="../../static/spyla.png" mode="" class="skuspyla skuimga" v-if="skutype == 1"></image>
-                        <image src="../../static/csjla.png" mode="" class="skucsjla skuimga" v-else-if="skutype == 2"></image>
-                    </view> -->
                     <view class="headerTool">
-                        <view
-                            class="headerToolItem"
-                            @click="changetype(0)"
-                            :class="{
-                                headerToolCur: skutype == 0
-                            }"
-                        >
-                            欧皇榜
-                        </view>
                         <view
                             @click="changetype(1)"
                             class="headerToolItem"
@@ -71,16 +63,29 @@
                             抽赏记录
                         </view>
                         <view
+                            class="headerToolItem"
+                            @click="changetype(0)"
+                            :class="{
+                                headerToolCur: skutype == 3
+                            }"
+                        >
+                            欧皇榜
+                        </view>
+                        <view
                             @click="changetype(3)"
                             class="headerToolItem"
                             :class="{
-                                headerToolCur: skutype == 3
+                                headerToolCur: skutype == 4
                             }"
                         >
                             非酋榜
                         </view>
                     </view>
-                    <view class="item" v-for="(item, index) in info.skus" :key="item.id" @tap="showDetailImagePopup(item)" v-if="skutype == 1">
+
+                    <view class="_block" v-if="skutype == 1" v-for="(item, index) in info.sku_level.reverse()">
+                        {{ item.title }}
+                    </view>
+                    <!-- <view class="item" v-for="(item, index) in info.skus" :key="item.id" @tap="showDetailImagePopup(item)" v-if="skutype == 1">
                         <view class="thumb">
                             <image mode="aspectFill" :src="item.thumb + '?x-oss-process=image/resize,w_300'"></image>
                             <view class="shang-title" :class="'shang-title-' + item.level">{{ getLevelTitle(item.level) }}</view>
@@ -106,7 +111,7 @@
                                 </template>
                             </view>
                         </view>
-                    </view>
+                    </view> -->
                     <RecordList ref="record" v-if="skutype == 2" :info="info" style="width: 100%"></RecordList>
                 </view>
             </view>
@@ -163,12 +168,14 @@ export default {
                 {
                     image: 'https://watchrainbow.oss-cn-beijing.aliyuncs.com/box/img/other/OdzjbTIVwwwmxouf1AKgOriDBECmPWZwUo2OmwfG.jpg',
                     link: 'www.baidu.com',
-                    title: '我是标题'
+                    title: '我是标题',
+                    prencent: '0.1'
                 },
                 {
                     image: 'https://watchrainbow.oss-cn-beijing.aliyuncs.com/box/img/other/oBopLzJcsjvPlktedSysexQxBbzHyqCtpHRwaeoB.jpg',
                     link: 'www.baidu.com',
-                    title: '我是标题2'
+                    title: '我是标题2',
+                    prencent: '0.2'
                 }
             ],
             uuid: '',
@@ -364,6 +371,7 @@ export default {
     box-sizing: border-box;
     background-color: #000000;
     background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_page_particle.gif');
+    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/a36feecb27cf1838.gif');
     background-position: top;
     background-size: 100%;
     min-height: calc(100vh - 1rpx);
@@ -610,6 +618,14 @@ export default {
         padding: 10rpx 5rpx;
         // background-image: url('https://api.caihongbox.com.cn/image/listbg.png');
         background-size: 100% 100%;
+
+        ._block {
+            height: 400rpx;
+            width: 100%;
+            background-image: url('../../static/_blockBg.png');
+            background-size: 100% 100%;
+            margin: 20rpx 0;
+        }
         .item {
             padding: 40rpx 40rpx 40rpx 44rpx;
             width: 49%;
@@ -808,7 +824,7 @@ export default {
     .btn {
         width: 160rpx;
         height: 166rpx;
-        background-image: url('https://api.caihongbox.com.cn/image/choubox.png');
+        background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/choubox%20(1).png');
         background-size: 100% 100%;
         text-align: center;
 

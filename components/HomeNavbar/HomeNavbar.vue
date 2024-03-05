@@ -95,6 +95,10 @@ export default {
             font-weight: bold;
             color: #ffffff;
 
+            background-image: linear-gradient(to right, orange, #8151c2);
+            -webkit-background-clip: text;
+            color: transparent !important;
+
             transition:
                 font-size 0.5s,
                 color 0.5s;
