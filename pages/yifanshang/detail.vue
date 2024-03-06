@@ -687,12 +687,13 @@ export default {
 
         .item {
             margin: 5rpx 4rpx;
-            padding: 5rpx;
+            padding: 30rpx;
             width: calc(100% / 3 - 4rpx - 4rpx);
             box-sizing: border-box;
             border-radius: 25rpx;
             background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/boxItemBg.png');
             color: #fff;
+            background-size: 100% 100%;
 
             .thumb {
                 position: relative;

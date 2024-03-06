@@ -275,7 +275,7 @@ export default {
         height: 80rpx;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
         .button {
             width: 50rpx;
             height: 50rpx;

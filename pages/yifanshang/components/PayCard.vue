@@ -21,6 +21,12 @@
                     <view class="item" :class="{ actived: payTotal === 0 }" @tap="changepay(0)">全包</view>
                 </view>
             </view>
+
+            <view class="numberChange">
+                <view class="button" @click="changeNumber(-1)">-</view>
+                <view>{{ payTotal }}</view>
+                <view class="button" @click="changeNumber(1)">+</view>
+            </view>
             <view class="block">
                 <view class="item-title">可用优惠券:</view>
                 <view class="arrow-right bold" @tap="isCouponPopup = true">
@@ -110,6 +116,18 @@ export default {
         this.initOrder();
     },
     methods: {
+        changeNumber(num) {
+            this.payTotal = this.payTotal + num;
+            if (this.payTotal < 1) {
+                this.payTotal = 1;
+                return;
+            }
+            if (this.payTotal > 100) {
+                this.payTotal = 100;
+                return;
+            }
+            this.initOrder();
+        },
         changepay(type) {
             if (this.payTotal == type) return;
             this.currentCoupon = {};
@@ -227,6 +245,20 @@ export default {
     border-radius: 10rpx 10rpx 0 0;
     padding: 50rpx 30rpx;
     box-sizing: border-box;
+
+    .numberChange {
+        line-height: 80rpx;
+        height: 80rpx;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .button {
+            width: 50rpx;
+            height: 50rpx;
+            margin: 0;
+            line-height: 50rpx;
+        }
+    }
 
     .close-btn {
         position: absolute;

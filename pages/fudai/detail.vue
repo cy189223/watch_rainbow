@@ -690,14 +690,15 @@ export default {
                 position: relative;
                 overflow: hidden;
                 background: rgba(0, 0, 0, 0.5);
-                border-radius: 20rpx;
                 position: relative;
+                padding: 10rpx;
 
                 image {
                     width: 100%;
                     aspect-ratio: 1;
                     display: block;
                     height: auto;
+                    border-radius: 20rpx;
                 }
 
                 .sell-out-c {
