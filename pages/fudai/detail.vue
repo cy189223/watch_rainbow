@@ -4,15 +4,6 @@
         <Navbar :title="info.title"></Navbar>
         <view class="content">
             <view class="headerBox">
-                <!-- <video
-                    style="height: 100%"
-                    object-fit="cover"
-                    autoplay
-                    loop
-                    :controls="false"
-                    :show-fullscreen-btn="false"
-                    src="https://watch-box.oss-cn-beijing.aliyuncs.com/bgV.mp4"
-                ></video> -->
                 <view class="bg1"></view>
                 <view class="banner">
                     <FBanner :list="skus"></FBanner>

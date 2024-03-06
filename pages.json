@@ -79,6 +79,7 @@
         {
             "path": "pages/yifanshang/detail",
             "style": {
+                "navigationStyle": "custom",
                 "backgroundTextStyle": "dark",
                 "navigationBarTitleText": "",
                 "navigationBarBackgroundColor": "#0d093c",

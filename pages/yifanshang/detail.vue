@@ -1,36 +1,38 @@
 <template>
     <view class="scope-container">
+        <view :style="'height:' + customBar + 'px;'"></view>
+        <Navbar :title="info.title"></Navbar>
         <view class="content">
             <view class="refreshbox" @tap="refreshRoom">刷新</view>
-            <view class="topbox">
-                <view class="topimgbox">
-                    <image :src="info.thumb" mode="aspectFill" class="topimg"></image>
-                    <view class="topimgtext">
-                        <view v-if="info.room && info.room.num">当前第{{ info.room.num | fixNumber }}箱</view>
-                        <view class="changebox" @tap="showRoomPopup">
-                            <text class="new-icon icon-express-package"></text>
-                            换箱
-                        </view>
+            <view class="headerBox">
+                <view class="bg1"></view>
+                <view class="banner">
+                    <FBanner :list="info.skus"></FBanner>
+                </view>
+                <view class="topimgtext">
+                    <view class="changebox" @tap="showRoomPopup">
+                        <text class="new-icon icon-express-package"></text>
+                        换箱
                     </view>
                 </view>
                 <view class="sharebtn" @tap="isSharePopup = true">
                     <text class="new-icon icon-fenxiang"></text>
                     <view>分享</view>
                 </view>
-                <view class="topmainbox">
-                    <view class="topmainboxa">
-                        <view class="titletext">{{ info.title }}</view>
-                    </view>
-                    <view class="topmainboxb">
-                        <view class="textbox" @tap="showTips">
-                            <text class="new-icon icon-a-1"></text>
-                            规则说明
-                        </view>
-                        <view class="textbox" @tap="totabbar('/pages/myBox/index')">
-                            <text class="new-icon icon-jineqiandaiyueshangjin"></text>
-                            我的赏袋
-                        </view>
-                    </view>
+            </view>
+            <view class="middleBox">
+                <view class="myMoneyInfo">
+                    彩虹币：{{ userInfo.score }}
+                    <br />
+                    彩虹积分：{{ userInfo.redpack }}
+                </view>
+                <view class="textbox" @tap="showTips">
+                    <text class="new-icon icon-a-1"></text>
+                    规则说明
+                </view>
+                <view class="textbox" @tap="totabbar('/pages/myBox/index')">
+                    <text class="new-icon icon-jineqiandaiyueshangjin"></text>
+                    我的赏袋
                 </view>
             </view>
 
@@ -119,12 +121,17 @@
 import PayCard from './components/PayCard.vue';
 import RoomPopup from './components/RoomPopup.vue';
 import RecordList from './components/RecordList.vue';
+import Navbar from '@/components/Navbar/index.vue';
 import { mapGetters } from 'vuex';
+import FBanner from './components/fBanner';
+
 export default {
     components: {
         PayCard,
         RoomPopup,
-        RecordList
+        RecordList,
+        Navbar,
+        FBanner
     },
     data() {
         return {
@@ -148,6 +155,9 @@ export default {
     },
     computed: {
         ...mapGetters(['userInfo']),
+        customBar() {
+            return this.$store.getters.deviceInfo.customBar;
+        },
         payInfo() {
             if (!this.info || !this.info.room) {
                 return {};
@@ -338,7 +348,7 @@ export default {
 <style lang="scss" scoped>
 .refreshbox {
     position: fixed;
-    bottom: 280rpx;
+    bottom: 690rpx;
     right: 10px;
     width: 45px;
     height: 20px;
@@ -352,9 +362,12 @@ export default {
 }
 
 .scope-container {
-    min-height: 100vh;
     box-sizing: border-box;
-    background-image: linear-gradient(to bottom, #0d093c, #1a0641);
+    background-color: #000000;
+    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/65dea2a339eab7782bf47e83.gif');
+    background-position: top;
+    background-size: 100%;
+    min-height: calc(100vh - 1rpx);
 }
 
 .topbox {
@@ -468,6 +481,127 @@ export default {
     }
 }
 
+.headerBox {
+    height: 400rpx;
+    width: 100%;
+    background: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_unlimited_swiper_new.png') center;
+    background-size: 96% 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    position: relative;
+
+    .bg1 {
+        width: 200rpx;
+        height: 200rpx;
+        background: url('https://watch-box.oss-cn-beijing.aliyuncs.com/%E7%BB%84%20221.png') center;
+        background-size: 96% 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        bottom: -17px;
+        left: 50%;
+        margin-left: -100rpx;
+        -webkit-animation-name: scaleDraw; /*关键帧名称*/
+        -webkit-animation-timing-function: ease-in-out; /*动画的速度曲线*/
+        -webkit-animation-iteration-count: infinite; /*动画播放的次数*/
+        -webkit-animation-duration: 5s; /*动画所花费的时间*/
+    }
+
+    @keyframes scaleDraw {
+        /*定义关键帧、scaleDrew是需要绑定到选择器的关键帧名称*/
+        0% {
+            transform: scale(1); /*开始为原始大小*/
+        }
+        25% {
+            transform: scale(1.1); /*放大1.1倍*/
+        }
+        50% {
+            transform: scale(1);
+        }
+        75% {
+            transform: scale(1.1);
+        }
+    }
+
+    .banner {
+        width: 100%;
+        height: 340rpx;
+        margin: 0 auto;
+        padding-top: 16rpx;
+        position: absolute;
+        top: 30rpx;
+    }
+
+    .topimgtext {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24rpx;
+        position: absolute;
+        left: 50rpx;
+        top: 3rpx;
+        background-image: linear-gradient(120deg, #7e30ee 0%, #ea25e7 100%);
+        color: #fff;
+        padding: 8rpx 20rpx 6rpx 20rpx;
+        border-radius: 10rpx;
+        .huoimg {
+            width: 34rpx;
+            height: 34rpx;
+            margin-right: 6rpx;
+        }
+    }
+
+    .sharebtn {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 0rpx;
+        right: 20rpx;
+        color: #fff;
+        font-size: 24rpx;
+        line-height: 38rpx;
+        background-image: linear-gradient(120deg, #7e30ee 0%, #ea25e7 100%);
+        padding: 0 20rpx 3rpx 20rpx;
+        border-radius: 10rpx;
+        .new-icon {
+            font-size: 24rpx;
+            color: #ceffff;
+            margin-right: 3px;
+        }
+    }
+}
+
+.middleBox {
+    padding: 26rpx 40rpx;
+    margin: 20rpx;
+    margin-top: 30rpx;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    align-items: center;
+    background: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_home_recommend.png');
+    background-size: 96% 100%;
+    background-repeat: no-repeat;
+    .myMoneyInfo {
+        line-height: 33rpx;
+        font-size: 26rpx;
+        text-shadow:
+            1px 1px 3px #b2b2f8,
+            -1px 1px 3px #b2b2f8,
+            -1px -1px 3px #b2b2f8,
+            1px -1px 3px #b2b2f8;
+    }
+    .textbox {
+        margin-right: 30rpx;
+        font-size: 30rpx;
+
+        .new-icon {
+            margin-right: 10rpx;
+            font-weight: bold;
+            font-size: 30rpx;
+        }
+    }
+}
+
 .body {
     width: 100%;
     position: relative;
@@ -558,6 +692,7 @@ export default {
             box-sizing: border-box;
             border-radius: 25rpx;
             background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/boxItemBg.png');
+            color: #fff;
 
             .thumb {
                 position: relative;
@@ -623,8 +758,9 @@ export default {
 
             .title {
                 font-size: 24rpx;
-                font-family: PingFang;
-                color: #000000;
+                // font-family: PingFang;
+                // color: #000000;
+                text-align: center;
                 margin: 5rpx;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -652,10 +788,11 @@ export default {
 
                     .value {
                         font-weight: normal;
+                        color: red;
                     }
 
                     .key {
-                        color: #999;
+                        // color: #999;
                     }
                 }
             }
