@@ -14,8 +14,11 @@
 
             <scroll-view class="scroll-view-212" scroll-y>
                 <view class="sku-list">
-                    <view class="item" @tap="checkSku(item)" :class="'item-' + skus.length" v-for="(item, index) in skus">
+                    <view class="item" @tap="checkSku(item)" :class="'item-' + skus.length" v-for="(item, index) in skus" :key="item.uuid">
                         <view class="thumb-c">
+                            <view class="lockIcons" v-show="isShowLockIcon(item) && !isReturnSaleSuccess">
+                                <image class="_lockIcon" v-show="item.isLock" :src="`https://watch-box.oss-cn-beijing.aliyuncs.com/${item.isLock ? 'lock' : 'unlock'}.png`"></image>
+                            </view>
                             <image class="thumb" :src="item.thumb" mode="aspectFit"></image>
                             <view class="_mTitle" :class="item.options.shang_title ? 'shang-title' : 'title'">{{ item.title }}</view>
                             <view class="total">×{{ item.total }}</view>
@@ -47,7 +50,9 @@
                     <view class="btn confirm bg-purple" @tap="goBack">试玩不发货哦~</view>
                 </view>
                 <view class="button-c" v-else>
-                    <view class="btn confirm bg-purple" @tap="close">全部云发货</view>
+                    <view class="btn confirm bg-purple" @tap="sendCloud">
+                        全部云发货({{ skus.filter((item) => !item.isLock).reduce((sum, e) => sum + Number(e.score_price * e.total || 0), 0) }})
+                    </view>
                     <view class="btn return-sale" @tap="returnSale" v-if="!orderConfig.is_ban_return_sale">我的赏袋</view>
                 </view>
             </view>
@@ -96,10 +101,54 @@ export default {
         }
     },
     methods: {
+        sendCloud() {
+            const checkItem = this.skus.filter((item) => !item.isLock);
+            if (checkItem.length == 0) {
+                uni.showToast({
+                    title: '暂无可发货赏品',
+                    icon: 'none'
+                });
+                return;
+            }
+            uni.showModal({
+                title: '确认回收',
+                content: '确认要批量回收吗?',
+                success: (res) => {
+                    if (res.confirm) {
+                        uni.showLoading({
+                            title: '回收中...'
+                        });
+                        this.$http(`/asset/return-sale/confirm`, 'post', {
+                            ids: checkItem.map((item) => item.id)
+                        }).then((res) => {
+                            this.isReturnSaleSuccess = 1;
+                            uni.showToast({
+                                title: '发货成功',
+                                icon: 'none'
+                            });
+                        });
+                    }
+                }
+            });
+        },
+        isShowLockIcon(item) {
+            let flag = true;
+            if (item.sku_type === 'score') {
+                flag = false;
+            } else if (item.sku_type === 'coupon') {
+                flag = false;
+            } else if (item.sku_type === 'redpack') {
+                flag = false;
+            }
+            return flag;
+        },
         initData() {
             // 演示模块
             if (this.tryMode) {
                 this.$http(`/try/packages/${this.tryInfo.package_uuid}`).then((res) => {
+                    res.data.skus.forEach((item) => {
+                        item.isLock = false;
+                    });
                     this.package = res.data;
                     this.$playAudio('open');
                     this.showResult = true;
@@ -107,6 +156,9 @@ export default {
             } else {
                 this.$http(`/asset/package?order_id=${this.order.id}`)
                     .then((res) => {
+                        res.data.skus.forEach((item) => {
+                            item.isLock = false;
+                        });
                         this.package = res.data;
                         this.$playAudio('open');
                         this.showResult = true;
@@ -165,6 +217,11 @@ export default {
                 });
             } else {
                 console.log(item);
+                item.isLock = !item.isLock;
+                uni.showToast({
+                    title: item.title + '已' + (item.isLock ? '加入保险柜' : '移出保险柜'),
+                    icon: 'none'
+                });
             }
         }
     }
@@ -235,6 +292,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
 
     .close-btn {
         font-size: 38rpx;
@@ -312,6 +370,22 @@ export default {
             transform-origin: center;
             animation-fill-mode: forwards;
             background-size: 100% 100%;
+
+            .lockIcons {
+                position: absolute;
+                z-index: 999;
+                width: 25rpx;
+                height: 25rpx;
+                left: 47rpx;
+                top: 12rpx;
+                ._lockIcon {
+                    width: 100%;
+                    height: 100%;
+                    position: initial;
+                    transform: none;
+                }
+            }
+
             .shang-title {
                 position: absolute;
                 left: 0;
@@ -358,12 +432,20 @@ export default {
                 width: 383rpx;
                 height: 420rpx;
 
+                .lockIcons {
+                    width: 40rpx;
+                    height: 40rpx;
+                    left: 92rpx;
+                    top: 27rpx;
+                }
+
                 image {
                     top: 70rpx;
                     width: 285rpx;
                     height: 285rpx;
                     display: block;
                 }
+
                 .title {
                     // left: 64rpx;
                     width: 100%;
