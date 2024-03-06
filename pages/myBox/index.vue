@@ -44,7 +44,7 @@
                     @tap="enterSelectMode('return_sale')"
                     v-if="orderConfig.is_return_sale_enable"
                 >
-                    选择回收
+                    选择云发货
                 </button>
 
                 <button
@@ -67,7 +67,7 @@
                     提交发货 (已选{{ selectedIds.length }}件)
                 </button>
                 <button class="select-box-btn bg-orange" hover-class="hover" @tap="batchReturnSale" v-if="selectType === 'return_sale'">
-                    确认回收 (已选{{ selectedIds.length }}件)
+                    确认云发货 (已选{{ selectedIds.length }}件)
                 </button>
                 <button class="select-box-btn bg-orange" hover-class="hover" @tap="batchResale" v-if="selectType === 'resale'">确认挂售 (已选{{ selectedIds.length }}件)</button>
                 <button class="select-box-btn bg-orange" hover-class="hover" @tap="batchExchange" v-if="selectType === 'exchange'">
