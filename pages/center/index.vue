@@ -100,6 +100,13 @@
         <view class="action-list action-list-1">
             <view class="item" @tap="toDetail('/pages/ranking/index')" hover-class="hover">
                 <view class="left-icon">
+                    <image src="@/static/center/liushui.png"></image>
+                </view>
+                <view class="text">流水奖励</view>
+                <text class="icon new-iconfont icon-arrow-right"></text>
+            </view>
+            <view class="item" @tap="toDetail('/pages/ranking/index')" hover-class="hover">
+                <view class="left-icon">
                     <image src="@/static/center/paihang.png"></image>
                 </view>
                 <view class="text">排行榜</view>
