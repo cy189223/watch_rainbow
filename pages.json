@@ -616,7 +616,7 @@
         {
             "path": "pages/pkindex/pkindex",
             "style": {
-                "navigationBarTitleText": "拳击",
+                "navigationBarTitleText": "打拳",
                 "enablePullDownRefresh": false
             }
         },

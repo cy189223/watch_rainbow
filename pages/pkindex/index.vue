@@ -1,7 +1,8 @@
 <template>
     <view class="container">
         <view :style="'height:' + customBar + 'px;'"></view>
-        <HomeNavbar :title="page.title" searchType="all" :theme="scrollTop > 20 ? '#000000' : 'transparent'"></HomeNavbar>
+        <Navbar title="打拳"></Navbar>
+        <!-- <HomeNavbar :title="page.title" searchType="all" :theme="scrollTop > 20 ? '#000000' : 'transparent'"></HomeNavbar> -->
 
         <!-- <view class="navlistbox">
             <view class="navbox" @tap="navtype = item.type" :class="navtype == item.type ? 'cur' : ''" v-for="(item, index) in navlist" :key="index">
@@ -67,7 +68,11 @@
 </template>
 
 <script>
+import Navbar from '@/components/Navbar/index.vue';
 export default {
+    components: {
+        Navbar
+    },
     data() {
         return {
             isShowPay: false,

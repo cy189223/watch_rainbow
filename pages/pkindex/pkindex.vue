@@ -1,5 +1,6 @@
 <template>
     <view class="pagebox">
+        <Navbar title="打拳"></Navbar>
         <view v-if="wintype == ''" class="refreshbox" @tap="refreshRoom">刷新</view>
         <view class="rulebtn" @tap="ruleshow = true">规则</view>
         <!-- <view class="liushuibtn" @tap="showliushuipopup()" v-if="liushuilist.list && liushuilist.list.length">流水奖励</view> -->
