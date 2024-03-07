@@ -644,6 +644,18 @@
                     "transparentTitle": "always"
                 }
             }
+        },
+        {
+            "path": "pages/ggl/detail",
+            "style": {
+                "navigationBarTitleText": "刮刮乐详情",
+                "navigationStyle": "custom",
+                "enablePullDownRefresh": true,
+                "mp-alipay": {
+                    "backgroundTextStyle": "black",
+                    "transparentTitle": "always"
+                }
+            }
         }
     ],
     "subpackages": [
