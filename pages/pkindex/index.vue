@@ -3,38 +3,14 @@
         <view :style="'height:' + customBar + 'px;'"></view>
         <HomeNavbar :title="page.title" searchType="all" :theme="scrollTop > 20 ? '#000000' : 'transparent'"></HomeNavbar>
 
-        <view class="navlistbox">
+        <!-- <view class="navlistbox">
             <view class="navbox" @tap="navtype = item.type" :class="navtype == item.type ? 'cur' : ''" v-for="(item, index) in navlist" :key="index">
                 {{ item.name }}
             </view>
-        </view>
+        </view> -->
 
-        <view v-if="navtype == 'lsjl'" class="liushuilistbox">
-            <view class="liushuibox" v-if="liushuilist.list">
-                <view v-for="(item, index) in liushuilist.list" :key="index" style="padding-bottom: 5px">
-                    <view>{{ item.start_time }} 至 {{ item.end_time }}</view>
-                    <view>PK赏累计消费金额：{{ item.amount }}</view>
-                    <view v-for="(ite, ind) in item.skus" :key="ind" class="mainbox">
-                        <view class="titletext">PK赏累计消费满{{ ite.amount }}送</view>
-                        <view class="canbuy">{{ ite.can_get == 2 ? '已领取' : ite.can_get == 1 ? '可领取' : '未达成' }}</view>
-                        <view class="flexbox">
-                            <view class="numbox">
-                                <image class="img" src="../../static/zuanshi.png" mode=""></image>
-                                <view>{{ ite.score && ite.score != '' ? ite.score : '0' }}</view>
-                            </view>
-                            <image v-if="ite.thumb && ite.thumb != ''" :src="ite.thumb" mode="aspectFill" class="imgbox"></image>
-                            <view v-if="ite.thumb && ite.thumb != ''" class="flextitle">{{ ite.title }}</view>
-                            <view v-if="ite.can_get == 1" @tap="receive(item.uuid, ite)" class="flexbtnbox">领取</view>
-                            <view v-else-if="ite.can_get == 2" class="flexbtnbox">已领取</view>
-                            <view v-else class="flexbtnbox grayflexbtnbox">领取</view>
-                        </view>
-                    </view>
-                </view>
-            </view>
-            <NoData v-if="liushuilist && !liushuilist.list.length"></NoData>
-        </view>
-
-        <view class="module-c" style="margin-top: 0px; padding: 0 14px" v-if="navtype == 'qjs'">
+        <!-- <view class="module-c" style="margin-top: 0px; padding: 0 14px" v-if="navtype == 'qjs'"> -->
+        <view class="module-c" style="margin-top: 0px; padding: 0 14px">
             <view class="list-scope list-grid2">
                 <view class="item-container grid2" hover-class="hover" @click="clickyfsItem(item, navtype)" v-for="(item, index) in qjslist.list" :key="index">
                     <view class="thumb-c">
@@ -54,7 +30,7 @@
                 </view>
             </view>
         </view>
-        <view class="module-c" style="margin-top: 0px; padding: 0 14px" v-if="navtype == 'ydd'">
+        <!-- <view class="module-c" style="margin-top: 0px; padding: 0 14px" v-if="navtype == 'ydd'">
             <view class="list-scope list-grid2">
                 <view class="item-container grid2" hover-class="hover" @click="clickyfsItem(item, navtype)" v-for="(item, index) in yddlist.list" :key="index">
                     <view class="thumb-c">
@@ -73,9 +49,9 @@
                     </view>
                 </view>
             </view>
-        </view>
+        </view> -->
 
-        <uni-popup style="z-index: 1000" ref="getPopup" type="bottom">
+        <!-- <uni-popup style="z-index: 1000" ref="getPopup" type="bottom">
             <view class="mask-content">
                 <text class="new-iconfont icon-close close-btn" @tap="hidegetpopup()"></text>
                 <view class="title">领取奖品</view>
@@ -86,7 +62,7 @@
                     <text>确认领取奖品</text>
                 </view>
             </view>
-        </uni-popup>
+        </uni-popup> -->
     </view>
 </template>
 
@@ -105,16 +81,12 @@ export default {
             yddlist: {},
             navlist: [
                 {
-                    name: '全局赏',
+                    name: '打拳',
                     type: 'qjs'
                 },
                 {
                     name: 'PK赏',
                     type: 'ydd'
-                },
-                {
-                    name: '流水奖励',
-                    type: 'lsjl'
                 }
             ]
         };
@@ -161,84 +133,84 @@ export default {
                 this.yddlist = res.data;
             });
         },
-        hidegetpopup() {
-            this.$refs.getPopup.close();
-        },
-        submit() {
-            if (!this.address.id) {
-                uni.showModal({
-                    title: '请选择收货地址'
-                });
-                return false;
-            }
+        // hidegetpopup() {
+        //     this.$refs.getPopup.close();
+        // },
+        // submit() {
+        //     if (!this.address.id) {
+        //         uni.showModal({
+        //             title: '请选择收货地址'
+        //         });
+        //         return false;
+        //     }
 
-            uni.showLoading({
-                title: '提交中',
-                icon: 'none'
-            });
+        //     uni.showLoading({
+        //         title: '提交中',
+        //         icon: 'none'
+        //     });
 
-            this.$http(`/account/order/confirm`, 'post', {
-                uuid: this.uuid,
-                sku_id: this.id,
-                address_id: this.address.id
-            }).then((res) => {
-                this.getList();
-                this.uuid = '';
-                this.id = '';
-                uni.hideLoading();
-                this.$refs.getPopup.close();
-                uni.showModal({
-                    title: '领取成功',
-                    content: '已成功提交发货请求，请注意查收快递哦~'
-                });
-            });
-        },
+        //     this.$http(`/account/order/confirm`, 'post', {
+        //         uuid: this.uuid,
+        //         sku_id: this.id,
+        //         address_id: this.address.id
+        //     }).then((res) => {
+        //         this.getList();
+        //         this.uuid = '';
+        //         this.id = '';
+        //         uni.hideLoading();
+        //         this.$refs.getPopup.close();
+        //         uni.showModal({
+        //             title: '领取成功',
+        //             content: '已成功提交发货请求，请注意查收快递哦~'
+        //         });
+        //     });
+        // },
         clickyfsItem(item, type) {
             uni.navigateTo({
                 url: `/pages/pkindex/pkindex?id=` + item.uuid + '&type=' + type
             });
-        },
-        receive(uuid, item) {
-            if (item.can_get == 2) {
-                uni.showToast({
-                    title: '已经领取过了哦',
-                    icon: 'none'
-                });
-                return;
-            }
-            if (item.can_get != 1) {
-                uni.showToast({
-                    title: '流水不足',
-                    icon: 'none'
-                });
-                return;
-            }
-            if (item.thumb && item.thumb != '') {
-                this.uuid = uuid;
-                this.id = item.id;
-                this.$refs.getPopup.open('bottom');
-            } else {
-                uni.showLoading({
-                    title: '领取中',
-                    icon: 'none'
-                });
-                this.$http(`/account/order/confirm`, 'post', {
-                    uuid: uuid,
-                    sku_id: item.id
-                    // address_id: this.address.id,
-                }).then((res) => {
-                    this.getList();
-                    this.uuid = '';
-                    this.id = '';
-                    uni.hideLoading();
-                    this.$refs.getPopup.close();
-                    uni.showModal({
-                        title: '领取成功',
-                        content: this.scoreAlias + '领取成功，请注意查收~'
-                    });
-                });
-            }
         }
+        // receive(uuid, item) {
+        //     if (item.can_get == 2) {
+        //         uni.showToast({
+        //             title: '已经领取过了哦',
+        //             icon: 'none'
+        //         });
+        //         return;
+        //     }
+        //     if (item.can_get != 1) {
+        //         uni.showToast({
+        //             title: '流水不足',
+        //             icon: 'none'
+        //         });
+        //         return;
+        //     }
+        //     if (item.thumb && item.thumb != '') {
+        //         this.uuid = uuid;
+        //         this.id = item.id;
+        //         this.$refs.getPopup.open('bottom');
+        //     } else {
+        //         uni.showLoading({
+        //             title: '领取中',
+        //             icon: 'none'
+        //         });
+        //         this.$http(`/account/order/confirm`, 'post', {
+        //             uuid: uuid,
+        //             sku_id: item.id
+        //             // address_id: this.address.id,
+        //         }).then((res) => {
+        //             this.getList();
+        //             this.uuid = '';
+        //             this.id = '';
+        //             uni.hideLoading();
+        //             this.$refs.getPopup.close();
+        //             uni.showModal({
+        //                 title: '领取成功',
+        //                 content: this.scoreAlias + '领取成功，请注意查收~'
+        //             });
+        //         });
+        //     }
+        // }
     },
     onPageScroll(e) {
         this.scrollTop = e.scrollTop;
