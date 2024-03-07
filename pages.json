@@ -133,6 +133,14 @@
             }
         },
         {
+            "path": "pages/liushui/index",
+            "style": {
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "流水奖励",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
             "path": "pages/presell/index",
             "style": {
                 "backgroundTextStyle": "dark",

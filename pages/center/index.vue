@@ -98,7 +98,7 @@
             imageStyle="border-radius: 50rpx 50rpx 0rpx 0rpx; box-shadow: 10px 10rpx 10rpx 10rpx rgba(243, 238, 220, 0.4);"
         ></Banner>
         <view class="action-list action-list-1">
-            <view class="item" @tap="toDetail('/pages/ranking/index')" hover-class="hover">
+            <view class="item" @tap="toDetail('/pages/liushui/index')" hover-class="hover">
                 <view class="left-icon">
                     <image src="@/static/center/liushui.png"></image>
                 </view>
