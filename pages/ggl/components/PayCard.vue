@@ -3,26 +3,27 @@
         <view class="mask-content animated bounceInUp" @tap.stop>
             <text class="new-iconfont icon-close close-btn" @tap="cancel"></text>
             <view class="title">
-                {{ info.title }}
+                {{ info.box.title }}
             </view>
 
-            <view class="numberChange">
-                <view class="button" @click="changeNumber(-1)">-</view>
-                <view>{{ payTotal }}</view>
-                <view class="button" @click="changeNumber(1)">+</view>
-            </view>
             <view class="block">
-                <view class="total-list-new">
-                    <view class="item" v-for="(item, index) in info.total_list" :class="{ actived: payTotal === item.total }" @tap="changepay(item.total)">
-                        <view class="total-text">
-                            开{{ item.total }}个
-                            <text class="discount-text" v-if="item.is_discount">(惠)</text>
-                        </view>
-                        <PriceDisplay :info="item"></PriceDisplay>
-                    </view>
+                <view class="item-title">单价:</view>
+                <view class="price-c">
+                    <PriceDisplay :info="info.box"></PriceDisplay>
                 </view>
             </view>
+            <view class="block">
+                <view class="item-title">数量:</view>
+                <view class="total-list">
+                    <view class="item" :class="{ actived: payTotal === 1 }" @tap="changepay(1)">开1个</view>
 
+                    <view class="item" :class="{ actived: payTotal === 0 }" @tap="changepay(0)" v-if="info.box.sku_ratio_type === 1">整盒端({{ info.box.sku_total }}个)</view>
+                    <view class="item" :class="{ actived: payTotal === 5 }" @tap="changepay(5)" v-else>连开5个</view>
+
+                    <view class="item" :class="{ actived: payTotal === 20 }" @tap="changepay(20)">连开20个</view>
+                </view>
+                <!-- <view class="">x1</view> -->
+            </view>
             <view class="block">
                 <view class="item-title">可用优惠券:</view>
                 <view class="arrow-right bold" @tap="isCouponPopup = true">
@@ -44,7 +45,6 @@
                     <text class="meta" v-else>¥0</text>
                 </view>
             </view>
-
             <view class="block" v-if="order.max_useable_score">
                 <view class="item-title">{{ scoreAlias }}抵扣</view>
                 <view class="arrow-right bold">
@@ -53,7 +53,6 @@
                     <switch v-if="order.max_useable_score" class="redpack-switch" :checked="order.is_use_score" @change="scoreSwitchChange" />
                 </view>
             </view>
-
             <view class="total">
                 小计：
                 <PriceDisplay :info="order" prefix="pay_"></PriceDisplay>
@@ -62,11 +61,13 @@
             <!-- 用户协议 -->
             <UserStatement v-model="isCheckUserStatement"></UserStatement>
 
-            <view class="button" @tap="disableMultiClick(submit)" v-if="isInit && !isSubmiting">
-                <text>确认购买</text>
-            </view>
-            <view class="button disabled" v-else>
-                <text>确认购买</text>
+            <view class="button-c">
+                <view class="button" @tap="disableMultiClick(submit)" v-if="isInit && isCheckUserStatement">
+                    <text>确认购买</text>
+                </view>
+                <view class="button disabled" v-else>
+                    <text>确认购买</text>
+                </view>
             </view>
         </view>
 
@@ -86,7 +87,7 @@ export default {
     components: {},
     data() {
         return {
-            payTotal: '',
+            payTotal: 1,
             order: {},
             price: 0,
             form: {
@@ -97,37 +98,24 @@ export default {
             isCouponPopup: false,
             unusableCoupons: [],
             usableCoupons: [],
-            isInit: false,
             isCheckUserStatement: true,
-            isSubmiting: false
+            isInit: false
         };
     },
     props: {
         info: {
             type: Object
         },
-        Total: {
+        buyTotal: {
             type: Number
         }
     },
     computed: {},
     created() {
-        this.payTotal = this.Total;
+        this.payTotal = this.buyTotal;
         this.initOrder();
     },
     methods: {
-        changeNumber(num) {
-            this.payTotal = this.payTotal + num;
-            if (this.payTotal < 1) {
-                this.payTotal = 1;
-                return;
-            }
-            if (this.payTotal > 50) {
-                this.payTotal = 50;
-                return;
-            }
-            this.initOrder();
-        },
         changepay(type) {
             if (this.payTotal == type) return;
             this.currentCoupon = {};
@@ -135,8 +123,6 @@ export default {
         },
         couponChange(e) {
             if (e.id === this.currentCoupon.id) {
-                // 再次点击取消使用优惠券  // 暂时关闭此功能
-                // this.currentCoupon = {}
             } else {
                 this.currentCoupon = e;
                 this.initOrder();
@@ -144,10 +130,12 @@ export default {
         },
         initOrder(type) {
             uni.showLoading();
-            this.$http('/fudai/order/preview', 'POST', {
+            this.$http('/box-order/preview', 'POST', {
+                room_id: this.info.room.id,
+                sku_index: this.info.sku_index,
                 page_uuid: this.info.page_uuid,
-                total: type == undefined ? this.payTotal : type,
                 coupon_id: this.currentCoupon.id,
+                total: type == undefined ? this.payTotal : type,
                 ...this.form
             })
                 .then((res) => {
@@ -162,7 +150,7 @@ export default {
                         this.form.is_use_score = 0;
                     }
                 })
-                .catch((err) => {
+                .catch((e) => {
                     this.isInit = false;
                     this.cancel();
                 });
@@ -176,33 +164,27 @@ export default {
             this.initOrder();
         },
         cancel() {
-            this.$emit('close');
+            this.$emit('cancel');
         },
         createOrder() {
-            if (this.isSubmiting) {
-                return false;
-            }
-
             uni.showLoading({
                 title: '提交中',
                 icon: 'none'
             });
 
-            this.isSubmiting = true;
-            setTimeout(() => {
-                this.isSubmiting = false;
-            }, 1500);
-
-            this.$http('/fudai/order/confirm', 'POST', {
+            this.$http('/box-order/confirm', 'POST', {
+                room_id: this.info.room.id,
+                sku_index: this.info.sku_index,
                 page_uuid: this.info.page_uuid,
-                total: this.payTotal,
                 coupon_id: this.currentCoupon.id,
+                total: this.payTotal,
                 ...this.form
             }).then((res) => {
+                console.log('请求结题======>', res);
                 uni.hideLoading();
-
                 let info = res.data;
                 if (info.is_need_pay) {
+                    // 进行支付
                     payment.pay({
                         pay_config: info.pay_config,
                         success: () => {
@@ -226,14 +208,6 @@ export default {
             });
         },
         submit() {
-            if (!this.isCheckUserStatement) {
-                uni.showToast({
-                    title: '请先勾选《用户使用协议》',
-                    icon: 'none'
-                });
-                return false;
-            }
-
             // 微信小程序请求订阅消息
             // #ifdef MP-WEIXIN
             uni.requestSubscribeMessage({
@@ -249,6 +223,39 @@ export default {
             // #ifndef MP-WEIXIN
             this.createOrder();
             // #endif
+        },
+        createAgentPay() {
+            uni.showLoading({
+                title: '提交中',
+                icon: 'none'
+            });
+            this.$http('/box-order/confirm', 'POST', {
+                create_mode: 'agent_pay',
+                room_id: this.info.room.id,
+                sku_index: this.info.sku_index,
+                page_uuid: this.info.page_uuid,
+                coupon_id: this.currentCoupon.id,
+                total: this.payTotal,
+                ...this.form
+            }).then((res) => {
+                uni.hideLoading();
+                let agentRecordUuid = res.data.uuid;
+                uni.redirectTo({
+                    url: '/pages/agentPayRecord/detail?uuid=' + agentRecordUuid
+                });
+            });
+        },
+        submitForDaifu() {
+            uni.showModal({
+                title: '代付订单在生成后30分钟内可以转发给朋友帮你支付',
+                // content: '请先收集足够的碎片再来兑换哦~',
+                confirmText: '生成代付',
+                success: (res) => {
+                    if (res.confirm) {
+                        this.createAgentPay();
+                    }
+                }
+            });
         }
     },
     onPageScroll(e) {}
@@ -256,33 +263,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.small-text {
-    // font-size: 80%;
-}
-
 .mask-content {
     position: absolute;
-    bottom: 0;
+    bottom: 0rpx;
     width: 100%;
     background-color: #ededed;
     background-color: white;
     border-radius: 10rpx 10rpx 0 0;
-    padding: 50rpx 40rpx;
+    padding: 50rpx 30rpx 60rpx 30rpx;
     box-sizing: border-box;
-
-    .numberChange {
-        line-height: 80rpx;
-        height: 80rpx;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .button {
-            width: 50rpx;
-            height: 50rpx;
-            margin: 0;
-            line-height: 50rpx;
-        }
-    }
 
     .close-btn {
         position: absolute;
@@ -296,6 +285,13 @@ export default {
         font-weight: 500;
     }
 
+    .redpack-switch {
+        margin-left: 10rpx;
+        position: relative;
+        left: 10rpx;
+        transform: scale(0.8);
+    }
+
     .block {
         display: flex;
         align-items: center;
@@ -307,55 +303,25 @@ export default {
             font-weight: 500;
         }
 
-        .total-list-new {
-            flex-grow: 1;
+        .price-c {
+        }
+
+        .total-list {
             display: flex;
-            justify-content: space-between;
-            position: relative;
             .item {
-                text-align: center;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
                 font-weight: 500;
-                border-radius: 10rpx;
+                border-radius: 40rpx;
                 border: 2rpx solid #e1e1e1;
-                padding: 20rpx 0rpx;
-                flex: 0 0 30%;
-                width: 30%;
+                padding: 4rpx 20rpx;
+                margin-left: 20rpx;
                 font-size: 24rpx;
-                position: relative;
-
-                .discount-text {
-                    display: inline;
-                    color: red;
-                    border-radius: 50%;
-                    margin-left: 10rpx;
-                    right: 10rpx;
-                    top: -30rpx;
-                }
-
-                .total-text {
-                    font-size: 30rpx;
-                    font-weight: 500;
-                }
 
                 &.actived {
                     background: #6938b6;
-                    border: 2rpx solid #6938b6;
+                    border: 2rpx solid rgba(105, 56, 182, 1);
                     color: white;
-                    .discount-text {
-                        color: white;
-                    }
                 }
             }
-        }
-
-        .redpack-switch {
-            margin-left: 10rpx;
-            position: relative;
-            left: 10rpx;
-            transform: scale(0.8);
         }
     }
 
@@ -375,28 +341,39 @@ export default {
         margin-bottom: 50rpx;
     }
 
-    .button {
-        padding: 0;
-        margin: 50rpx auto 0rpx auto;
-        width: 100%;
-        border-radius: 50rpx;
-        height: 86rpx;
-        line-height: 86rpx;
-        text-align: center;
-        font-size: 30rpx;
-        font-weight: bold;
-        background-color: #6938b6;
-        color: white;
-        box-shadow: 0 0 20rpx rgba(105, 56, 182, 0.6);
+    .button-c {
+        display: flex;
 
-        &:after {
-            border: none;
-        }
+        .button {
+            padding: 0;
+            margin: 20rpx auto 0rpx auto;
+            width: 100%;
+            border-radius: 50rpx;
+            height: 86rpx;
+            line-height: 86rpx;
+            text-align: center;
+            font-size: 30rpx;
+            font-weight: bold;
+            background-color: #6938b6;
+            box-shadow: 0 0 20rpx rgba(105, 56, 182, 0.6);
+            color: #fff;
 
-        &.disabled {
-            background-color: #ddd;
-            color: black;
-            box-shadow: 0 0 20rpx #ddd;
+            &.daifu {
+                margin-right: 30rpx;
+                width: 300rpx;
+                font-size: 28rpx;
+                box-shadow: 0 0 0rpx rgba(105, 56, 182, 0.6);
+            }
+
+            &:after {
+                border: none;
+            }
+
+            &.disabled {
+                background-color: #ddd;
+                color: black;
+                box-shadow: 0 0 20rpx #ddd;
+            }
         }
     }
 }

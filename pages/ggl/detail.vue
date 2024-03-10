@@ -59,7 +59,7 @@
                 <br />
                 <text style="font-size: 26rpx">已选{{ checkItemNum.length }}个</text>
             </view>
-            <view class="right" @tap="pay(checkMoney)">立即购买</view>
+            <view class="right" @tap="buyNow">立即购买</view>
         </view>
         <view class="ruleboxbg" @tap="ruleshow = false" v-if="ruleshow">
             <view class="rulebox" @tap.stop>
@@ -73,7 +73,8 @@
             </view>
         </view>
         <SharePopup v-if="isSharePopup" @close="isSharePopup = false" :info="posterInfo"></SharePopup>
-        <PayCard :info="payInfo" :Total="checkMoney" @close="hidePayPopup" @success="paySuccess" v-if="isPayPopup"></PayCard>
+        <PayCard :buyTotal="checkItemNum.length" v-if="isShowPayCard" :info="payCardInfo" @success="paySuccess" @cancel="isShowPayCard = false"></PayCard>
+        <OpenBoxPopup v-if="isOpenPopup" :order="order" @close="goBack"></OpenBoxPopup>
     </view>
 </template>
 
@@ -95,17 +96,13 @@ export default {
             return this.$store.getters.deviceInfo.customBar;
         },
         posterInfo() {
-            let globalShareConfig = this.getShareConfig(false);
-            if (globalShareConfig.path) {
-                return {
-                    money_price: this.info.money_price,
-                    score_price: this.info.score_price,
-                    title: this.info.title,
-                    path: globalShareConfig.path,
-                    app_url: globalShareConfig.app_url,
-                    thumb: this.info.thumb
-                };
-            }
+            return {
+                money_price: this.boxInfo.money_price,
+                score_price: this.boxInfo.score_price,
+                title: this.boxInfo.title,
+                path: this.getShareConfig().path,
+                thumb: this.boxInfo.thumb
+            };
         },
         checkItemNum() {
             return this.rankList.filter((item) => item.isCheck);
@@ -114,13 +111,12 @@ export default {
             const res = this.checkItemNum.length * this.price;
             return res;
         },
-        payInfo() {
+        payCardInfo() {
             return {
-                page_uuid: this.pageUuid,
-                title: this.info.title,
-                total_list: this.info.total_list,
-                money_price: this.info.money_price,
-                score_price: this.info.score_price
+                box: this.boxInfo,
+                room: this.roomInfo,
+                sku_index: this.skuIndex,
+                page_uuid: this.pageUuid
             };
         }
     },
@@ -150,9 +146,14 @@ export default {
                 { key: 'a20', isSell: false, isCheck: false }
             ],
             ordernotice: '我是公告',
+            order: {}, // 创建成功的订单
+            roomUuid: '658cdde3d9f16', //TODO 临时测试用
+            skuIndex: '8', //TODO 临时测试用
+            boxInfo: {},
             isSharePopup: false,
             ruleshow: false,
-            isPayPopup: false,
+            isShowPayCard: false,
+            isOpenPopup: false,
             uuid: '',
             info: {
                 setting: {
@@ -181,35 +182,39 @@ export default {
     },
     onLoad(e) {
         this.uuid = e.uuid;
+        this.initRoom();
     },
     methods: {
-        pay(type) {
-            this.isPayPopup = true;
-            this.paytotal = type;
+        initRoom() {
+            return this.$http(`/rooms/${this.roomUuid}/skus/${this.skuIndex}`).then((res) => {
+                this.boxInfo = res.data.box;
+                this.roomInfo = res.data.room;
+                this.skuList = res.data.sku_list;
+                this.pageUuid = res.data.page_uuid;
+            });
         },
         paySuccess(order) {
+            this.isShowPayCard = false;
+            uni.showToast({
+                title: '支付成功, 开盒中',
+                icon: 'none'
+            });
             this.order = order;
-            this.isPayPopup = false;
-            this.isShowResultPopup = true;
-            // 购买成功
-
-            this.refresh();
-        },
-        hidePayPopup() {
-            this.isPayPopup = false;
-        },
-        initData() {
-            // return this.$http(`/fudais/${this.uuid}`, 'GET', {}).then((res) => {
-            //     this.info = res.data.info;
-            //     this.config = res.data.config;
-            //     // this.getDanmu()
-            // });
+            this.isOpenPopup = true;
         },
         handlerClick(item, index) {
             if (item.isSell) {
                 return;
             }
             this.rankList[index].isCheck = !item.isCheck;
+        },
+        goBack() {
+            uni.navigateBack({
+                delta: 1
+            });
+        },
+        buyNow() {
+            this.isShowPayCard = true;
         }
     }
 };
