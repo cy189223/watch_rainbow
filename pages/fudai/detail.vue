@@ -620,7 +620,6 @@ export default {
         position: sticky;
         top: -1rpx;
         z-index: 999;
-        background-color: #000000;
         .headerToolItem {
             background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/wTagItemBg.png');
             width: 170rpx;

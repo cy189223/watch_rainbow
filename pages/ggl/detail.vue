@@ -50,6 +50,50 @@
                     {{ index + 1 }}
                 </view>
             </view>
+            <view class="l4">
+                <view class="body animated" :class="{ bounceOutRight: startMoving, bounceInLeft: !startMoving }">
+                    <view class="sku-list">
+                        <view class="skutitlebox">
+                            <image src="../../static/skutitle.png" mode="" class="skubg"></image>
+                            <image src="../../static/spyl.png" mode="" class="skuspyl skuimg" @tap="changetype(1)"></image>
+                            <image src="../../static/csjl.png" mode="" class="skucsjl skuimg" @tap="changetype(2)"></image>
+                            <image src="../../static/spyla.png" mode="" class="skuspyla skuimga" v-if="skutype == 1"></image>
+                            <image src="../../static/csjla.png" mode="" class="skucsjla skuimga" v-else-if="skutype == 2"></image>
+                        </view>
+
+                        <view class="item" v-for="(item, index) in skuList" :key="item.id" @tap="showSkuPopup" v-if="isShow && skutype == 1">
+                            <view class="thumb">
+                                <view class="sell-out-c" v-if="!item.stock">
+                                    <image mode="widthFix" class="sell-out" src="@/static/empty-stock-2.png"></image>
+                                </view>
+                                <image mode="aspectFill" :src="item.thumb + '?x-oss-process=image/resize,w_300'"></image>
+                                <view class="total">{{ item.stock }}/{{ item.total }}</view>
+                                <view class="shang-title" :class="{ gift: item.shang_type === 1 }">{{ item.shang_title }}</view>
+                            </view>
+                            <view class="title">{{ item.title }}</view>
+                            <view class="bottomflex">
+                                <view class="display-price" style="border-right: 1px solid #ccc">
+                                    <view class="value">
+                                        <text style="font-weight: bold" v-if="item.display_money_price">￥{{ item.display_money_price / 100 }}</text>
+                                        <PriceDisplay :info="boxInfo" v-else></PriceDisplay>
+                                    </view>
+                                    <view class="key">零售价</view>
+                                </view>
+                                <view class="display-price">
+                                    <template v-if="item.shang_type === 1">
+                                        <text class="value">只赠不售</text>
+                                    </template>
+                                    <template v-else>
+                                        <text class="value">{{ item.odds }}%</text>
+                                        <text clas="key">概率</text>
+                                    </template>
+                                </view>
+                            </view>
+                        </view>
+                        <RecordList ref="record" v-if="skutype == 2" :info="boxInfo" :room="boxInfo.room" style="width: 100%"></RecordList>
+                    </view>
+                </view>
+            </view>
         </view>
 
         <view class="bottomPay">
@@ -83,12 +127,14 @@ import Navbar from '@/components/Navbar/index.vue';
 import FBanner from './components/fBanner.vue';
 import NoticeBar from '@/components/NoticeBar/index.vue';
 import PayCard from './components/PayCard.vue';
+import RecordList from './components/RecordList.vue';
 
 export default {
     components: {
         Navbar,
         NoticeBar,
         PayCard,
+        RecordList,
         FBanner
     },
     computed: {
@@ -154,7 +200,11 @@ export default {
             ruleshow: false,
             isShowPayCard: false,
             isOpenPopup: false,
-            uuid: '',
+            isShow: false,
+            skuList: [],
+            roomInfo: {},
+            skutype: 1,
+            pageUuid: '',
             info: {
                 setting: {
                     html: '我是游戏规则'
@@ -181,7 +231,6 @@ export default {
         this.initData();
     },
     onLoad(e) {
-        this.uuid = e.uuid;
         this.initRoom();
     },
     methods: {
@@ -191,6 +240,7 @@ export default {
                 this.roomInfo = res.data.room;
                 this.skuList = res.data.sku_list;
                 this.pageUuid = res.data.page_uuid;
+                this.isShow = true;
             });
         },
         paySuccess(order) {
@@ -215,6 +265,9 @@ export default {
         },
         buyNow() {
             this.isShowPayCard = true;
+        },
+        changetype(type) {
+            this.skutype = type;
         }
     }
 };
@@ -228,7 +281,7 @@ export default {
     background-position: top;
     background-size: 100%;
     min-height: calc(100vh - 1rpx);
-    padding: 0 30rpx;
+    padding: 0 30rpx 140rpx 30rpx;
     color: #fff;
 
     .headerBox {
@@ -400,6 +453,176 @@ export default {
                 background-size: 100% 100%;
                 right: 4rpx;
                 bottom: 4rpx;
+            }
+        }
+        .l4 {
+            .sku-list {
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: flex-start;
+                margin: 70rpx 15rpx 30rpx;
+                padding: 65rpx 35rpx;
+                background-image: url('https://api.caihongbox.com.cn/image/listbg.png');
+                background-size: 100% 100%;
+                .skutitlebox {
+                    position: absolute;
+                    height: 95rpx;
+                    top: -45rpx;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    z-index: 111;
+
+                    .skubg {
+                        width: 520rpx;
+                        height: 95rpx;
+                    }
+
+                    .skuimg {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: 145rpx;
+                        height: 30rpx;
+                    }
+
+                    .skuimga {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: 300rpx;
+                        height: 85rpx;
+                    }
+
+                    .skuspyl {
+                        left: 60rpx;
+                    }
+
+                    .skuspyla {
+                        left: 5rpx;
+                    }
+
+                    .skucsjl {
+                        right: 60rpx;
+                    }
+
+                    .skucsjla {
+                        right: 5rpx;
+                    }
+                }
+                .item {
+                    margin: 5rpx 4rpx;
+                    padding: 30rpx;
+                    width: calc(100% / 3 - 4rpx - 4rpx);
+                    box-sizing: border-box;
+                    border-radius: 25rpx;
+                    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/boxItemBg.png');
+                    color: #fff;
+                    background-size: 100% 100%;
+
+                    .thumb {
+                        position: relative;
+                        overflow: hidden;
+                        background: rgba(0, 0, 0, 0.5);
+                        border-radius: 20rpx;
+                        position: relative;
+
+                        image {
+                            width: 100%;
+                            aspect-ratio: 1;
+                            height: auto;
+                            display: block;
+                        }
+
+                        .sell-out-c {
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            background: rgba(0, 0, 0, 0.5);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            .sell-out {
+                                width: 90rpx;
+                                height: 90rpx;
+                            }
+                        }
+
+                        .total {
+                            background: rgba(0, 0, 0, 0.5);
+                            border-radius: 6rpx;
+                            padding: 2rpx 10rpx;
+                            color: white;
+                            position: absolute;
+                            bottom: 10rpx;
+                            right: 10rpx;
+                            z-index: 100;
+                            font-size: 20rpx;
+                            font-weight: bold;
+                        }
+
+                        .shang-title {
+                            background-image: linear-gradient(to bottom, #4fb4fc, #68f1fb);
+                            border-radius: 0 0 10rpx 0;
+                            color: white;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            z-index: 100;
+                            padding: 0 15rpx;
+                            line-height: 40rpx;
+                            text-align: center;
+                            font-size: 24rpx;
+                            font-weight: bold;
+
+                            &.gift {
+                                background: #f15858;
+                            }
+                        }
+                    }
+
+                    .title {
+                        font-size: 24rpx;
+                        // font-family: PingFang;
+                        // color: #000000;
+                        text-align: center;
+                        margin: 5rpx;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                    }
+
+                    .bottomflex {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        border-top: 1px dashed #ccc;
+                        padding-top: 5rpx;
+
+                        .display-price {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            width: 50%;
+                            height: 60rpx;
+                            font-size: 22rpx;
+                            text-align: center;
+
+                            .value {
+                                font-weight: normal;
+                                color: red;
+                            }
+
+                            .key {
+                                // color: #999;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
