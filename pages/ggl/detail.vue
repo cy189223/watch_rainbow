@@ -27,7 +27,7 @@
                     <view style="font-size: 28rpx; margin-right: 20rpx">指定选择</view>
 
                     可选
-                    <view class="block" style="background: #f86567"></view>
+                    <view class="block" style="background: linear-gradient(60deg, #7e30ee 0%, #ea25e7 100%)"></view>
                     已售 &nbsp; &nbsp;
                     <view class="block" style="background: #f2f2f2"></view>
                 </view>
@@ -38,7 +38,7 @@
                 已开启排队机制
             </view>
             <view class="l3">
-                <BlockFactor :num="100"></BlockFactor>
+                <BlockFactor></BlockFactor>
             </view>
         </view>
 
