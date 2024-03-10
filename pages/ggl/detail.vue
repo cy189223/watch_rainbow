@@ -31,17 +31,36 @@
                     已售 &nbsp; &nbsp;
                     <view class="block" style="background: #f2f2f2"></view>
                 </view>
-                <view class="l1_2">剩余 98/100</view>
+                <view class="l1_2">剩余 {{ rankList.length - rankList.filter((item) => item.isSell).length }}/{{ rankList.length }}</view>
             </view>
             <view class="l2">
                 <image class="dun" src="https://watch-box.oss-cn-beijing.aliyuncs.com/dunpai.png"></image>
                 已开启排队机制
             </view>
             <view class="l3">
-                <BlockFactor></BlockFactor>
+                <view
+                    class="bl"
+                    :class="{
+                        selled: item.isSell,
+                        isCheck: item.isCheck
+                    }"
+                    @click="handlerClick(item, index)"
+                    v-for="(item, index) in rankList"
+                >
+                    {{ index + 1 }}
+                </view>
             </view>
         </view>
 
+        <view class="bottomPay">
+            <view class="left">
+                <text style="font-size: 32rpx">共：{{ checkMoney }}</text>
+
+                <br />
+                <text style="font-size: 26rpx">已选择{{ checkItemNum.length }}</text>
+            </view>
+            <view class="right">立即购买</view>
+        </view>
         <view class="ruleboxbg" @tap="ruleshow = false" v-if="ruleshow">
             <view class="rulebox" @tap.stop>
                 <view class="rulemainbtn">
@@ -61,13 +80,11 @@
 import Navbar from '@/components/Navbar/index.vue';
 import FBanner from './components/fBanner.vue';
 import NoticeBar from '@/components/NoticeBar/index.vue';
-import BlockFactor from './components/blockFactor.vue';
 
 export default {
     components: {
         Navbar,
         NoticeBar,
-        BlockFactor,
         FBanner
     },
     computed: {
@@ -86,10 +103,40 @@ export default {
                     thumb: this.info.thumb
                 };
             }
+        },
+        checkItemNum() {
+            return this.rankList.filter((item) => item.isCheck);
+        },
+        checkMoney() {
+            const res = this.checkItemNum.length * this.price;
+            return res;
         }
     },
     data() {
         return {
+            price: 100,
+            rankList: [
+                { key: 'a1', isSell: true, isCheck: false },
+                { key: 'a2', isSell: false, isCheck: true },
+                { key: 'a3', isSell: false, isCheck: false },
+                { key: 'a4', isSell: false, isCheck: false },
+                { key: 'a5', isSell: false, isCheck: false },
+                { key: 'a6', isSell: false, isCheck: false },
+                { key: 'a7', isSell: true, isCheck: false },
+                { key: 'a8', isSell: false, isCheck: false },
+                { key: 'a9', isSell: false, isCheck: false },
+                { key: 'a10', isSell: false, isCheck: false },
+                { key: 'a11', isSell: false, isCheck: false },
+                { key: 'a12', isSell: false, isCheck: false },
+                { key: 'a13', isSell: false, isCheck: false },
+                { key: 'a14', isSell: false, isCheck: false },
+                { key: 'a15', isSell: false, isCheck: false },
+                { key: 'a16', isSell: false, isCheck: false },
+                { key: 'a17', isSell: false, isCheck: false },
+                { key: 'a18', isSell: false, isCheck: false },
+                { key: 'a19', isSell: false, isCheck: false },
+                { key: 'a20', isSell: false, isCheck: false }
+            ],
             ordernotice: '我是公告',
             isSharePopup: false,
             ruleshow: false,
@@ -114,7 +161,14 @@ export default {
             ]
         };
     },
-    methods: {}
+    methods: {
+        handlerClick(item, index) {
+            if (item.isSell) {
+                return;
+            }
+            this.rankList[index].isCheck = !item.isCheck;
+        }
+    }
 };
 </script>
 
@@ -256,6 +310,71 @@ export default {
                 width: 40rpx;
                 height: 40rpx;
             }
+        }
+        .l3 {
+            margin-top: 20rpx;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 70rpx);
+            grid-row-gap: 19rpx;
+            grid-column-gap: 19rpx;
+            .bl {
+                height: 70rpx;
+                background: linear-gradient(60deg, #7e30ee 0%, #ea25e7 100%);
+                text-align: left;
+                padding-left: 6rpx;
+                border-radius: 10rpx;
+                font-size: 26rpx;
+                color: #fff;
+                position: relative;
+            }
+            .selled {
+                background: #f2f2f2;
+                color: #c4c4c4;
+            }
+
+            .selled::before {
+                content: '';
+                position: absolute;
+                width: 50rpx;
+                height: 50rpx;
+                background-image: url(https://watch-box.oss-cn-beijing.aliyuncs.com/%E5%B7%B2%E5%94%AE1.png);
+                background-size: 100% 100%;
+                right: 0px;
+                bottom: 0;
+            }
+
+            .isCheck::before {
+                content: '';
+                position: absolute;
+                width: 30rpx;
+                height: 30rpx;
+                background-image: url(https://watch-box.oss-cn-beijing.aliyuncs.com/%E9%80%89%E4%B8%AD.png);
+                background-size: 100% 100%;
+                right: 4rpx;
+                bottom: 4rpx;
+            }
+        }
+    }
+
+    .bottomPay {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 140rpx;
+        background-color: #161616;
+        left: 0;
+        padding: 0 40rpx;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .right {
+            width: 200rpx;
+            height: 70rpx;
+            background-color: red;
+            border-radius: 20rpx;
+            text-align: center;
+            line-height: 70rpx;
         }
     }
 
