@@ -57,9 +57,9 @@
                 <text style="font-size: 32rpx">共：{{ checkMoney }}</text>
 
                 <br />
-                <text style="font-size: 26rpx">已选择{{ checkItemNum.length }}</text>
+                <text style="font-size: 26rpx">已选{{ checkItemNum.length }}个</text>
             </view>
-            <view class="right">立即购买</view>
+            <view class="right" @tap="pay(checkMoney)">立即购买</view>
         </view>
         <view class="ruleboxbg" @tap="ruleshow = false" v-if="ruleshow">
             <view class="rulebox" @tap.stop>
@@ -73,6 +73,7 @@
             </view>
         </view>
         <SharePopup v-if="isSharePopup" @close="isSharePopup = false" :info="posterInfo"></SharePopup>
+        <PayCard :info="payInfo" :Total="checkMoney" @close="hidePayPopup" @success="paySuccess" v-if="isPayPopup"></PayCard>
     </view>
 </template>
 
@@ -80,11 +81,13 @@
 import Navbar from '@/components/Navbar/index.vue';
 import FBanner from './components/fBanner.vue';
 import NoticeBar from '@/components/NoticeBar/index.vue';
+import PayCard from './components/PayCard.vue';
 
 export default {
     components: {
         Navbar,
         NoticeBar,
+        PayCard,
         FBanner
     },
     computed: {
@@ -110,6 +113,15 @@ export default {
         checkMoney() {
             const res = this.checkItemNum.length * this.price;
             return res;
+        },
+        payInfo() {
+            return {
+                page_uuid: this.pageUuid,
+                title: this.info.title,
+                total_list: this.info.total_list,
+                money_price: this.info.money_price,
+                score_price: this.info.score_price
+            };
         }
     },
     data() {
@@ -140,6 +152,8 @@ export default {
             ordernotice: '我是公告',
             isSharePopup: false,
             ruleshow: false,
+            isPayPopup: false,
+            uuid: '',
             info: {
                 setting: {
                     html: '我是游戏规则'
@@ -161,7 +175,36 @@ export default {
             ]
         };
     },
+    onPullDownRefresh() {
+        this.$showPullRefresh();
+        this.initData();
+    },
+    onLoad(e) {
+        this.uuid = e.uuid;
+    },
     methods: {
+        pay(type) {
+            this.isPayPopup = true;
+            this.paytotal = type;
+        },
+        paySuccess(order) {
+            this.order = order;
+            this.isPayPopup = false;
+            this.isShowResultPopup = true;
+            // 购买成功
+
+            this.refresh();
+        },
+        hidePayPopup() {
+            this.isPayPopup = false;
+        },
+        initData() {
+            // return this.$http(`/fudais/${this.uuid}`, 'GET', {}).then((res) => {
+            //     this.info = res.data.info;
+            //     this.config = res.data.config;
+            //     // this.getDanmu()
+            // });
+        },
         handlerClick(item, index) {
             if (item.isSell) {
                 return;
