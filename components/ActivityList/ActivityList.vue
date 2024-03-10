@@ -149,8 +149,8 @@ export default {
             } else if (item.activity_type === 'rotate_lottery') {
                 url = `/packageA/rotateLottery/detail?uuid=${item.uuid}`;
             } else if (item.activity_type === 'box') {
-                // url = `/pages/boxDetail/index?uuid=${item.uuid}`;
-                url = `/pages/ggl/detail?uuid=${item.uuid}`; //TODO 这里暂时先这样处理 后期等ggl有数据 在将这里改回 /boxes/
+                url = `/pages/boxDetail/index?uuid=${item.uuid}`;
+                // url = `/pages/ggl/detail?uuid=${item.uuid}`; //TODO 这里暂时先这样处理 后期等ggl有数据 在将这里改回 /boxes/
             } else if (item.activity_type === 'ggl') {
                 url = `/pages/ggl/detail?uuid=${item.uuid}`;
             }
