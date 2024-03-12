@@ -95,7 +95,7 @@
                 </view>
             </view>
         </view>
-
+        <BottomRankPanel :isWait="isWait" @changeWaitStatus="(status) => (isWait = status)"></BottomRankPanel>
         <view class="bottomPay">
             <view class="left">
                 <text style="font-size: 32rpx">共：{{ checkMoney }}</text>
@@ -128,6 +128,7 @@ import FBanner from './components/fBanner.vue';
 import NoticeBar from '@/components/NoticeBar/index.vue';
 import PayCard from './components/PayCard.vue';
 import RecordList from './components/RecordList.vue';
+import BottomRankPanel from '@/components/BottomRankPanel/index.vue';
 
 export default {
     components: {
@@ -135,6 +136,7 @@ export default {
         NoticeBar,
         PayCard,
         RecordList,
+        BottomRankPanel,
         FBanner
     },
     computed: {
@@ -205,6 +207,7 @@ export default {
             roomInfo: {},
             skutype: 1,
             pageUuid: '',
+            isWait: true,
             info: {
                 setting: {
                     html: '我是游戏规则'
@@ -281,7 +284,7 @@ export default {
     background-position: top;
     background-size: 100%;
     min-height: calc(100vh - 1rpx);
-    padding: 0 30rpx 140rpx 30rpx;
+    padding: 0 30rpx 250rpx 30rpx;
     color: #fff;
 
     .headerBox {
@@ -416,8 +419,9 @@ export default {
             margin-top: 20rpx;
             display: grid;
             grid-template-columns: repeat(auto-fill, 70rpx);
-            grid-row-gap: 19rpx;
-            grid-column-gap: 19rpx;
+            grid-row-gap: 15rpx;
+            grid-column-gap: 15rpx;
+            padding: 0 15rpx;
             .bl {
                 height: 70rpx;
                 background: linear-gradient(60deg, #7e30ee 0%, #ea25e7 100%);
