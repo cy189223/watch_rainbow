@@ -196,7 +196,7 @@ export default {
             ordernotice: '我是公告',
             order: {}, // 创建成功的订单
             roomUuid: '658cdde3d9f16', //TODO 临时测试用
-            skuIndex: '8', //TODO 临时测试用
+            skuIndex: '9', //TODO 临时测试用
             boxInfo: {},
             isSharePopup: false,
             ruleshow: false,

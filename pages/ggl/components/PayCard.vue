@@ -15,12 +15,13 @@
             <view class="block">
                 <view class="item-title">数量:</view>
                 <view class="total-list">
-                    <view class="item" :class="{ actived: payTotal === 1 }" @tap="changepay(1)">开1个</view>
+                    <view class="item actived">{{ payTotal }}个</view>
+                    <!-- <view class="item" :class="{ actived: payTotal === 1 }" @tap="changepay(1)">开1个</view>
 
                     <view class="item" :class="{ actived: payTotal === 0 }" @tap="changepay(0)" v-if="info.box.sku_ratio_type === 1">整盒端({{ info.box.sku_total }}个)</view>
                     <view class="item" :class="{ actived: payTotal === 5 }" @tap="changepay(5)" v-else>连开5个</view>
 
-                    <view class="item" :class="{ actived: payTotal === 20 }" @tap="changepay(20)">连开20个</view>
+                    <view class="item" :class="{ actived: payTotal === 20 }" @tap="changepay(20)">连开20个</view> -->
                 </view>
                 <!-- <view class="">x1</view> -->
             </view>
@@ -264,6 +265,7 @@ export default {
 
 <style lang="scss" scoped>
 .mask-content {
+    color: #333;
     position: absolute;
     bottom: 0rpx;
     width: 100%;
