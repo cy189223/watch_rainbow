@@ -1,13 +1,28 @@
 <template>
     <view class="pagebox">
-        <Navbar title="打拳"></Navbar>
+        <view :style="'height:' + customBar + 'px;'"></view>
+        <Navbar :title="pkdata.activity.title"></Navbar>
+        <view class="headerBox">
+            <view class="bg1"></view>
+            <view class="banner">
+                <FBanner :list="pkssku.list"></FBanner>
+            </view>
+            <view class="ruleInfo" @tap="ruleshow = true">
+                <text class="new-icon icon-express-package"></text>
+                玩法说明
+            </view>
+            <!-- <view class="sharebtn" @tap="isSharePopup = true">
+                <text class="new-icon icon-fenxiang"></text>
+                <view>分享</view>
+            </view> -->
+        </view>
         <view v-if="wintype == ''" class="refreshbox" @tap="refreshRoom">刷新</view>
-        <view class="rulebtn" @tap="ruleshow = true">规则</view>
+        <!-- <view class="rulebtn" @tap="ruleshow = true">规则</view> -->
         <!-- <view class="liushuibtn" @tap="showliushuipopup()" v-if="liushuilist.list && liushuilist.list.length">流水奖励</view> -->
-        <image v-if="ispk" src="https://api.caihongbox.com.cn/image/pkheader.png" mode="widthFix" class="headerimg"></image>
+        <!-- <image v-if="ispk" src="https://api.caihongbox.com.cn/image/pkheader.png" mode="widthFix" class="headerimg"></image>
         <image v-else src="https://api.caihongbox.com.cn/image/qjheader.png" mode="widthFix" class="headerimg"></image>
         <image v-if="ispk" src="https://api.caihongbox.com.cn/image/abpk.png" mode="scaleToFill" class="pkimg"></image>
-        <view v-if="ispk" class="pktext">AB阵营获胜概率各50%</view>
+        <view v-if="ispk" class="pktext">AB阵营获胜概率各50%</view> -->
         <view class="sku-list">
             <view class="title-c">
                 <view class="stock-c" v-if="pkdata.room_index">第{{ pkdata.room_index }}箱奖品池</view>
@@ -169,9 +184,14 @@
 <script>
 import PayCard from './components/PayCard.vue';
 import RoomPopup from './components/RoomPopup.vue';
+import Navbar from '@/components/Navbar/index.vue';
+import FBanner from './components/fBanner.vue';
+
 export default {
     components: {
-        PayCard
+        PayCard,
+        Navbar,
+        FBanner
     },
     data() {
         return {
@@ -197,7 +217,21 @@ export default {
             payjoin_type: '',
             payseat_uuid: '',
             ispk: false,
-            pktype: ''
+            pktype: '',
+            bannerList: [
+                {
+                    thumb: 'https://watchrainbow.oss-cn-beijing.aliyuncs.com/box/img/other/OdzjbTIVwwwmxouf1AKgOriDBECmPWZwUo2OmwfG.jpg',
+                    link: 'www.baidu.com',
+                    title: '我是标题',
+                    front_odds: '0.1'
+                },
+                {
+                    thumb: 'https://watchrainbow.oss-cn-beijing.aliyuncs.com/box/img/other/oBopLzJcsjvPlktedSysexQxBbzHyqCtpHRwaeoB.jpg',
+                    link: 'www.baidu.com',
+                    title: '我是标题2',
+                    front_odds: '0.2'
+                }
+            ]
         };
     },
     onShow() {},
@@ -221,6 +255,9 @@ export default {
                     path: '/pages/pkindex/pkindex?id=' + this.pkid + '&type=' + this.pktype
                 };
             }
+        },
+        customBar() {
+            return this.$store.getters.deviceInfo.customBar;
         }
     },
     methods: {
@@ -386,6 +423,95 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.headerBox {
+    height: 400rpx;
+    width: 100%;
+    background: url('https://watch-box.oss-cn-beijing.aliyuncs.com/bg_unlimited_swiper_new.png') center;
+    background-size: 96% 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    position: relative;
+
+    .bg1 {
+        width: 200rpx;
+        height: 200rpx;
+        background: url('https://watch-box.oss-cn-beijing.aliyuncs.com/%E7%BB%84%20221.png') center;
+        background-size: 96% 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        bottom: -17px;
+        left: 50%;
+        margin-left: -100rpx;
+        -webkit-animation-name: scaleDraw; /*关键帧名称*/
+        -webkit-animation-timing-function: ease-in-out; /*动画的速度曲线*/
+        -webkit-animation-iteration-count: infinite; /*动画播放的次数*/
+        -webkit-animation-duration: 5s; /*动画所花费的时间*/
+    }
+
+    @keyframes scaleDraw {
+        /*定义关键帧、scaleDrew是需要绑定到选择器的关键帧名称*/
+        0% {
+            transform: scale(1); /*开始为原始大小*/
+        }
+        25% {
+            transform: scale(1.1); /*放大1.1倍*/
+        }
+        50% {
+            transform: scale(1);
+        }
+        75% {
+            transform: scale(1.1);
+        }
+    }
+
+    .banner {
+        width: 100%;
+        height: 340rpx;
+        margin: 0 auto;
+        padding-top: 16rpx;
+        position: absolute;
+        top: 30rpx;
+    }
+
+    .ruleInfo {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 0rpx;
+        left: 20rpx;
+        color: #fff;
+        font-size: 24rpx;
+        line-height: 38rpx;
+        background-image: linear-gradient(120deg, #7e30ee 0%, #ea25e7 100%);
+        padding: 0 20rpx 3rpx 20rpx;
+        border-radius: 10rpx;
+        .new-icon {
+            font-size: 24rpx;
+            color: #ceffff;
+            margin-right: 3px;
+        }
+    }
+
+    .sharebtn {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 0rpx;
+        right: 20rpx;
+        color: #fff;
+        font-size: 24rpx;
+        line-height: 38rpx;
+        background-image: linear-gradient(120deg, #7e30ee 0%, #ea25e7 100%);
+        padding: 0 20rpx 3rpx 20rpx;
+        border-radius: 10rpx;
+        .new-icon {
+            font-size: 24rpx;
+            color: #ceffff;
+            margin-right: 3px;
+        }
+    }
+}
+
 .rulebtn {
     position: fixed;
     right: 0rpx;
@@ -403,7 +529,7 @@ export default {
 
 .refreshbox {
     position: fixed;
-    top: 600rpx;
+    top: 800rpx;
     right: 10px;
     width: 45px;
     height: 20px;
@@ -417,8 +543,14 @@ export default {
 }
 
 .pagebox {
+    box-sizing: border-box;
+    background-color: #000000;
+    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/65dea2a339eab7782bf47e83.gif');
+    background-position: top;
+    background-size: 100%;
+    min-height: calc(100vh - 1rpx);
+    color: #fff;
     padding-bottom: 40rpx;
-    background-image: linear-gradient(to bottom, #0d093c, #1a0641);
 }
 
 .headerimg {
@@ -608,7 +740,8 @@ export default {
         width: calc(100% / 3 - 4rpx - 4rpx);
         box-sizing: border-box;
         border-radius: 25rpx;
-        background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/boxItemBg.png');
+        // background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/boxItemBg.png');
+        background: #fff;
 
         .thumb {
             position: relative;
@@ -638,7 +771,7 @@ export default {
         }
 
         .moneytext {
-            font-size: 24rpx;
+            font-size: 20rpx;
             color: #000000;
             font-family: PingFang;
             margin: 5rpx;
@@ -651,6 +784,7 @@ export default {
             border-top: 1px dashed #ccc;
             margin: 0 -2rpx;
             padding-top: 5rpx;
+            color: #000000;
 
             .display-price {
                 display: flex;
