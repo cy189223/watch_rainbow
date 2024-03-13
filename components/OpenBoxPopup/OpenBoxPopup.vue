@@ -13,7 +13,34 @@
             <image src="https://api.caihongbox.com.cn/image/getimg.png" mode="aspectFit" class="titleimg"></image>
 
             <scroll-view class="scroll-view-212" scroll-y>
-                <view class="sku-list">
+                <view class="sku-list" v-if="skus.length > 1">
+                    <view class="item" @tap="checkSku(item)" :class="'item-' + skus.length" v-for="(item, index) in skus" :key="item.uuid">
+                        <view
+                            class="card"
+                            :class="{
+                                active: skusActiveStatus[index].isActive
+                            }"
+                        >
+                            <view class="card-face card-front"></view>
+                            <view class="card-face card-back">
+                                <view class="thumb-c">
+                                    <view class="lockIcons" v-show="isShowLockIcon(item) && !isReturnSaleSuccess">
+                                        <image
+                                            class="_lockIcon"
+                                            v-show="item.isLock"
+                                            :src="`https://watch-box.oss-cn-beijing.aliyuncs.com/${item.isLock ? 'lock2' : 'unlock2'}.png`"
+                                        ></image>
+                                    </view>
+                                    <image class="thumb" :src="item.thumb" mode="aspectFit"></image>
+                                    <view class="_mTitle" :class="item.options.shang_title ? 'shang-title' : 'title'">{{ item.title }}</view>
+                                    <view class="total">×{{ item.total }}</view>
+                                    <view class="title" :class="{ gift: item.options.shang_type === 1 }" v-if="item.options.shang_title">{{ item.options.shang_title }}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="sku-list" v-else-if="skus.length == 1">
                     <view class="item" @tap="checkSku(item)" :class="'item-' + skus.length" v-for="(item, index) in skus" :key="item.uuid">
                         <view class="thumb-c">
                             <view class="lockIcons" v-show="isShowLockIcon(item) && !isReturnSaleSuccess">
@@ -84,7 +111,10 @@ export default {
             isShowReturnSale: false,
             isReturnSaleSuccess: false,
             package: {},
-            isNotOpen: false // 未开启
+            isNotOpen: false, // 未开启
+            skusActiveStatus: [],
+            mIndex: -1,
+            mInterval: null
         };
     },
     mounted() {
@@ -92,7 +122,6 @@ export default {
     },
     computed: {
         skus() {
-            console.log(this.package.skus);
             return this.package.skus || [];
         },
         orderConfig() {
@@ -106,6 +135,16 @@ export default {
         }
     },
     methods: {
+        playCard() {
+            this.mInterval = setInterval(() => {
+                this.mIndex++;
+                if (this.skusActiveStatus[this.mIndex]) {
+                    this.skusActiveStatus[this.mIndex].isActive = true;
+                } else {
+                    clearInterval(this.mInterval);
+                }
+            }, 500);
+        },
         sendCloud() {
             const checkItem = this.skus.filter((item) => !item.isLock);
             if (checkItem.length == 0) {
@@ -155,8 +194,10 @@ export default {
                         item.isLock = false;
                     });
                     this.package = res.data;
+                    this.skusActiveStatus = this.package.skus.map((item) => ({ isActive: false }));
                     this.$playAudio('open');
                     this.showResult = true;
+                    this.playCard();
                 });
             } else {
                 this.$http(`/asset/package?order_id=${this.order.id}`)
@@ -165,8 +206,10 @@ export default {
                             item.isLock = false;
                         });
                         this.package = res.data;
+                        this.skusActiveStatus = this.package.skus.map((item) => ({ isActive: false }));
                         this.$playAudio('open');
                         this.showResult = true;
+                        this.playCard();
                     })
                     .catch((err) => {
                         // 未开启
@@ -347,12 +390,47 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding-top: 300rpx;
 
     .item {
         width: 210rpx;
         height: 260rpx;
         margin: 30rpx 10rpx 0;
         position: relative;
+        perspective: 600px;
+
+        .card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+        }
+        .card.active {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            line-height: 260px;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            font-size: 40px;
+            backface-visibility: hidden;
+        }
+        .card-face.card-front {
+            width: 210rpx;
+            height: 230rpx;
+            background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/getbg.png');
+            background-size: 100% 100%;
+        }
+
+        .card-face.card-back {
+            transform: rotateY(180deg);
+        }
 
         image {
             position: absolute;
