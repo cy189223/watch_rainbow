@@ -657,6 +657,13 @@
                     "transparentTitle": "always"
                 }
             }
+        },
+        {
+            "path": "pages/demo/index",
+            "style": {
+                "navigationBarTitleText": "测试翻牌",
+                "navigationStyle": "custom"
+            }
         }
     ],
     "subpackages": [

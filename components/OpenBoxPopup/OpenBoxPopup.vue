@@ -92,6 +92,7 @@ export default {
     },
     computed: {
         skus() {
+            console.log(this.package.skus);
             return this.package.skus || [];
         },
         orderConfig() {
