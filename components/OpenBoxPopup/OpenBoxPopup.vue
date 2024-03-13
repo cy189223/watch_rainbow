@@ -17,7 +17,11 @@
                     <view class="item" @tap="checkSku(item)" :class="'item-' + skus.length" v-for="(item, index) in skus" :key="item.uuid">
                         <view class="thumb-c">
                             <view class="lockIcons" v-show="isShowLockIcon(item) && !isReturnSaleSuccess">
-                                <image class="_lockIcon" v-show="item.isLock" :src="`https://watch-box.oss-cn-beijing.aliyuncs.com/${item.isLock ? 'lock' : 'unlock'}.png`"></image>
+                                <image
+                                    class="_lockIcon"
+                                    v-show="item.isLock"
+                                    :src="`https://watch-box.oss-cn-beijing.aliyuncs.com/${item.isLock ? 'lock2' : 'unlock2'}.png`"
+                                ></image>
                             </view>
                             <image class="thumb" :src="item.thumb" mode="aspectFit"></image>
                             <view class="_mTitle" :class="item.options.shang_title ? 'shang-title' : 'title'">{{ item.title }}</view>
@@ -366,7 +370,7 @@ export default {
             position: relative;
             background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/getbg.png');
             z-index: 11;
-            animation: showbox 1s;
+            animation: showbox 4s;
             transform-origin: center;
             animation-fill-mode: forwards;
             background-size: 100% 100%;
@@ -376,8 +380,8 @@ export default {
                 z-index: 999;
                 width: 25rpx;
                 height: 25rpx;
-                left: 47rpx;
-                top: 12rpx;
+                left: 30rpx;
+                top: 14rpx;
                 ._lockIcon {
                     width: 100%;
                     height: 100%;
@@ -451,7 +455,7 @@ export default {
                     width: 100%;
                     line-height: 30rpx;
                     font-size: 28rpx;
-                    bottom: 32rpx;
+                    bottom: 36rpx;
                 }
                 .total {
                     width: 75rpx;
