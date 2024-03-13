@@ -58,7 +58,7 @@ const deviceInfo = {
 
 const dev = 'http://test.api.rainbow.bailingkeji.com'; // 你的测试api地址   http://manghe.com https://api.caihongbox.com.cn
 
-const prod = 'https://api.caihongbox.com.cn'; // 你的正式api地址
+const prod = 'http://test.api.rainbow.bailingkeji.com'; // 你的正式api地址
 
 module.exports = {
     VERSIONS: '1.0.0',

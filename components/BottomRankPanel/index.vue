@@ -1,5 +1,5 @@
 <template>
-    <view class="wrap animated" :style="`bottom:${bottomRpx}rpx`" :class="{ bounceOutRight: startMoving, bounceInLeft: !startMoving }">
+    <view class="wrap animated" :style="'bottom:' + bottomRpx + 'rpx'" :class="{ bounceOutRight: startMoving, bounceInLeft: !startMoving }">
         <view class="left">
             <image class="userIcon" :src="userInfo.userIcon"></image>
             <view class="middle">
