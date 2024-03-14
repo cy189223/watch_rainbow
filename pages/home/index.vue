@@ -6,7 +6,7 @@
         <!-- #endif -->
         <PageRender :refreshCounter="refreshCounter" :getNextPageCounter="getNextPageCounter" :page="page" theme="default">
             <template v-slot:gonggao>
-                <view class="orderbox">
+                <view class="orderbox" v-if="ordernotice">
                     <image class="gonggao-icon" src="https://watch-box.oss-cn-beijing.aliyuncs.com/%E5%85%AC%E5%91%8A.png" mode="scaleToFill"></image>
                     <NoticeBar scrollable single :text="ordernotice" style="flex: 1" color="#fff" background-color="none" speed="50"></NoticeBar>
                 </view>
