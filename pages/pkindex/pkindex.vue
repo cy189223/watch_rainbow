@@ -98,12 +98,13 @@
         <view class="mainbox">
             <view class="userlistbox parta" :class="ispk ? '' : 'quanjushang'">
                 <view class="userbox" v-for="(item, index) in pkadata" :key="index" @tap="topay(item)">
-                    <view class="num">{{ item.seat_code }}</view>
+                    <view class="num">{{ item.seat_code < 10 ? '0' + item.seat_code : item.seat_code }}</view>
                     <image v-if="item.user && item.user.headimg" :src="item.user.headimg" mode="scaleToFill" class="userimg"></image>
                     <image v-else src="/static/jia.png" mode="scaleToFill" class="userimg"></image>
+                    <view class="cardStatusLogo" :class="item.user ? 'isSend' : 'noSend'"></view>
                     <view class="usertextbox">
                         <view v-if="item.user && item.user.name" class="usernamebox">{{ item.user.name }}</view>
-                        <view v-else class="joinbox" style="position: static; transform: translate(0, 0); width: 100%; box-sizing: border-box">点击加入</view>
+                        <view v-else class="myJoinbox">点击加入</view>
                     </view>
                 </view>
                 <!-- <view class="joinbox" v-if="teama && wintype == ''" @tap="topaya()">{{ispk ? '加入阵营' : '点击参与'}}</view>
@@ -120,7 +121,8 @@
                     </block>
                 </view>
             </view>
-            <view class="userlistbox partb" style="display: flex; align-items: center; justify-content: center; flex-direction: column" v-if="ispk">
+
+            <!-- <view class="userlistbox partb" style="display: flex; align-items: center; justify-content: center; flex-direction: column" v-if="ispk">
                 <view
                     class="userbox"
                     style="width: calc(100% - 60rpx); margin-top: 10rpx"
@@ -136,8 +138,8 @@
                     <image v-if="item.user && item.user.headimg" :src="item.user.headimg" mode="scaleToFill" class="userimg" style="margin-right: 0"></image>
                     <image v-else src="/static/jia.png" mode="scaleToFill" class="userimg" style="margin-right: 0"></image>
                 </view>
-                <!-- <view class="joinbox" v-if="teamb && wintype == ''" @tap="topayb()">加入阵营</view>
-				<view class="joinbox" v-else>阵营已满</view> -->
+                <view class="joinbox" v-if="teamb && wintype == ''" @tap="topayb()">加入阵营</view>
+				<view class="joinbox" v-else>阵营已满</view>
                 <view class="moneynum" v-if="pkdata.activity && pkdata.activity.other_money_price != undefined">
                     入场：{{ pkdata.activity.other_money_price == 0 || !pkdata.activity.other_money_price ? '' : '￥' + (pkdata.activity.other_money_price / 100).toFixed(2)
                     }}{{
@@ -150,7 +152,7 @@
                     <image src="https://api.caihongbox.com.cn/image/win.png" mode="aspectFit" v-if="wintype == 'B'"></image>
                     <image src="https://api.caihongbox.com.cn/image/lose.png" mode="aspectFit" v-else></image>
                 </view>
-            </view>
+            </view> -->
         </view>
 
         <view class="ruleboxbg" @tap="ruleshow = false" v-if="ruleshow">
@@ -567,7 +569,7 @@ export default {
 
 .joinbox {
     margin: 30rpx auto;
-    width: 210rpx;
+    width: 180rpx;
     line-height: 50rpx;
     color: #fff;
     text-align: center;
@@ -614,12 +616,22 @@ export default {
             .userbox {
                 width: calc(50% - 60rpx);
                 margin-bottom: 10rpx;
+                height: 380rpx;
+                position: relative;
+                background-image: url(https://watch-box.oss-cn-beijing.aliyuncs.com/model-bg%209.png);
+                background-size: 100% 100%;
+                background-color: #230e6969;
+                .num {
+                    position: absolute;
+                    left: 30rpx;
+                    top: 20rpx;
+                }
             }
         }
 
-        &.parta {
-            background-image: linear-gradient(to bottom, #d23017, transparent);
-        }
+        // &.parta {
+        //     background-image: linear-gradient(to bottom, #d23017, transparent);
+        // }
 
         &.partb {
             background-image: linear-gradient(to bottom, #083ad0, transparent);
@@ -651,23 +663,61 @@ export default {
     }
 
     .userimg {
-        width: 75rpx;
-        height: 75rpx;
+        width: 40rpx;
+        height: 40rpx;
         margin: 0 10rpx;
         border-radius: 50%;
         border: 1px solid #fff;
         background-color: #fff;
+        position: absolute;
+        bottom: 40rpx;
+        left: 34rpx;
+    }
+
+    .cardStatusLogo {
+        width: 200rpx;
+        height: 200rpx;
+        margin: 0 auto;
+        background-size: 100% 100%;
+        position: relative;
+        top: -20rpx;
+    }
+
+    .isSend {
+        background-image: url(https://watch-box.oss-cn-beijing.aliyuncs.com/sallOut.png);
+    }
+
+    .noSend {
+        background-image: url(https://watch-box.oss-cn-beijing.aliyuncs.com/%E7%83%AD%E9%94%80.png);
     }
 
     .usertextbox {
         width: calc(100% - 120rpx);
         font-size: 28rpx;
-
+        position: absolute;
+        bottom: 42rpx;
+        left: 100rpx;
         .usernamebox {
             width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+        }
+        .myJoinbox {
+            position: absolute;
+            margin: 30rpx auto;
+            bottom: -42rpx;
+            left: -10rpx;
+            font-size: 30rpx;
+            width: 160rpx;
+            line-height: 50rpx;
+            color: #fff;
+            text-align: center;
+            border-radius: 50rpx;
+            border: 5rpx solid transparent;
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+            background-image: linear-gradient(to bottom, #6118a0, #8038c1, #6118a0), linear-gradient(to right, #ef3dfe, #7976e3, #60dde8);
         }
     }
 
@@ -935,7 +985,7 @@ export default {
 
 .bottombtnbox {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     margin: 60rpx 0;
 

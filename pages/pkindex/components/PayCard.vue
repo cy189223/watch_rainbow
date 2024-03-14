@@ -182,6 +182,7 @@ export default {
     border-radius: 10rpx 10rpx 0 0;
     padding: 50rpx 30rpx 60rpx 30rpx;
     box-sizing: border-box;
+    color: #333;
 
     .close-btn {
         position: absolute;
