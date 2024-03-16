@@ -90,13 +90,13 @@
                 </view>
             </view>
         </view>
-        <Banner
+        <!-- <Banner
             class="center-banner"
             v-if="config.banner && config.banner.length"
             :list="config.banner"
             iStyle="height: 220rpx;"
             imageStyle="border-radius: 50rpx 50rpx 0rpx 0rpx; box-shadow: 10px 10rpx 10rpx 10rpx rgba(243, 238, 220, 0.4);"
-        ></Banner>
+        ></Banner> -->
         <view class="action-list action-list-1">
             <view class="item" @tap="toDetail('/pages/liushui/index')" hover-class="hover">
                 <view class="left-icon">
@@ -262,6 +262,10 @@ page {
 
 .container {
     padding-top: 60px;
+    background-color: #000000;
+    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/65dea2a339eab7782bf47e83.gif');
+    background-position: top;
+    background-size: 100%;
 }
 
 .header {

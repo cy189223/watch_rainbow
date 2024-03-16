@@ -49,14 +49,17 @@
                         <image src="../../static/csjla.png" mode="" class="skucsjla skuimga" v-else-if="skutype == 2"></image>
                     </view>
                     <view class="item" v-for="(item, index) in info.skus" :key="item.id" @tap="showSkuPopup" v-if="skutype == 1">
-                        <view class="thumb">
-                            <view class="sell-out-c" v-if="!item.stock">
-                                <image mode="widthFix" class="sell-out" src="@/static/empty-stock-2.png"></image>
+                        <view class="imageArea">
+                            <view class="thumb">
+                                <view class="sell-out-c" v-if="!item.stock">
+                                    <image mode="widthFix" class="sell-out" src="@/static/empty-stock-2.png"></image>
+                                </view>
+                                <image mode="aspectFill" :src="item.thumb + '?x-oss-process=image/resize,w_300'"></image>
+                                <view class="total">{{ item.stock }}/{{ item.total }}</view>
+                                <view class="shang-title" :class="{ gift: item.shang_type === 1 }">{{ item.shang_title }}</view>
                             </view>
-                            <image mode="aspectFill" :src="item.thumb + '?x-oss-process=image/resize,w_300'"></image>
-                            <view class="total">{{ item.stock }}/{{ item.total }}</view>
-                            <view class="shang-title" :class="{ gift: item.shang_type === 1 }">{{ item.shang_title }}</view>
                         </view>
+
                         <view class="title">{{ item.title }}</view>
                         <view class="bottomflex">
                             <view class="display-price" style="border-right: 1px solid #ccc">
@@ -695,64 +698,69 @@ export default {
             color: #fff;
             background-size: 100% 100%;
 
-            .thumb {
-                position: relative;
-                overflow: hidden;
-                background: rgba(0, 0, 0, 0.5);
-                border-radius: 20rpx;
+            .imageArea {
+                padding: 10rpx;
+                box-sizing: border-box;
                 position: relative;
 
-                image {
-                    width: 100%;
-                    aspect-ratio: 1;
-                    height: auto;
-                    display: block;
-                }
-
-                .sell-out-c {
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
+                .thumb {
+                    overflow: hidden;
                     background: rgba(0, 0, 0, 0.5);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    border-radius: 20rpx;
+                    position: relative;
 
-                    .sell-out {
-                        width: 90rpx;
-                        height: 90rpx;
+                    image {
+                        width: 100%;
+                        aspect-ratio: 1;
+                        height: auto;
+                        display: block;
                     }
-                }
 
-                .total {
-                    background: rgba(0, 0, 0, 0.5);
-                    border-radius: 6rpx;
-                    padding: 2rpx 10rpx;
-                    color: white;
-                    position: absolute;
-                    bottom: 10rpx;
-                    right: 10rpx;
-                    z-index: 100;
-                    font-size: 20rpx;
-                    font-weight: bold;
-                }
+                    .sell-out-c {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.5);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
 
-                .shang-title {
-                    background-image: linear-gradient(to bottom, #4fb4fc, #68f1fb);
-                    border-radius: 0 0 10rpx 0;
-                    color: white;
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    z-index: 100;
-                    padding: 0 15rpx;
-                    line-height: 40rpx;
-                    text-align: center;
-                    font-size: 24rpx;
-                    font-weight: bold;
+                        .sell-out {
+                            width: 90rpx;
+                            height: 90rpx;
+                        }
+                    }
 
-                    &.gift {
-                        background: #f15858;
+                    .total {
+                        background: rgba(0, 0, 0, 0.5);
+                        border-radius: 6rpx;
+                        padding: 2rpx 10rpx;
+                        color: white;
+                        position: absolute;
+                        bottom: 10rpx;
+                        right: 10rpx;
+                        z-index: 100;
+                        font-size: 20rpx;
+                        font-weight: bold;
+                    }
+
+                    .shang-title {
+                        background-image: linear-gradient(to bottom, #4fb4fc, #68f1fb);
+                        border-radius: 0 0 10rpx 0;
+                        color: white;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        z-index: 100;
+                        padding: 0 15rpx;
+                        line-height: 40rpx;
+                        text-align: center;
+                        font-size: 24rpx;
+                        font-weight: bold;
+
+                        &.gift {
+                            background: #f15858;
+                        }
                     }
                 }
             }
@@ -805,20 +813,20 @@ export default {
     position: fixed;
     bottom: 0rpx;
     width: 100%;
-    height: 270rpx;
+    height: 210rpx;
     border-radius: 30px 30px 0 0;
     background-image: linear-gradient(to bottom, #613396, #1332ca);
 }
 
 .btn-c {
     width: 700rpx;
-    margin: 50rpx auto 0rpx auto;
+    margin: 30rpx auto 0rpx auto;
     display: flex;
     justify-content: space-between;
 
     .btn {
-        width: 160rpx;
-        flex: 0 0 160rpx;
+        width: 140rpx;
+        flex: 0 0 140rpx;
     }
 }
 

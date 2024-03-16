@@ -74,7 +74,7 @@
 
             <view class="bottom" v-if="showResult">
                 <view class="button-c" v-if="isReturnSaleSuccess">
-                    <view class="btn confirm bg-purple" @tap="goBack">再抽一个</view>
+                    <view class="btn confirm bg-purple" @tap="close">再抽一个</view>
                     <view class="btn return-sale bg-white">已返售</view>
                 </view>
                 <view class="button-c" v-else-if="tryMode">
@@ -157,7 +157,7 @@ export default {
             }
             uni.showModal({
                 title: '确认回收',
-                content: '确认要云发货吗?当前折价率为 1，云发货后你将获得：' + sendMoney + '积分',
+                content: '确认要云发货吗?当前折价率为 1，云发货后你将获得：' + this.sendMoney + '积分',
                 success: (res) => {
                     if (res.confirm) {
                         uni.showLoading({
@@ -391,7 +391,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 300rpx;
 
     .item {
         width: 210rpx;

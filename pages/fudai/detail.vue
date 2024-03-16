@@ -306,10 +306,18 @@ export default {
         },
         showDetailImagePopup(item) {
             if (!item.detail_images || !item.detail_images.length) {
-                uni.showToast({
-                    title: '此款暂无详情~',
-                    icon: 'none'
-                });
+                if (item.thumb) {
+                    uni.previewImage({
+                        urls: [item.thumb],
+                        current: 0
+                    });
+                } else {
+                    uni.showToast({
+                        title: '此款暂无详情~',
+                        icon: 'none'
+                    });
+                }
+
                 return false;
             }
             this.$refs.detailPopup.open('bottom');
@@ -659,6 +667,8 @@ export default {
                 color: #fff;
                 background-image: linear-gradient(120deg, #7e30ee 0%, #ea25e7 100%);
                 border-radius: 10rpx;
+                font-size: 27rpx;
+                align-items: center;
                 ._icon {
                     margin-right: 20rpx;
                     height: 40rpx;
@@ -690,7 +700,7 @@ export default {
                 overflow: hidden;
                 background: rgba(0, 0, 0, 0.5);
                 position: relative;
-                padding: 10rpx;
+                padding: 16rpx;
 
                 image {
                     width: 100%;
@@ -810,7 +820,7 @@ export default {
     bottom: 0rpx;
     // border: 1px solid red;
     width: 100%;
-    height: 270rpx;
+    height: 210rpx;
     // padding-bottom: 60rpx;
     border-radius: 30px 30px 0 0;
     background-image: linear-gradient(to bottom, #613396, #1332ca);
@@ -870,13 +880,13 @@ export default {
 }
 .btn-c {
     width: 700rpx;
-    margin: 50rpx auto 0rpx auto;
+    margin: 30rpx auto 0rpx auto;
     display: flex;
     justify-content: space-around;
     align-items: center;
     .btn {
-        width: 160rpx;
-        height: 166rpx;
+        width: 140rpx;
+        height: 144rpx;
         background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/choubox%20(1).png');
         background-size: 100% 100%;
         text-align: center;
@@ -889,9 +899,8 @@ export default {
             font-size: 64rpx;
         }
         .choutext {
-            margin-top: 5rpx;
             font-size: 25rpx;
-            line-height: 25rpx;
+            line-height: 15rpx;
             color: #2f366b;
             font-weight: bold;
         }

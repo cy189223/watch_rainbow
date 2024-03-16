@@ -1,11 +1,11 @@
 <template>
 		<view >
-			<view class="tag-list">
+			<!-- <view class="tag-list">
 				<view class="item" :class="{actived: tag === 'all'}" @tap="setTag('all')">全部</view>
 				<view class="item" :class="{actived: tag === item.id}" @tap="setTag(item.id)" v-for="(item, index) in tagList">
 					{{item.title}}
 				</view>
-			</view>
+			</view> -->
 			<scroll-view scroll-y class="scroll-view" @scrolltolower="fetchList">
 				<view class="list-scope">
 					<view v-for="(item, index) in list" class="item-scope">
@@ -16,13 +16,17 @@
 							<view class="time">{{$tool.formatDate(item.created_at, 'MM/dd hh:mm:ss')}}</view>
 						</view>
 						
-						<view class="sku-c">
+						<!-- <view class="sku-c">
 							<image :src="item.thumb" mode="aspectFit" class="thumb"></image>
 							<view class="sku-title">{{item.title}}</view>
 							<view style="flex-grow: 1"></view>
 							<view class="shang-title strong" style="margin-right: 10rpx;" v-if="item.is_free_order">免单</view>
 							<view class="shang-title" :class="{strong: item.options.shang_type === 1}">{{item.options.shang_title}}</view>
 							<view class="total">x{{item.total}}</view>
+						</view> -->
+						<view class="sku-c">
+							<view class="sku-title">缺数据</view>
+							赠送赏*1 A*1 B*1 
 						</view>
 						
 					</view>
@@ -192,6 +196,7 @@
 				display: flex;
 				align-items: center;
 				margin-top: 10rpx;
+				justify-content: space-between;
 				
 				.thumb {
 					width: 40rpx;
