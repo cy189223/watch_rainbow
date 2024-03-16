@@ -1,6 +1,8 @@
 <template>
     <view class="container">
-        <view class="header-tabs">
+        <view :style="'height:' + customBar + 'px;'"></view>
+        <Navbar title="盒柜仓库"></Navbar>
+        <view class="header-tabs" :style="'top:' + customBar + 'px;'">
             <view class="tab-item" v-for="(item, index) in typeTextList" :class="{ active: current == index }" :data-current="index" @tap="currentChange" :key="index">
                 <text class="text">
                     {{ item }}
@@ -9,7 +11,7 @@
             </view>
         </view>
 
-        <view class="swiper-wrapper">
+        <view class="swiper-wrapper" :style="'top:' + customBar + 'px;'">
             <swiper :current="current" @change="currentChange2">
                 <swiper-item v-for="(item, index) in types" :key="index">
                     <scroll-view scroll-y @scrolltolower="scrolltolower">
@@ -44,7 +46,7 @@
                     @tap="enterSelectMode('return_sale')"
                     v-if="orderConfig.is_return_sale_enable"
                 >
-                    选择云发货
+                    选择回收
                 </button>
 
                 <button
@@ -67,7 +69,7 @@
                     提交发货 (已选{{ selectedIds.length }}件)
                 </button>
                 <button class="select-box-btn bg-orange" hover-class="hover" @tap="batchReturnSale" v-if="selectType === 'return_sale'">
-                    确认云发货 (已选{{ selectedIds.length }}件)
+                    确认回收 (已选{{ selectedIds.length }}件)
                 </button>
                 <button class="select-box-btn bg-orange" hover-class="hover" @tap="batchResale" v-if="selectType === 'resale'">确认挂售 (已选{{ selectedIds.length }}件)</button>
                 <button class="select-box-btn bg-orange" hover-class="hover" @tap="batchExchange" v-if="selectType === 'exchange'">
@@ -102,9 +104,11 @@
 <script>
 import PackageSku from './components/PackageSku.vue';
 import PayCard from './components/PayCard.vue';
+import Navbar from '@/components/Navbar/index.vue';
 export default {
     components: {
         PackageSku,
+        Navbar,
         PayCard
     },
     data() {
@@ -131,6 +135,9 @@ export default {
         };
     },
     computed: {
+        customBar() {
+            return this.$store.getters.deviceInfo.customBar;
+        },
         orderConfig() {
             return this.$store.getters.setting.order || {};
         },
@@ -486,6 +493,15 @@ export default {
 </script>
 
 <style lang="scss">
+.container {
+    padding-top: 1rpx;
+    background-color: #000000;
+    background-image: url('https://watch-box.oss-cn-beijing.aliyuncs.com/65dea2a339eab7782bf47e83.gif');
+    background-position: top;
+    background-size: 100%;
+    min-height: calc(100vh - 1rpx);
+}
+
 button {
     padding: 0;
     margin: 0;
@@ -551,10 +567,11 @@ button {
     height: 90rpx;
     display: flex;
     position: fixed;
-    top: 0;
     left: 0;
     z-index: 10;
-    background-color: #ffffff;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+    overflow-x: auto;
 
     .tab-item {
         flex: 1;
@@ -565,12 +582,12 @@ button {
         font-weight: 500;
 
         &.active {
-            color: rgba(51, 51, 51, 1);
+            color: #8352c4;
             position: relative;
             font-weight: 500;
 
             .text {
-                border-bottom: 6rpx solid rgba(51, 51, 51, 1);
+                border-bottom: 6rpx solid #8352c4;
                 padding: 0rpx 0rpx 4rpx 0rpx;
             }
         }
@@ -581,11 +598,10 @@ button {
     width: 100%;
     height: 100%;
     position: fixed;
-    top: 0;
     left: 0;
     box-sizing: border-box;
     padding-top: 90rpx;
-    background-color: white;
+    // background-color: white;
 
     swiper,
     scroll-view {

@@ -275,6 +275,7 @@
         {
             "path": "pages/myBox/index",
             "style": {
+                "navigationStyle": "custom",
                 "backgroundTextStyle": "dark",
                 "navigationBarTitleText": "盒柜仓库",
                 "navigationBarBackgroundColor": "#FFFFFF"

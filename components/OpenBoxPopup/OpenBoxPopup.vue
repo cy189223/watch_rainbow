@@ -81,9 +81,7 @@
                     <view class="btn confirm bg-purple" @tap="goBack">试玩不发货哦~</view>
                 </view>
                 <view class="button-c" v-else>
-                    <view class="btn confirm bg-purple" @tap="sendCloud">
-                        全部云发货({{ skus.filter((item) => !item.isLock).reduce((sum, e) => sum + Number(e.score_price * e.total || 0), 0) }})
-                    </view>
+                    <view class="btn confirm bg-purple" @tap="sendCloud">全部云发货({{ sendMoney }}积分)</view>
                     <view class="btn return-sale" @tap="returnSale" v-if="!orderConfig.is_ban_return_sale">我的赏袋</view>
                 </view>
             </view>
@@ -132,6 +130,9 @@ export default {
         },
         rewardLotteryTicket() {
             return this.package.reward && this.package.reward.lottery_ticket;
+        },
+        sendMoney() {
+            return this.skus.filter((item) => !item.isLock).reduce((sum, e) => sum + Number(e.score_price * e.total || 0), 0);
         }
     },
     methods: {
@@ -143,7 +144,7 @@ export default {
                 } else {
                     clearInterval(this.mInterval);
                 }
-            }, 500);
+            }, 200);
         },
         sendCloud() {
             const checkItem = this.skus.filter((item) => !item.isLock);
@@ -156,7 +157,7 @@ export default {
             }
             uni.showModal({
                 title: '确认回收',
-                content: '确认要批量回收吗?',
+                content: '确认要云发货吗?当前折价率为 1，云发货后你将获得：' + sendMoney + '积分',
                 success: (res) => {
                     if (res.confirm) {
                         uni.showLoading({

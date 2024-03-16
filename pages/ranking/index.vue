@@ -53,7 +53,7 @@ export default {
     data() {
         return {
             paiming: [],
-            typeTextList: ['人民币', '流水'],
+            typeTextList: ['彩虹币', '彩虹积分'],
             current: 0,
             rankListSetting: ''
         };
