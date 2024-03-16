@@ -55,10 +55,14 @@ Vue.prototype.$money = () => {
 
 // 初始化点击声
 let audioSrcMap = {
-    click: 'https://api.caihongbox.com.cn/image/click.mp3',
-    check: 'https://api.caihongbox.com.cn/image/check.mp3',
-    yao: 'https://api.caihongbox.com.cn/image/yao.mp3',
-    open: 'https://api.caihongbox.com.cn/image/open.mp3'
+    // click: 'https://api.caihongbox.com.cn/image/click.mp3',
+    // check: 'https://api.caihongbox.com.cn/image/check.mp3',
+    // yao: 'https://api.caihongbox.com.cn/image/yao.mp3',
+    // open: 'https://api.caihongbox.com.cn/image/open.mp3'
+    click: '',
+    check: '',
+    yao: '',
+    open: ''
 };
 var audioContainer = {
     click: null,
