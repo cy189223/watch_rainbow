@@ -31,10 +31,10 @@
                                             :src="`https://watch-box.oss-cn-beijing.aliyuncs.com/${item.isLock ? 'lock2' : 'unlock2'}.png`"
                                         ></image>
                                     </view>
-                                    <image class="thumb" :src="item.thumb" mode="aspectFit"></image>
-                                    <view class="_mTitle" :class="item.options.shang_title ? 'shang-title' : 'title'">{{ item.title }}</view>
+                                    <image class="thumb" :src="item.thumb" mode="scaleToFill"></image>
+                                    <view class="_mTitle title">{{ item.title }}</view>
                                     <view class="total">×{{ item.total }}</view>
-                                    <view class="title" :class="{ gift: item.options.shang_type === 1 }" v-if="item.options.shang_title">{{ item.options.shang_title }}</view>
+                                    <!-- <view class="title" :class="{ gift: item.options.shang_type === 1 }" v-if="item.options.shang_title">{{ item.options.shang_title }}</view> -->
                                 </view>
                             </view>
                         </view>
@@ -50,10 +50,10 @@
                                     :src="`https://watch-box.oss-cn-beijing.aliyuncs.com/${item.isLock ? 'lock2' : 'unlock2'}.png`"
                                 ></image>
                             </view>
-                            <image class="thumb" :src="item.thumb" mode="aspectFit"></image>
-                            <view class="_mTitle" :class="item.options.shang_title ? 'shang-title' : 'title'">{{ item.title }}</view>
+                            <image class="thumb" :src="item.thumb" mode="scaleToFill"></image>
+                            <view class="_mTitle title">{{ item.title }}</view>
                             <view class="total">×{{ item.total }}</view>
-                            <view class="title" :class="{ gift: item.options.shang_type === 1 }" v-if="item.options.shang_title">{{ item.options.shang_title }}</view>
+                            <!-- <view class="title" :class="{ gift: item.options.shang_type === 1 }" v-if="item.options.shang_title">{{ item.options.shang_title }}</view> -->
                         </view>
                     </view>
                 </view>
@@ -436,9 +436,9 @@ export default {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 155rpx;
-            height: 155rpx;
-            top: 36rpx;
+            width: 130rpx;
+            height: 130rpx;
+            top: 46rpx;
             display: block;
         }
 
@@ -457,8 +457,8 @@ export default {
             .lockIcons {
                 position: absolute;
                 z-index: 999;
-                width: 25rpx;
-                height: 25rpx;
+                width: 30rpx;
+                height: 30rpx;
                 left: 30rpx;
                 top: 14rpx;
                 ._lockIcon {
@@ -468,28 +468,39 @@ export default {
                     transform: none;
                 }
             }
-
-            .shang-title {
-                position: absolute;
-                left: 0;
-                right: 0;
-                bottom: -30rpx;
-                color: white;
-                text-align: center;
-                font-size: 24rpx;
+            .thumb {
+                box-shadow: 0rpx 0rpx 11rpx 0rpx rgba(176, 128, 255, 0.8);
+                border: 1px solid #a809f8;
             }
+
+            // .shang-title {
+            //     position: absolute;
+            //     left: 0;
+            //     right: 0;
+            //     bottom: -30rpx;
+            //     color: white;
+            //     text-align: center;
+            //     font-size: 24rpx;
+            // }
             .title {
                 position: absolute;
                 color: #6965c4;
                 font-weight: 500;
                 text-align: center;
                 width: 100%;
-                line-height: 19rpx;
-                font-size: 19rpx;
+                line-height: 20rpx;
+                font-size: 20rpx;
                 // top: 25rpx;
                 // left: 35rpx;
                 text-align: center;
-                bottom: 20rpx;
+                bottom: 23rpx;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                padding: 0 36rpx 0 20rpx;
+                box-sizing: border-box;
             }
         }
 
@@ -524,8 +535,8 @@ export default {
 
                 image {
                     top: 70rpx;
-                    width: 285rpx;
-                    height: 285rpx;
+                    width: 270rpx;
+                    height: 270rpx;
                     display: block;
                 }
 
@@ -534,7 +545,7 @@ export default {
                     width: 100%;
                     line-height: 30rpx;
                     font-size: 28rpx;
-                    bottom: 36rpx;
+                    bottom: 40rpx;
                 }
                 .total {
                     width: 75rpx;
