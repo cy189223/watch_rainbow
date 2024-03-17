@@ -896,12 +896,12 @@ export default {
             line-height: 64rpx;
             font-family: fantasy;
             color: #fff;
-            margin-top: 40rpx;
+            margin-top: 32rpx;
             font-size: 64rpx;
         }
         .choutext {
             font-size: 25rpx;
-            line-height: 15rpx;
+            line-height: 20rpx;
             color: #2f366b;
             font-weight: bold;
         }

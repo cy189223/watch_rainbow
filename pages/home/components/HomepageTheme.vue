@@ -565,8 +565,8 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin: 10rpx 40rpx 0;
-    position: sticky;
-    z-index: 970;
+    // position: sticky;
+    // z-index: 970;
     padding-bottom: 40rpx;
 
     .navbox {

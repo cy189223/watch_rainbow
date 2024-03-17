@@ -97,15 +97,16 @@
 
         <view class="mainbox">
             <view class="userlistbox parta" :class="ispk ? '' : 'quanjushang'">
-                <view class="userbox" v-for="(item, index) in pkadata" :key="index" @tap="topay(item)">
+                <view class="userbox" :class="item.user ? '_isSendP' : '_noSendP'" v-for="(item, index) in pkadata" :key="index" @tap="topay(item)">
                     <view class="num">{{ item.seat_code < 10 ? '0' + item.seat_code : item.seat_code }}</view>
                     <image v-if="item.user && item.user.headimg" :src="item.user.headimg" mode="scaleToFill" class="userimg"></image>
-                    <image v-else src="/static/jia.png" mode="scaleToFill" class="userimg"></image>
-                    <view class="cardStatusLogo" :class="item.user ? 'isSend' : 'noSend'"></view>
-                    <view class="usertextbox">
-                        <view v-if="item.user && item.user.name" class="usernamebox">{{ item.user.name }}</view>
-                        <view v-else class="myJoinbox">点击加入</view>
+                    <!-- <image v-else src="/static/jia.png" mode="scaleToFill" class="userimg"></image> -->
+                    <view class="cardStatusLogo isSend" v-if="item.user"></view>
+                    <view class="cardStatusLogo noSend" v-else></view>
+                    <view class="usertextbox" v-if="item.user && item.user.name">
+                        <view class="usernamebox">{{ item.user.name }}</view>
                     </view>
+                    <view v-else class="_logoTitle">彩虹赏</view>
                 </view>
                 <!-- <view class="joinbox" v-if="teama && wintype == ''" @tap="topaya()">{{ispk ? '加入阵营' : '点击参与'}}</view>
 				<view class="joinbox" v-else>阵营已满</view> -->
@@ -614,18 +615,23 @@ export default {
             padding-bottom: 60rpx;
 
             .userbox {
-                width: calc(50% - 60rpx);
+                width: calc(33.3% - 20rpx);
                 margin-bottom: 10rpx;
-                height: 380rpx;
+                height: 333rpx;
                 position: relative;
                 background-image: url(https://watch-box.oss-cn-beijing.aliyuncs.com/model-bg%209.png);
                 background-size: 100% 100%;
-                background-color: #230e6969;
                 .num {
                     position: absolute;
                     left: 30rpx;
                     top: 20rpx;
                 }
+            }
+            ._isSendP {
+                background-color: #9e9e9e82;
+            }
+            ._noSendP {
+                background-color: #ffd70082;
             }
         }
 
@@ -658,7 +664,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 30rpx 30rpx 40rpx;
+        margin: 30rpx 10rpx 40rpx;
         color: #fff;
     }
 
@@ -671,12 +677,12 @@ export default {
         background-color: #fff;
         position: absolute;
         bottom: 40rpx;
-        left: 34rpx;
+        left: 24rpx;
     }
 
     .cardStatusLogo {
-        width: 200rpx;
-        height: 200rpx;
+        width: 180rpx;
+        height: 180rpx;
         margin: 0 auto;
         background-size: 100% 100%;
         position: relative;
@@ -688,20 +694,22 @@ export default {
     }
 
     .noSend {
-        background-image: url(https://watch-box.oss-cn-beijing.aliyuncs.com/%E7%83%AD%E9%94%80.png);
+        background-image: url(https://watch-box.oss-cn-beijing.aliyuncs.com/10521710674570_.png);
+        top: -30rpx;
     }
 
     .usertextbox {
-        width: calc(100% - 120rpx);
+        width: calc(100% - 110rpx);
         font-size: 28rpx;
         position: absolute;
-        bottom: 42rpx;
-        left: 100rpx;
+        bottom: 46rpx;
+        left: 84rpx;
         .usernamebox {
             width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            font-size: 24rpx;
         }
         .myJoinbox {
             position: absolute;
@@ -719,6 +727,17 @@ export default {
             background-origin: padding-box, border-box;
             background-image: linear-gradient(to bottom, #6118a0, #8038c1, #6118a0), linear-gradient(to right, #ef3dfe, #7976e3, #60dde8);
         }
+    }
+
+    ._logoTitle {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        bottom: 27px;
+        font-size: 24rpx;
+        background-image: linear-gradient(to right, #ff0000, #ff7d00, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
+        -webkit-background-clip: text;
+        color: transparent !important;
     }
 
     .baoditext {
