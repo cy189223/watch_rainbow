@@ -575,7 +575,7 @@ export default {
             background-image: linear-gradient(to right, #4610be, #8348d4, #28218b);
         }
     }
-    padding-bottom: 270rpx;
+    padding-bottom: 200rpx;
 
     .skutitlebox {
         position: absolute;
@@ -775,7 +775,7 @@ export default {
             }
 
             .title {
-                font-size: 24rpx;
+                font-size: 22rpx;
                 color: #fff;
                 margin: 5rpx;
                 overflow: hidden;
@@ -784,16 +784,17 @@ export default {
                 -webkit-line-clamp: 1;
                 -webkit-box-orient: vertical;
                 padding: 10rpx 0;
+                height: 22rpx;
             }
 
             .bottomflex {
                 display: flex;
                 justify-content: space-between;
                 align-items: flex-start;
-                font-size: 20rpx;
+                font-size: 18rpx;
                 color: #fff;
                 border-top: 1px solid #eee;
-                padding: 10rpx;
+                padding: 10rpx 6rpx;
 
                 .display-price {
                     display: flex;

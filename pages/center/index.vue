@@ -134,7 +134,7 @@
                 <view class="text">领券中心</view>
                 <text class="icon new-iconfont icon-arrow-right"></text>
             </view>
-            <view class="item" @tap="toDetail('/pages/level/level')" hover-class="hover">
+            <view class="item noBorder" @tap="toDetail('/pages/level/level')" hover-class="hover">
                 <view class="left-icon">
                     <image style="width: 30rpx; height: 30rpx" src="@/static/center/jiangli.png"></image>
                 </view>
@@ -144,7 +144,16 @@
         </view>
 
         <view class="action-list">
-            <view class="item" v-for="(item, index) in items" @tap="$tool.toLink(item.link)" hover-class="hover" :key="index">
+            <view
+                class="item"
+                :class="{
+                    noBorder: index == items.length - 1
+                }"
+                v-for="(item, index) in items"
+                @tap="$tool.toLink(item.link)"
+                hover-class="hover"
+                :key="index"
+            >
                 <view class="left-icon">
                     <image :src="item.image"></image>
                 </view>
@@ -535,6 +544,9 @@ page {
             line-height: 42rpx;
             padding: 0rpx;
         }
+    }
+    .noBorder {
+        border-bottom: none;
     }
 }
 

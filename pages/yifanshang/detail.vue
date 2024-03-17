@@ -766,7 +766,7 @@ export default {
             }
 
             .title {
-                font-size: 24rpx;
+                font-size: 22rpx;
                 // font-family: PingFang;
                 // color: #000000;
                 text-align: center;
@@ -791,8 +791,8 @@ export default {
                     justify-content: center;
                     align-items: center;
                     width: 50%;
-                    height: 60rpx;
-                    font-size: 22rpx;
+                    height: 50rpx;
+                    font-size: 20rpx;
                     text-align: center;
 
                     .value {
