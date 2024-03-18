@@ -92,8 +92,8 @@ export default {
             width: 100%;
             display: block;
             margin: 0rpx;
-            // box-shadow: 0rpx 0rpx 11rpx 0rpx rgba(176, 128, 255, 0.8);
-            // border: 2px solid #a809f8;
+            box-shadow: 0rpx 0rpx 11rpx 0rpx rgba(176, 128, 255, 0.8);
+            border: 2px solid #a809f8;
         }
 
         .text {

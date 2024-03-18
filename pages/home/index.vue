@@ -13,24 +13,28 @@
             </template>
             <template v-slot:tools>
                 <view class="btnlist">
-                    <image
-                        class="btnbox"
-                        src="https://watch-box.oss-cn-beijing.aliyuncs.com/%E5%AE%A2%E6%9C%8D.png"
-                        mode="scaleToFill"
-                        @tap="toDetail('/pages/jiaoliuqun/jiaoliuqun')"
-                    ></image>
-                    <image
-                        class="btnbox"
-                        src="https://watch-box.oss-cn-beijing.aliyuncs.com/%E7%AD%BE%E5%88%B0.png"
-                        mode="scaleToFill"
-                        @tap="toDetail('/pages/activity/index')"
-                    ></image>
-                    <image
-                        class="btnbox"
-                        src="https://watch-box.oss-cn-beijing.aliyuncs.com/%E6%8E%92%E8%A1%8C%E6%A6%9C.png"
-                        mode="scaleToFill"
-                        @tap="toDetail('/pages/ranking/index')"
-                    ></image>
+                    <view class="btnbox">
+                        <image
+                            src="https://watch-box.oss-cn-beijing.aliyuncs.com/%E5%AE%A2%E6%9C%8Dnew1.png"
+                            mode="scaleToFill"
+                            @tap="toDetail('/pages/jiaoliuqun/jiaoliuqun')"
+                        ></image>
+                        <text>客服</text>
+                    </view>
+
+                    <view class="btnbox">
+                        <image src="https://watch-box.oss-cn-beijing.aliyuncs.com/%E7%AD%BE%E5%88%B0new1.png" mode="scaleToFill" @tap="toDetail('/pages/activity/index')"></image>
+                        <text>签到</text>
+                    </view>
+
+                    <view class="btnbox">
+                        <image
+                            src="https://watch-box.oss-cn-beijing.aliyuncs.com/%E6%8E%92%E8%A1%8C%E6%A6%9Cnew1.png"
+                            mode="scaleToFill"
+                            @tap="toDetail('/pages/ranking/index')"
+                        ></image>
+                        <text>排行榜</text>
+                    </view>
                 </view>
             </template>
         </PageRender>
@@ -159,12 +163,23 @@ export default {
     }
     .btnlist {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
-
+        color: #fff;
+        box-shadow: 0rpx 0rpx 11rpx 0rpx rgba(176, 128, 255, 0.8);
+        border: 2px solid #a809f8;
+        padding: 15rpx 0 50rpx 0;
+        margin-bottom: 25rpx;
+        border-radius: 10rpx;
         .btnbox {
-            width: 160rpx;
-            height: 180rpx;
+            width: 100rpx;
+            height: 110rpx;
+            text-align: center;
+            font-size: 28rpx;
+            image {
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 }
