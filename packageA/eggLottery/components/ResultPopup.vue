@@ -24,13 +24,13 @@
 				</view> -->
                 <view class="button-c" v-if="isReturnSaleSuccess">
                     <view class="btn confirm bg-purple" @tap="goBack">再抽一个</view>
-                    <view class="btn return-sale bg-white">已返售</view>
+                    <view class="btn return-sale bg-white">已云发货</view>
                 </view>
                 <view class="button-c" v-else>
                     <view class="btn confirm bg-purple" @tap="handleOk">
                         {{ buttonTitle || '去盒柜发货' }}
                     </view>
-                    <view class="btn return-sale" @tap="returnSale">一键回收</view>
+                    <view class="btn return-sale" @tap="returnSale">一键云发货</view>
                 </view>
             </view>
 

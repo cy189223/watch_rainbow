@@ -70,21 +70,21 @@
 
         <view class="meta-c padding-h" v-if="info.return_saled_at">
             <view class="list-item" v-if="info.return_saled_at">
-                <view class="body">回收时间</view>
+                <view class="body">云发货时间</view>
                 <view class="arrow-right">
                     {{ info.return_saled_at }}
                 </view>
             </view>
             <view class="list-item" v-if="info.return_score">
-                <view class="body">回收获得{{ scoreAlias }}</view>
+                <view class="body">云发货获得{{ scoreAlias }}</view>
                 <view class="arrow-right">{{ info.return_score }}{{ scoreAlias }}</view>
             </view>
             <view class="list-item" v-if="info.return_redpack">
-                <view class="body">回收获得{{ $money() }}</view>
+                <view class="body">云发货获得{{ $money() }}</view>
                 <view class="arrow-right">{{ info.return_redpack / 100 }}元</view>
             </view>
             <view class="list-item" v-if="info.return_money">
-                <view class="body">回收原路退回</view>
+                <view class="body">云发货原路退回</view>
                 <view class="arrow-right">{{ info.return_money / 100 }}元</view>
             </view>
         </view>

@@ -1,7 +1,7 @@
 <template>
     <view class="scope-container">
         <view :style="'height:' + customBar + 'px;'"></view>
-        <Navbar title="刮刮乐名称"></Navbar>
+        <Navbar title="刮刮乐名称" :scrollTop="scrollTop"></Navbar>
         <view class="headerBox">
             <view class="bg1"></view>
             <view class="banner">
@@ -207,6 +207,7 @@ export default {
             roomInfo: {},
             skutype: 1,
             pageUuid: '',
+            scrollTop: 0,
             isWait: true,
             info: {
                 setting: {
@@ -235,6 +236,9 @@ export default {
     },
     onLoad(e) {
         this.initRoom();
+    },
+    onPageScroll(e) {
+        this.scrollTop = e.scrollTop;
     },
     methods: {
         initRoom() {

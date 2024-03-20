@@ -1,7 +1,7 @@
 <template>
     <view class="scope-container">
         <view :style="'height:' + customBar + 'px;'"></view>
-        <Navbar :title="info.title"></Navbar>
+        <Navbar :title="info.title" :scrollTop="scrollTop"></Navbar>
         <view class="content">
             <view class="headerBox">
                 <view class="bg1"></view>
@@ -212,6 +212,7 @@ export default {
                     prencent: '0.2'
                 }
             ],
+            scrollTop: 0,
             uuid: '',
             isInit: false,
             isPayPopup: false,
@@ -327,6 +328,9 @@ export default {
                 this.isNotFound = true;
             });
     },
+    onPageScroll(e) {
+        this.scrollTop = e.scrollTop;
+    },
     onReachBottom() {},
     methods: {
         totabbar(url) {
@@ -407,8 +411,7 @@ export default {
             const res = this.skus.filter((item) => item.front_odds == odds);
             return res;
         }
-    },
-    onPageScroll(e) {}
+    }
 };
 </script>
 

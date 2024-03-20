@@ -166,8 +166,8 @@ export default {
         justify-content: space-around;
         align-items: center;
         color: #fff;
-        box-shadow: 0rpx 0rpx 11rpx 0rpx rgba(176, 128, 255, 0.8);
-        border: 2px solid #a809f8;
+        // box-shadow: 0rpx 0rpx 11rpx 0rpx rgba(176, 128, 255, 0.8);
+        // border: 2px solid #a809f8;
         padding: 15rpx 0 50rpx 0;
         margin-bottom: 25rpx;
         border-radius: 10rpx;

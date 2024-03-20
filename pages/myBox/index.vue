@@ -46,7 +46,7 @@
                     @tap="enterSelectMode('return_sale')"
                     v-if="orderConfig.is_return_sale_enable"
                 >
-                    选择回收
+                    选择云发货
                 </button>
 
                 <button
@@ -69,7 +69,7 @@
                     提交发货 (已选{{ selectedIds.length }}件)
                 </button>
                 <button class="select-box-btn bg-orange" hover-class="hover" @tap="batchReturnSale" v-if="selectType === 'return_sale'">
-                    确认回收 (已选{{ selectedIds.length }}件)
+                    确认云发货 (已选{{ selectedIds.length }}件)
                 </button>
                 <button class="select-box-btn bg-orange" hover-class="hover" @tap="batchResale" v-if="selectType === 'resale'">确认挂售 (已选{{ selectedIds.length }}件)</button>
                 <button class="select-box-btn bg-orange" hover-class="hover" @tap="batchExchange" v-if="selectType === 'exchange'">
@@ -89,7 +89,7 @@
                 <text class="new-iconfont icon-close close-btn" @tap.stop="closepopup()"></text>
                 <view class="title">
                     <text class="new-iconfont icon-check"></text>
-                    {{ selectType === 'return_sale' ? '回收' : '返售' }}成功
+                    {{ selectType === 'return_sale' ? '云发货' : '返售' }}成功
                 </view>
 
                 <view class="btn-c">
@@ -246,7 +246,7 @@ export default {
                 this.isShowPay = true;
             }
         },
-        // 批量回收
+        // 批量云发货
         batchReturnSale() {
             if (this.isbatchReturnSale) {
                 return;
@@ -255,19 +255,19 @@ export default {
             if (this.selectedIds.length == 0) {
                 uni.showModal({
                     title: '请选择物品',
-                    content: '选择一件或多件物品后才能回收哦~'
+                    content: '选择一件或多件物品后才能云发货哦~'
                 });
                 this.isbatchReturnSale = false;
                 return false;
             }
 
             uni.showModal({
-                title: '确认回收',
-                content: '确认要批量回收吗?',
+                title: '确认云发货',
+                content: '确认要批量云发货吗?',
                 success: (res) => {
                     if (res.confirm) {
                         uni.showLoading({
-                            title: '回收中...'
+                            title: '云发货中...'
                         });
                         this.$http(`/asset/return-sale/confirm`, 'post', {
                             ids: this.selectedIds

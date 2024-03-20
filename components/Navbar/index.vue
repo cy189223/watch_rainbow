@@ -1,6 +1,18 @@
 <template>
-    <view class="header" :style="'height:' + customBar + 'px'">
-        <view class="home-nav" :style="contentStyle">
+    <view
+        class="header"
+        :style="{
+            height: customBar + 'px'
+        }"
+    >
+        <view
+            class="home-nav"
+            :style="{
+                height: deviceInfo.customBar + 'px',
+                paddingTop: deviceInfo.statusBar + 'px',
+                background: bg
+            }"
+        >
             <view class="nav-content">
                 <image class="back-icon" @tap="goBack" src="https://watch-box.oss-cn-beijing.aliyuncs.com/%E5%90%8E%E9%80%80.png"></image>
                 <view class="title">
@@ -14,7 +26,8 @@
 <script>
 export default {
     props: {
-        title: String
+        title: String,
+        scrollTop: Number
     },
     data() {
         return {
@@ -25,11 +38,13 @@ export default {
     computed: {
         deviceInfo() {
             return this.$store.getters.deviceInfo;
+        },
+        bg() {
+            return this.scrollTop > 150 ? '#000000' : 'transparent';
         }
     },
     created() {
         this.customBar = this.deviceInfo.customBar;
-        this.contentStyle = `height:${this.deviceInfo.customBar}px;padding-top:${this.deviceInfo.statusBar}px;`;
     },
     methods: {
         goBack() {

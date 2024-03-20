@@ -1,7 +1,7 @@
 <template>
     <view class="scope-container">
         <view :style="'height:' + customBar + 'px;'"></view>
-        <Navbar :title="info.title"></Navbar>
+        <Navbar :title="info.title" :scrollTop="scrollTop"></Navbar>
         <view class="content">
             <view class="refreshbox" @tap="refreshRoom">刷新</view>
             <view class="headerBox">
@@ -153,6 +153,7 @@ export default {
             roomId: '',
             skutype: 1,
             ruletext: '',
+            scrollTop: 0,
             isSharePopup: false
         };
     },
@@ -229,6 +230,9 @@ export default {
         this.initData().then((res) => {
             uni.hideLoading();
         });
+    },
+    onPageScroll(e) {
+        this.scrollTop = e.scrollTop;
     },
     methods: {
         isEnableBtn(total) {
@@ -343,8 +347,7 @@ export default {
         changetype(type) {
             this.skutype = type;
         }
-    },
-    onPageScroll(e) {}
+    }
 };
 </script>
 

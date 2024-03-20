@@ -75,7 +75,7 @@
             <view class="bottom" v-if="showResult">
                 <view class="button-c" v-if="isReturnSaleSuccess">
                     <view class="btn confirm bg-purple" @tap="close">再抽一个</view>
-                    <view class="btn return-sale bg-white">已返售</view>
+                    <view class="btn return-sale bg-white">已云发货</view>
                 </view>
                 <view class="button-c" v-else-if="tryMode">
                     <view class="btn confirm bg-purple" @tap="goBack">试玩不发货哦~</view>
@@ -144,7 +144,7 @@ export default {
                 } else {
                     clearInterval(this.mInterval);
                 }
-            }, 200);
+            }, 100);
         },
         sendCloud() {
             const checkItem = this.skus.filter((item) => !item.isLock);
@@ -156,12 +156,12 @@ export default {
                 return;
             }
             uni.showModal({
-                title: '确认回收',
+                title: '确认云发货',
                 content: '确认要云发货吗?当前折价率为 1，云发货后你将获得：' + this.sendMoney + '积分',
                 success: (res) => {
                     if (res.confirm) {
                         uni.showLoading({
-                            title: '回收中...'
+                            title: '云发货中...'
                         });
                         this.$http(`/asset/return-sale/confirm`, 'post', {
                             ids: checkItem.map((item) => item.id)

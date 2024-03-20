@@ -29,7 +29,7 @@
             <template v-if="order.union_status == 'pending'">
                 <button class="bg-orange" hover-class="hover" v-if="isVirtualAsset" @tap="handleVirtualAssetPick">领取</button>
                 <!-- <button class="bg-orange" hover-class="hover" v-if="order.is_chip_cover" data-type="兑换碎片" @tap="handleCoverChip">兑换碎片</button> -->
-                <button class="bg-cancel" hover-class="hover" v-if="isReturnSaleable" data-type="返售" @tap="handleClick2">回收</button>
+                <button class="bg-cancel" hover-class="hover" v-if="isReturnSaleable" data-type="返售" @tap="handleClick2">云发货</button>
                 <button class="bg-cancel" hover-class="hover" v-if="marketConfig.is_enabled" data-type="转售" @tap="handleClick2">挂售</button>
                 <button class="bg-cancel" hover-class="hover" v-if="marketConfig.is_enabled || isReturnSaleable" data-type="转售" @tap="locked">存入保险柜</button>
             </template>
