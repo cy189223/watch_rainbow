@@ -260,7 +260,7 @@ export default {
             this.ruleshow = true;
         },
         initData() {
-            return this.$http(`/yifanshangs/${this.uuid}`, 'GET', {
+            return this.$http(`/fudai_yifanshangs/${this.uuid}`, 'GET', {
                 room_id: this.roomId
             }).then((res) => {
                 this.info = res.data.info;

@@ -225,7 +225,7 @@ export default {
         // },
         clickyfsItem(item) {
             uni.navigateTo({
-                url: `/pages/yifanshang/detail?uuid=${item.uuid}`
+                url: `/pages/fudai_wuxianchi/detail?uuid=${item.uuid}`
             });
         }
     }

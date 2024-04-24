@@ -111,6 +111,16 @@
             }
         },
         {
+            "path": "pages/fudai_wuxianchi/detail",
+            "style": {
+                "navigationStyle": "custom",
+                "backgroundTextStyle": "dark",
+                "navigationBarTitleText": "无限池",
+                "navigationBarBackgroundColor": "#0d093c",
+                "navigationBarTextStyle": "white"
+            }
+        },
+        {
             "path": "pages/productDetail/index",
             "style": {
                 "backgroundTextStyle": "dark",

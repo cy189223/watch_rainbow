@@ -113,7 +113,7 @@ export default {
             });
         },
         getyfsList() {
-            this.$http(`/yifanshangs`, 'get', {
+            this.$http(`/fudai_yifanshangs`, 'get', {
                 type: 'yfs'
             }).then((res) => {
                 this.yfslist = res.data;
