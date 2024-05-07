@@ -73,27 +73,26 @@
                             非酋榜
                         </view>
                     </view>
-
-                    <view class="_block" v-if="skutype == 1" v-for="item in skuLevelReverse" :key="item.title" v-show="getSkusByLevel(item.odds).length > 0">
+                    <view class="_block" :v-if="skutype == 1" v-for="item in skuLevelReverse" :key="item.title">
                         <view class="_t1">
                             <image :src="item.icon" class="_icon"></image>
                             {{ item.title }}
 
-                            <view style="margin-left: 20rpx" v-if="config.show_odds_mode === 'enable'">
+                            <view style="margin-left: 20rpx">
                                 概率{{ item.odds }}%
                                 <text style="font-size: 20rpx">（此概率为当前赏级出赏概率）</text>
                             </view>
-                            <view style="margin-left: 20rpx" v-else-if="config.show_odds_mode === 'auto'">
+                            <!-- <view style="margin-left: 20rpx" v-else-if="config.show_odds_mode === 'auto'">
                                 <view v-if="item.front_odds >= 0.1">概率{{ item.odds }}%</view>
                                 <view v-else>概率{{ '<' }}0.1%</view>
                                 <text style="font-size: 20rpx">（此概率为当前赏级出赏概率）</text>
-                            </view>
+                            </view> -->
                         </view>
                         <view class="itemWrap">
-                            <view class="item" v-for="(item, index) in getSkusByLevel(item.odds)" :key="item.id" @tap="showDetailImagePopup(item)" v-if="skutype == 1">
+                            <view class="item"  :key="item.id" @tap="showDetailImagePopup(item)">
                                 <view class="thumb">
                                     <image mode="aspectFill" :src="item.thumb + '?x-oss-process=image/resize,w_300'"></image>
-                                    <view class="shang-title" :class="'shang-title-' + item.level">{{ getLevelTitle(item.front_odds) }}</view>
+                                    <view class="shang-title" :class="'shang-title-' + item.level">{{ getLevelTitle(item.odds) }}</view>
                                 </view>
                                 <view class="title">{{ item.title }}</view>
                                 <view class="bottomflex">
@@ -238,10 +237,10 @@ export default {
             return this.$store.getters.deviceInfo.customBar;
         },
         skuLevel() {
-            return this.info.sku_level || [];
+            return this.info.skus || [];
         },
         skuLevelReverse() {
-            return (this.info.sku_level || []).reverse() || [];
+            return (this.info.skus || []).reverse() || [];
         },
         skus() {
             return this.info.skus || [];

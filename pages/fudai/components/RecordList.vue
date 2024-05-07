@@ -1,10 +1,10 @@
 <template>
 		<view >
 			<view class="tag-list">
-				<view class="item" :class="{actived: sku_level === ''}" @tap="setTag('')">全部</view>
+				<!-- <view class="item" :class="{actived: sku_level === ''}" @tap="setTag('')">全部</view>
 				<view class="item" :class="{actived: sku_level === index - 0 + 1}" @tap="setTag(index - 0 + 1)" v-for="(item, index) in info.sku_level" :key="index">
 					{{item.title}}
-				</view>
+				</view> -->
 			</view>
 			<scroll-view scroll-y class="scroll-view" @scrolltolower="fetchList">
 				<view class="list-scope">
@@ -19,7 +19,7 @@
 							<view class="time">{{item.created_at}}</view>
 							<view style="flex-grow: 1"></view>
 							<view class="shang-title" :class="'shang-title' + item.sku_level">{{getLevelTitle(item.sku_level)}}</view>
-							<view class="total">第{{item.open_indexs}}抽</view>
+							<!-- <view class="total">第{{item.open_indexs}}抽</view> -->
 						</view>
 						
 					</view>
@@ -101,6 +101,7 @@
 					per_page: this.perPage
 				}).then(res => {
 					this.list = [...this.list, ...res.data.list]
+					console.log(this.list, 'list')
 					this.isInit = true
 					this.page++
 				})

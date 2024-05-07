@@ -121,7 +121,7 @@
                                 </view>
                                 <view class="sku-c">
                                     <view class="sku-title">积分</view>
-                                    333
+                                    3334
                                 </view>
                             </view>
                         </view>

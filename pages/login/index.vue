@@ -207,7 +207,6 @@ export default {
                 });
                 return false;
             }
-
             if (this.isLoginLoading) {
                 return false;
             }
