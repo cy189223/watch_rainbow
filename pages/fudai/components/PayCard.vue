@@ -192,10 +192,10 @@ export default {
             setTimeout(() => {
                 this.isSubmiting = false;
             }, 1500);
-
             this.$http('/fudai/order/confirm', 'POST', {
                 page_uuid: this.info.page_uuid,
                 total: this.payTotal,
+                activity_id: this.info.id,
                 coupon_id: this.currentCoupon.id,
                 ...this.form
             }).then((res) => {

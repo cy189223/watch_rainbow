@@ -1,5 +1,5 @@
 <template>
-		<view >
+		<view class="_t4">
 			<view class="tag-list">
 				<!-- <view class="item" :class="{actived: sku_level === ''}" @tap="setTag('')">全部</view>
 				<view class="item" :class="{actived: sku_level === index - 0 + 1}" @tap="setTag(index - 0 + 1)" v-for="(item, index) in info.sku_level" :key="index">
@@ -9,25 +9,24 @@
 			<scroll-view scroll-y class="scroll-view" @scrolltolower="fetchList">
 				<view class="list-scope">
 					<view v-for="(item, index) in list" class="item-scope">
-					
+						
 						<view class="user-c">
-							<image :src="item.headimg" mode="aspectFill" class="headimg"></image>
-							<view class="sku-title">{{item.text}}</view>
+							<image
+								:src="item.headimg"
+								mode="aspectFill"
+								class="headimg"
+							></image>
+							<view class="name">{{item.user_name}}</view>
+							<view class="time">{{ $tool.formatDate(item.created_at, 'MM/dd hh:mm:ss') }}</view>
 						</view>
-						
 						<view class="sku-c">
-							<view class="time">{{item.created_at}}</view>
-							<view style="flex-grow: 1"></view>
-							<view class="shang-title" :class="'shang-title' + item.sku_level">{{getLevelTitle(item.sku_level)}}</view>
-							<!-- <view class="total">第{{item.open_indexs}}抽</view> -->
+							<view class="sku-title">{{item.title}}</view>
 						</view>
-						
 					</view>
 					<NoData v-if="!list.length && isInit"></NoData>
 				</view>
 			</scroll-view>
 		</view>
-	</view>
 </template>
 
 <script>
@@ -50,16 +49,17 @@
 			},
 		},
 		computed: {
-			tagList () {
-				return this.info.skus.filter(item => {
-					return item.shang_type === 0
-				}).map(item => {
-					return {
-						title: item.shang_title,
-						id: item.id
-					}
-				}).slice(0, 3)
-			}
+			// tagList () {
+			// 	console.log(this.info, 'this,info')
+			// 	return this.info.skus.filter(item => {
+			// 		return item.shang_type === 0
+			// 	}).map(item => {
+			// 		return {
+			// 			title: item.shang_title,
+			// 			id: item.id
+			// 		}
+			// 	}).slice(0, 3)
+			// }
 		},
 		watch: {
 			payTotal() {
@@ -98,7 +98,8 @@
 					node_id: this.info.id,
 					sku_level: this.sku_level,
 					page: this.page,
-					per_page: this.perPage
+					per_page: this.perPage,
+					gift_type: 2
 				}).then(res => {
 					this.list = [...this.list, ...res.data.list]
 					this.isInit = true
@@ -115,7 +116,85 @@
 </script>
 
 <style lang="scss" scoped>
+	._t4 {
+        .list-scope {
+            margin: 0rpx 10rpx;
 
+            .item-scope {
+                position: relative;
+                background: white;
+                border-radius: 25rpx;
+                padding: 30rpx 20rpx;
+                margin-bottom: 20rpx;
+
+                .user-c {
+                    display: flex;
+                    align-items: center;
+                    .headimg {
+                        width: 40rpx;
+                        height: 40rpx;
+                        flex: 0 0 40rpx;
+                        border-radius: 50%;
+                    }
+
+                    .name {
+                        font-weight: 500;
+                        font-size: 28rpx;
+                        flex-grow: 1;
+                        margin-left: 10rpx;
+                    }
+                    .time {
+                        font-weight: 500;
+                        font-size: 28rpx;
+                    }
+                }
+
+                .sku-c {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 10rpx;
+                    justify-content: space-between;
+
+                    .thumb {
+                        width: 40rpx;
+                        height: 40rpx;
+                        border: 1rpx solid #e1e1e1;
+                        max-width: 400rpx;
+                    }
+
+                    .shang-title {
+                        font-size: 28rpx;
+                        font-weight: 500;
+                        &.strong {
+                            background: #fcf6d8;
+                            color: #f58348;
+                            padding: 4rpx 10rpx;
+                            font-size: 24rpx;
+                            border-radius: 6rpx;
+                            margin-left: 10rpx;
+                        }
+                    }
+
+                    .total {
+                        margin-left: 20rpx;
+                    }
+
+                    .sku-title {
+                        font-size: 28rpx;
+                        font-weight: 500;
+                        text-align: left;
+                        margin-left: 10rpx;
+                        max-width: 410rpx;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
+                }
+            }
+        }
+    }
 	.scroll-view {
 		min-height: 60vh;
 	    max-height: 100vh;

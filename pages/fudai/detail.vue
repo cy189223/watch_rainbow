@@ -73,8 +73,8 @@
                             非酋榜
                         </view>
                     </view>
-
-                    <view class="_block" v-if="skutype == 1" v-for="item in skuLevelReverse" :key="item.title" v-show="getSkusByLevel(item.odds).length > 0">
+                    <view v-if="skutype == 1">
+                        <view class="_block"  v-for="item in skuLevelReverse" :key="item.title" v-show="getSkusByLevel(item.odds).length > 0">
                         <view class="_t1">
                             <image :src="item.icon" class="_icon"></image>
                             {{ item.title }}
@@ -103,50 +103,12 @@
                             </view>
                         </view>
                     </view>
+                    </view>
+                    
 
-                    <RecordList ref="record" v-if="skutype == 2" :info="info" style="width: 100%"></RecordList>
-                </view>
-                <view class="_t3" v-if="skutype == 3">
-                    <scroll-view scroll-y class="scroll-view">
-                        <view class="list-scope">
-                            <view class="item-scope">
-                                <view class="user-c">
-                                    <image
-                                        src="https://watchrainbow.oss-cn-beijing.aliyuncs.com/img/other/Bfg3Go3zygcK90dDwkIaSF7plXv7iBqVou1xzdTd.jpg"
-                                        mode="aspectFill"
-                                        class="headimg"
-                                    ></image>
-                                    <view class="name">生亦何欢</view>
-                                    <view class="time">{{ $tool.formatDate(new Date(), 'MM/dd hh:mm:ss') }}</view>
-                                </view>
-                                <view class="sku-c">
-                                    <view class="sku-title">积分</view>
-                                    3334
-                                </view>
-                            </view>
-                        </view>
-                    </scroll-view>
-                </view>
-                <view class="_t4" v-if="skutype == 4">
-                    <scroll-view scroll-y class="scroll-view">
-                        <view class="list-scope">
-                            <view class="item-scope">
-                                <view class="user-c">
-                                    <image
-                                        src="https://watchrainbow.oss-cn-beijing.aliyuncs.com/img/other/Bfg3Go3zygcK90dDwkIaSF7plXv7iBqVou1xzdTd.jpg"
-                                        mode="aspectFill"
-                                        class="headimg"
-                                    ></image>
-                                    <view class="name">乱我道心</view>
-                                    <view class="time">{{ $tool.formatDate(new Date(), 'MM/dd hh:mm:ss') }}</view>
-                                </view>
-                                <view class="sku-c">
-                                    <view class="sku-title">积分</view>
-                                    222
-                                </view>
-                            </view>
-                        </view>
-                    </scroll-view>
+                    <RecordList ref="record" v-else-if="skutype == 2" :info="info" style="width: 100%"></RecordList>
+                    <OuRecordList ref="ouRecord" v-else-if="skutype == 3" :info="info" style="width: 100%"></OuRecordList>
+                    <FeiRecordList ref="feiRecord" v-else-if="skutype == 4" :info="info" style="width: 100%"></FeiRecordList>
                 </view>
             </view>
         </view>
@@ -185,6 +147,8 @@
 <script>
 import PayCard from './components/PayCard.vue';
 import RecordList from './components/RecordList.vue';
+import OuRecordList from './components/OuRecordList.vue';
+import FeiRecordList from './components/FeiRecordList.vue';
 import Navbar from '@/components/Navbar/index.vue';
 import FBanner from './components/fBanner';
 
@@ -193,6 +157,8 @@ export default {
     components: {
         PayCard,
         RecordList,
+        OuRecordList,
+        FeiRecordList,
         Navbar,
         FBanner
     },
@@ -252,7 +218,8 @@ export default {
                 title: this.info.title,
                 total_list: this.info.total_list,
                 money_price: this.info.money_price,
-                score_price: this.info.score_price
+                score_price: this.info.score_price,
+                id: this.info.id
             };
         },
         titleBgColor() {
@@ -855,165 +822,6 @@ export default {
                     .value {
                         font-weight: normal;
                         color: red;
-                    }
-                }
-            }
-        }
-    }
-    ._t3 {
-        .list-scope {
-            margin: 0rpx 10rpx;
-
-            .item-scope {
-                position: relative;
-                background: white;
-                border-radius: 25rpx;
-                padding: 30rpx 20rpx;
-                margin-bottom: 20rpx;
-
-                .user-c {
-                    display: flex;
-                    align-items: center;
-                    .headimg {
-                        width: 40rpx;
-                        height: 40rpx;
-                        flex: 0 0 40rpx;
-                        border-radius: 50%;
-                    }
-
-                    .name {
-                        font-weight: 500;
-                        font-size: 28rpx;
-                        flex-grow: 1;
-                        margin-left: 10rpx;
-                    }
-                    .time {
-                        font-weight: 500;
-                        font-size: 28rpx;
-                    }
-                }
-
-                .sku-c {
-                    display: flex;
-                    align-items: center;
-                    margin-top: 10rpx;
-                    justify-content: space-between;
-
-                    .thumb {
-                        width: 40rpx;
-                        height: 40rpx;
-                        border: 1rpx solid #e1e1e1;
-                        max-width: 400rpx;
-                    }
-
-                    .shang-title {
-                        font-size: 28rpx;
-                        font-weight: 500;
-                        &.strong {
-                            background: #fcf6d8;
-                            color: #f58348;
-                            padding: 4rpx 10rpx;
-                            font-size: 24rpx;
-                            border-radius: 6rpx;
-                            margin-left: 10rpx;
-                        }
-                    }
-
-                    .total {
-                        margin-left: 20rpx;
-                    }
-
-                    .sku-title {
-                        font-size: 28rpx;
-                        font-weight: 500;
-                        text-align: left;
-                        margin-left: 10rpx;
-                        max-width: 410rpx;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                    }
-                }
-            }
-        }
-    }
-
-    ._t4 {
-        .list-scope {
-            margin: 0rpx 10rpx;
-
-            .item-scope {
-                position: relative;
-                background: white;
-                border-radius: 25rpx;
-                padding: 30rpx 20rpx;
-                margin-bottom: 20rpx;
-
-                .user-c {
-                    display: flex;
-                    align-items: center;
-                    .headimg {
-                        width: 40rpx;
-                        height: 40rpx;
-                        flex: 0 0 40rpx;
-                        border-radius: 50%;
-                    }
-
-                    .name {
-                        font-weight: 500;
-                        font-size: 28rpx;
-                        flex-grow: 1;
-                        margin-left: 10rpx;
-                    }
-                    .time {
-                        font-weight: 500;
-                        font-size: 28rpx;
-                    }
-                }
-
-                .sku-c {
-                    display: flex;
-                    align-items: center;
-                    margin-top: 10rpx;
-                    justify-content: space-between;
-
-                    .thumb {
-                        width: 40rpx;
-                        height: 40rpx;
-                        border: 1rpx solid #e1e1e1;
-                        max-width: 400rpx;
-                    }
-
-                    .shang-title {
-                        font-size: 28rpx;
-                        font-weight: 500;
-                        &.strong {
-                            background: #fcf6d8;
-                            color: #f58348;
-                            padding: 4rpx 10rpx;
-                            font-size: 24rpx;
-                            border-radius: 6rpx;
-                            margin-left: 10rpx;
-                        }
-                    }
-
-                    .total {
-                        margin-left: 20rpx;
-                    }
-
-                    .sku-title {
-                        font-size: 28rpx;
-                        font-weight: 500;
-                        text-align: left;
-                        margin-left: 10rpx;
-                        max-width: 410rpx;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
                     }
                 }
             }
