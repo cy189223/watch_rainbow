@@ -969,6 +969,7 @@ export default {
             height: 45vh;
             overflow-y: auto;
             padding: 0 20rpx 20rpx;
+            white-space: pre-line;
         }
     }
 }
