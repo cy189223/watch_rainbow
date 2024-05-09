@@ -1,11 +1,11 @@
 <template>
-    <view class="container-scope animated bounceInDown" :class="{ 'with-navtar': isNavbarEnable }">
+    <view class="container-scope animated bounceInDown" :class="{ 'with-navtar': isNavbarEnable }" @tap="close">
         <view class="content-scope" v-if="isNotOpen">
             <view class="title" style="margin-top: 300rpx">抢购用户太多了</view>
             <view class="title" style="margin-top: 20rpx">请不要离开此页面，等待几秒后刷新哦~</view>
             <view class="bottom">
                 <view class="button-c">
-                    <view class="btn confirm bg-purple" @tap="handleRefresh">立即刷新</view>
+                    <view class="btn confirm bg-purple" @tap.stop="handleRefresh">立即刷新</view>
                 </view>
             </view>
         </view>
@@ -14,7 +14,7 @@
 
             <scroll-view class="scroll-view-212" scroll-y>
                 <view class="sku-list" v-if="skus.length > 1">
-                    <view class="item" @tap="checkSku(item)" :class="'item-' + skus.length" v-for="(item, index) in skus" :key="item.uuid">
+                    <view class="item" @tap.stop="checkSku(item)" :class="'item-' + skus.length" v-for="(item, index) in skus" :key="item.uuid">
                         <view
                             class="card"
                             :class="{
@@ -41,7 +41,7 @@
                     </view>
                 </view>
                 <view class="sku-list" v-else-if="skus.length == 1">
-                    <view class="item" @tap="checkSku(item)" :class="'item-' + skus.length" v-for="(item, index) in skus" :key="item.uuid">
+                    <view class="item" @tap.stop="checkSku(item)" :class="'item-' + skus.length" v-for="(item, index) in skus" :key="item.uuid">
                         <view class="thumb-c">
                             <view class="lockIcons" v-show="isShowLockIcon(item) && !isReturnSaleSuccess">
                                 <image
@@ -59,13 +59,13 @@
                 </view>
             </scroll-view>
 
-            <view class="lottery-tips" v-if="showResult && rewardJikaTimes" @tap="goJikaDetail">
+            <view class="lottery-tips" v-if="showResult && rewardJikaTimes" @tap.stop="goJikaDetail">
                 <text>恭喜您额外获得</text>
                 <text class="ticket-total">{{ rewardJikaTimes.total }}</text>
                 <text>次集卡机会</text>
                 <text class="new-iconfont icon-arrow-right"></text>
             </view>
-            <view class="lottery-tips" v-else-if="showResult && rewardLotteryTicket" @tap="goLotteryDetail">
+            <view class="lottery-tips" v-else-if="showResult && rewardLotteryTicket" @tap.stop="goLotteryDetail">
                 <text>恭喜您额外获得</text>
                 <text class="ticket-total">{{ rewardLotteryTicket.total }}</text>
                 <text>张活动抽奖码</text>
@@ -74,20 +74,20 @@
 
             <view class="bottom" v-if="showResult">
                 <view class="button-c" v-if="isReturnSaleSuccess">
-                    <view class="btn confirm bg-purple" @tap="close">再抽一个</view>
+                    <view class="btn confirm bg-purple" @tap.stop="close">再抽一个</view>
                     <view class="btn return-sale bg-white">已云发货</view>
                 </view>
                 <view class="button-c" v-else-if="tryMode">
-                    <view class="btn confirm bg-purple" @tap="goBack">试玩不发货哦~</view>
+                    <view class="btn confirm bg-purple" @tap.stop="goBack">试玩不发货哦~</view>
                 </view>
                 <view class="button-c" v-else>
-                    <view class="btn confirm bg-purple" @tap="sendCloud">全部云发货({{ sendMoney }}积分)</view>
-                    <view class="btn return-sale" @tap="returnSale" v-if="!orderConfig.is_ban_return_sale">我的赏袋</view>
+                    <view class="btn confirm bg-purple" @tap.stop="sendCloud">全部云发货({{ sendMoney }}积分)</view>
+                    <view class="btn return-sale" @tap.stop="returnSale" v-if="!orderConfig.is_ban_return_sale">我的赏袋</view>
                 </view>
             </view>
         </view>
 
-        <ReturnSalePopup @cancel="isShowReturnSale = false" @refresh="isReturnSaleSuccess = true" :uuid="orderUuid" v-if="isShowReturnSale"></ReturnSalePopup>
+        <ReturnSalePopup @cancel.stop="isShowReturnSale = false" @refresh.stop="isReturnSaleSuccess = true" :uuid="orderUuid" v-if="isShowReturnSale"></ReturnSalePopup>
     </view>
 </template>
 
